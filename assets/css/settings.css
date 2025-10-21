@@ -1,0 +1,162 @@
+/**
+ * Dashboard Launchpad - Settings Page Styles
+ */
+
+/* Tab Navigation */
+.nav-tab-wrapper {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccd0d4;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px 0;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Sortable Buttons List */
+.sortable-buttons {
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+    max-width: 600px;
+}
+
+.button-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    background: #fff;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    cursor: move;
+    transition: all 0.2s ease;
+}
+
+.button-item:hover {
+    background: #f6f7f7;
+    border-color: #2271b1;
+}
+
+.button-item.ui-sortable-helper {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    opacity: 0.9;
+}
+
+.sortable-placeholder {
+    border: 2px dashed #2271b1;
+    background: #f0f6fc;
+    visibility: visible !important;
+    height: 50px;
+    margin-bottom: 8px;
+}
+
+.drag-handle {
+    color: #8c8f94;
+    margin-right: 12px;
+    cursor: move;
+}
+
+.drag-handle:hover {
+    color: #2271b1;
+}
+
+.button-item label {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    margin: 0;
+    cursor: pointer;
+}
+
+.button-item input[type="checkbox"] {
+    margin: 0 10px 0 0;
+    cursor: pointer;
+}
+
+.button-item .dashicons {
+    margin-right: 8px;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+/* Color Picker Styling */
+.wp-picker-container {
+    margin-top: 5px;
+}
+
+/* Role Visibility Table */
+.role-visibility-table th {
+    vertical-align: top;
+    padding-top: 15px;
+}
+
+.role-visibility-table th .dashicons {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.role-visibility-table td {
+    padding: 15px 10px;
+}
+
+.role-visibility-table label {
+    cursor: pointer;
+}
+
+/* Form Table Improvements */
+.form-table th {
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 782px) {
+    .sortable-buttons {
+        max-width: 100%;
+    }
+    
+    .button-item {
+        padding: 10px;
+    }
+    
+    .role-visibility-table label {
+        display: block;
+        margin-bottom: 8px;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .button-item {
+        background: #1d2327;
+        border-color: #3c434a;
+        color: #f0f0f1;
+    }
+    
+    .button-item:hover {
+        background: #2c3338;
+        border-color: #72aee6;
+    }
+    
+    .sortable-placeholder {
+        border-color: #72aee6;
+        background: #1e2a3a;
+    }
+}
+
+/* Success Messages */
+.notice {
+    margin: 15px 0;
+}
+
+/* Submit Button Styling */
+.submit {
+    padding-top: 20px;
+    border-top: 1px solid #dcdcde;
+    margin-top: 20px;
+}
