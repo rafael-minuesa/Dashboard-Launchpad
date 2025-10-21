@@ -37,11 +37,11 @@ class Dashboard_Launchpad_Dashboard {
     public static function add_launchpad_menu() {
         add_menu_page(
             __('Launchpad', 'dashboard-launchpad'),           // Page title
-            __('🚀 Launchpad', 'dashboard-launchpad'),        // Menu title (with rocket emoji)
+            __('Launchpad', 'dashboard-launchpad'),           // Menu title
             'read',                                            // Capability (all logged-in users)
             'dashboard-launchpad',                             // Menu slug
             array(__CLASS__, 'render_launchpad_page'),         // Callback function
-            'dashicons-rocket',                                // Icon
+            'dashicons-rocket',                                // Icon (rocket)
             1                                                  // Position 1 (before Dashboard at position 2)
         );
     }
