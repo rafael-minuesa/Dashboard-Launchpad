@@ -18,7 +18,7 @@ if (!defined('WPINC')) {
 }
 
 // Define plugin constants
-define('DASHBOARD_LAUNCHPAD_VERSION', '1.0.0');
+define('DASHBOARD_LAUNCHPAD_VERSION', '1.2.0');
 define('DASHBOARD_LAUNCHPAD_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('DASHBOARD_LAUNCHPAD_PLUGIN_URL', plugin_dir_url(__FILE__));
 
@@ -27,7 +27,13 @@ require_once DASHBOARD_LAUNCHPAD_PLUGIN_DIR . 'includes/class-settings.php';
 require_once DASHBOARD_LAUNCHPAD_PLUGIN_DIR . 'includes/class-dashboard.php';
 
 /**
- * Initialize the plugin
+ * Initialize the plugin.
+ *
+ * Loads the settings and dashboard classes and initializes their hooks.
+ * This function is called on the 'plugins_loaded' action hook.
+ *
+ * @since 1.0.0
+ * @return void
  */
 function dashboard_launchpad_init() {
     Dashboard_Launchpad_Settings::init();
@@ -36,7 +42,14 @@ function dashboard_launchpad_init() {
 add_action('plugins_loaded', 'dashboard_launchpad_init');
 
 /**
- * Enqueue admin styles and scripts
+ * Enqueue admin styles and scripts.
+ *
+ * Loads CSS and JavaScript files for the dashboard and settings pages.
+ * Assets are only loaded on their respective pages to optimize performance.
+ *
+ * @since 1.0.0
+ * @param string $hook The current admin page hook.
+ * @return void
  */
 function dashboard_launchpad_enqueue_admin_assets($hook) {
     // Enqueue on dashboard
@@ -84,7 +97,13 @@ function dashboard_launchpad_enqueue_admin_assets($hook) {
 add_action('admin_enqueue_scripts', 'dashboard_launchpad_enqueue_admin_assets');
 
 /**
- * Plugin activation hook
+ * Plugin activation hook.
+ *
+ * Sets up default plugin options when the plugin is first activated.
+ * Only creates options if they don't already exist to preserve user settings.
+ *
+ * @since 1.0.0
+ * @return void
  */
 function dashboard_launchpad_activate() {
     // Set default options
@@ -105,7 +124,13 @@ function dashboard_launchpad_activate() {
 register_activation_hook(__FILE__, 'dashboard_launchpad_activate');
 
 /**
- * Plugin deactivation hook
+ * Plugin deactivation hook.
+ *
+ * Performs cleanup tasks when the plugin is deactivated.
+ * Currently does not perform any actions. Settings are preserved.
+ *
+ * @since 1.0.0
+ * @return void
  */
 function dashboard_launchpad_deactivate() {
     // Deactivation tasks if needed
@@ -113,10 +138,17 @@ function dashboard_launchpad_deactivate() {
 register_deactivation_hook(__FILE__, 'dashboard_launchpad_deactivate');
 
 /**
- * Get default button configuration
+ * Get default button configuration.
+ *
+ * Returns an array of all available dashboard buttons with their labels,
+ * URLs, icons, and required capabilities. These can be filtered using the
+ * 'dashboard_launchpad_default_buttons' filter.
+ *
+ * @since 1.0.0
+ * @return array Array of button configurations keyed by button ID.
  */
 function dashboard_launchpad_get_default_buttons() {
-    return array(
+    $buttons = array(
         'posts' => array(
             'label' => __('Posts', 'dashboard-launchpad'),
             'url' => 'edit.php',
@@ -178,4 +210,14 @@ function dashboard_launchpad_get_default_buttons() {
             'capability' => 'manage_options'
         ),
     );
+
+    /**
+     * Filter the default button configuration.
+     *
+     * Allows developers to add, remove, or modify buttons.
+     *
+     * @since 1.2.0
+     * @param array $buttons Array of button configurations.
+     */
+    return apply_filters('dashboard_launchpad_default_buttons', $buttons);
 }

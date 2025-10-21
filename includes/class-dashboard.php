@@ -2,13 +2,23 @@
 /**
  * Dashboard functionality
  *
+ * Handles the rendering of the dashboard widget, removes default WordPress widgets,
+ * and manages button ordering and customization.
+ *
  * @package Dashboard_Launchpad
+ * @since 1.0.0
  */
 
 class Dashboard_Launchpad_Dashboard {
-    
+
     /**
-     * Initialize the dashboard
+     * Initialize the dashboard.
+     *
+     * Registers action hooks for dashboard widget management, AJAX handlers,
+     * and custom styling.
+     *
+     * @since 1.0.0
+     * @return void
      */
     public static function init() {
         add_action('wp_dashboard_setup', array(__CLASS__, 'remove_default_widgets'));
@@ -18,7 +28,13 @@ class Dashboard_Launchpad_Dashboard {
     }
     
     /**
-     * Remove default dashboard widgets
+     * Remove default dashboard widgets.
+     *
+     * Removes the default WordPress dashboard widgets to provide a clean
+     * slate for the launchpad widget.
+     *
+     * @since 1.0.0
+     * @return void
      */
     public static function remove_default_widgets() {
         remove_meta_box('dashboard_right_now', 'dashboard', 'normal');
@@ -28,7 +44,13 @@ class Dashboard_Launchpad_Dashboard {
     }
     
     /**
-     * Add the launchpad widget
+     * Add the launchpad widget.
+     *
+     * Registers the Quick Launch dashboard widget that displays the
+     * customizable button grid.
+     *
+     * @since 1.0.0
+     * @return void
      */
     public static function add_launchpad_widget() {
         wp_add_dashboard_widget(
@@ -39,7 +61,14 @@ class Dashboard_Launchpad_Dashboard {
     }
     
     /**
-     * Render the launchpad widget
+     * Render the launchpad widget.
+     *
+     * Displays the button grid in the dashboard widget, filtering buttons
+     * based on user capabilities, role visibility settings, and enabled status.
+     * Applies ordering based on user preferences.
+     *
+     * @since 1.0.0
+     * @return void
      */
     public static function render_launchpad_widget() {
         $options = get_option('dashboard_launchpad_options');
@@ -125,27 +154,55 @@ class Dashboard_Launchpad_Dashboard {
     }
     
     /**
-     * Save button order via AJAX
+     * Save button order via AJAX.
+     *
+     * Handles AJAX requests to save the button order when users drag and drop
+     * buttons in the dashboard. Verifies nonce and user capabilities before saving.
+     *
+     * @since 1.0.0
+     * @return void Sends JSON response and exits.
      */
     public static function save_button_order() {
         check_ajax_referer('dashboard_launchpad_nonce', 'nonce');
-        
+
         if (!current_user_can('manage_options')) {
             wp_send_json_error(array('message' => __('Insufficient permissions', 'dashboard-launchpad')));
         }
-        
-        $order = isset($_POST['order']) ? $_POST['order'] : array();
-        $order = array_map('sanitize_key', $order);
-        
+
+        // Validate input
+        if (!isset($_POST['order']) || !is_array($_POST['order'])) {
+            wp_send_json_error(array('message' => __('Invalid data format', 'dashboard-launchpad')));
+        }
+
+        $order = array_map('sanitize_key', $_POST['order']);
+
+        // Verify all button IDs are valid
+        $all_buttons = dashboard_launchpad_get_default_buttons();
+        $valid_order = array();
+        foreach ($order as $button_id) {
+            if (isset($all_buttons[$button_id])) {
+                $valid_order[] = $button_id;
+            }
+        }
+
         $options = get_option('dashboard_launchpad_options');
-        $options['button_order'] = $order;
+        if (!is_array($options)) {
+            $options = array();
+        }
+        $options['button_order'] = $valid_order;
         update_option('dashboard_launchpad_options', $options);
-        
+
         wp_send_json_success(array('message' => __('Order saved', 'dashboard-launchpad')));
     }
     
     /**
-     * Add custom styles based on user settings
+     * Add custom styles based on user settings.
+     *
+     * Outputs inline CSS in the admin header to apply user-customized colors
+     * to the launchpad buttons. Only runs on the dashboard page.
+     *
+     * @since 1.0.0
+     * @return void
      */
     public static function add_custom_styles() {
         if (get_current_screen()->id !== 'dashboard') {
