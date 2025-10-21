@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: Dashboard Launchpad
- * Plugin URI: https://github.com/yourusername/dashboard-launchpad
- * Description: Transform your WordPress dashboard into a streamlined command center with quick-access buttons to all admin areas
+ * Plugin URI: https://github.com/rafael-minuesa/dashboard-launchpad
+ * Description: Quick-access command center with customizable buttons to all WordPress admin areas. Appears as the first menu item above Dashboard.
  * Version: 1.3.0
  * Author: Rafael Minuesa
  * Author URI: https://prowoos.com
@@ -54,15 +54,15 @@ add_action('plugins_loaded', 'dashboard_launchpad_init');
  * @return void
  */
 function dashboard_launchpad_enqueue_admin_assets($hook) {
-    // Enqueue on dashboard
-    if ('index.php' === $hook) {
+    // Enqueue on Launchpad page
+    if ('toplevel_page_dashboard-launchpad' === $hook) {
         wp_enqueue_style(
             'dashboard-launchpad',
             DASHBOARD_LAUNCHPAD_PLUGIN_URL . 'assets/css/dashboard-launchpad.css',
             array(),
             DASHBOARD_LAUNCHPAD_VERSION
         );
-        
+
         wp_enqueue_script(
             'dashboard-launchpad-sortable',
             DASHBOARD_LAUNCHPAD_PLUGIN_URL . 'assets/js/dashboard-launchpad.js',
@@ -70,7 +70,7 @@ function dashboard_launchpad_enqueue_admin_assets($hook) {
             DASHBOARD_LAUNCHPAD_VERSION,
             true
         );
-        
+
         wp_localize_script('dashboard-launchpad-sortable', 'dashboardLaunchpad', array(
             'ajaxurl' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('dashboard_launchpad_nonce')
