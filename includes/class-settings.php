@@ -128,7 +128,10 @@ class Dashboard_Launchpad_Settings {
         } else {
             $sanitized['role_visibility'] = array();
         }
-        
+
+        // Clear button cache when settings are updated
+        dashboard_launchpad_clear_cache();
+
         return $sanitized;
     }
     

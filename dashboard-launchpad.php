@@ -3,7 +3,7 @@
  * Plugin Name: Dashboard Launchpad
  * Plugin URI: https://github.com/yourusername/dashboard-launchpad
  * Description: Transform your WordPress dashboard into a streamlined command center with quick-access buttons to all admin areas
- * Version: 1.2.0
+ * Version: 1.3.0
  * Author: Rafael Minuesa
  * Author URI: https://prowoos.com
  * License: GPLv2 or later
@@ -18,13 +18,14 @@ if (!defined('WPINC')) {
 }
 
 // Define plugin constants
-define('DASHBOARD_LAUNCHPAD_VERSION', '1.2.0');
+define('DASHBOARD_LAUNCHPAD_VERSION', '1.3.0');
 define('DASHBOARD_LAUNCHPAD_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('DASHBOARD_LAUNCHPAD_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 // Include required files
 require_once DASHBOARD_LAUNCHPAD_PLUGIN_DIR . 'includes/class-settings.php';
 require_once DASHBOARD_LAUNCHPAD_PLUGIN_DIR . 'includes/class-dashboard.php';
+require_once DASHBOARD_LAUNCHPAD_PLUGIN_DIR . 'includes/class-custom-buttons.php';
 
 /**
  * Initialize the plugin.
@@ -38,6 +39,7 @@ require_once DASHBOARD_LAUNCHPAD_PLUGIN_DIR . 'includes/class-dashboard.php';
 function dashboard_launchpad_init() {
     Dashboard_Launchpad_Settings::init();
     Dashboard_Launchpad_Dashboard::init();
+    Dashboard_Launchpad_Custom_Buttons::init();
 }
 add_action('plugins_loaded', 'dashboard_launchpad_init');
 
@@ -144,10 +146,22 @@ register_deactivation_hook(__FILE__, 'dashboard_launchpad_deactivate');
  * URLs, icons, and required capabilities. These can be filtered using the
  * 'dashboard_launchpad_default_buttons' filter.
  *
+ * Uses transient caching to improve performance. Cache is cleared when
+ * settings are updated.
+ *
  * @since 1.0.0
  * @return array Array of button configurations keyed by button ID.
  */
 function dashboard_launchpad_get_default_buttons() {
+    // Try to get from cache first
+    $cache_key = 'dashboard_launchpad_buttons_cache';
+    $buttons = get_transient($cache_key);
+
+    if (false !== $buttons) {
+        return $buttons;
+    }
+
+    // Build buttons array if not cached
     $buttons = array(
         'posts' => array(
             'label' => __('Posts', 'dashboard-launchpad'),
@@ -219,5 +233,25 @@ function dashboard_launchpad_get_default_buttons() {
      * @since 1.2.0
      * @param array $buttons Array of button configurations.
      */
-    return apply_filters('dashboard_launchpad_default_buttons', $buttons);
+    $buttons = apply_filters('dashboard_launchpad_default_buttons', $buttons);
+
+    // Merge with custom buttons
+    $buttons = Dashboard_Launchpad_Custom_Buttons::merge_buttons($buttons);
+
+    // Cache for 1 hour (can be cleared when settings are saved)
+    set_transient($cache_key, $buttons, HOUR_IN_SECONDS);
+
+    return $buttons;
+}
+
+/**
+ * Clear button cache.
+ *
+ * Called when plugin settings are updated to ensure cached data stays fresh.
+ *
+ * @since 1.2.0
+ * @return void
+ */
+function dashboard_launchpad_clear_cache() {
+    delete_transient('dashboard_launchpad_buttons_cache');
 }

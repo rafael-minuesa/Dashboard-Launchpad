@@ -192,6 +192,9 @@ class Dashboard_Launchpad_Dashboard {
         $options['button_order'] = $valid_order;
         update_option('dashboard_launchpad_options', $options);
 
+        // Clear cache after updating order
+        dashboard_launchpad_clear_cache();
+
         wp_send_json_success(array('message' => __('Order saved', 'dashboard-launchpad')));
     }
     

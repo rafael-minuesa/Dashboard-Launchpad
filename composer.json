@@ -1,0 +1,39 @@
+{
+    "name": "rafael-minuesa/dashboard-launchpad",
+    "description": "Transform your WordPress dashboard into a streamlined command center with quick-access buttons",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Rafael Minuesa",
+            "email": "contact@prowoos.com",
+            "homepage": "https://prowoos.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "yoast/phpunit-polyfills": "^1.0",
+        "wp-coding-standards/wpcs": "^3.0",
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7"
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test:coverage": "phpunit --coverage-html coverage",
+        "phpcs": "phpcs --standard=WordPress --extensions=php .",
+        "phpcs:fix": "phpcbf --standard=WordPress --extensions=php .",
+        "lint": [
+            "@phpcs"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
