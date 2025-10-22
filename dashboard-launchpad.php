@@ -122,9 +122,26 @@ function dashboard_launchpad_enqueue_admin_assets( $hook ) {
                 'nonce'   => wp_create_nonce( 'dashboard_launchpad_nonce' ),
             )
         );
+
+        // Also enqueue settings assets on launchpad page (settings are now at bottom of page)
+        wp_enqueue_style( 'wp-color-picker' );
+        wp_enqueue_script(
+            'dashboard-launchpad-settings',
+            DASHBOARD_LAUNCHPAD_PLUGIN_URL . 'assets/js/settings.js',
+            array( 'jquery', 'wp-color-picker', 'jquery-ui-sortable' ),
+            DASHBOARD_LAUNCHPAD_VERSION,
+            true
+        );
+
+        wp_enqueue_style(
+            'dashboard-launchpad-settings',
+            DASHBOARD_LAUNCHPAD_PLUGIN_URL . 'assets/css/settings.css',
+            array(),
+            DASHBOARD_LAUNCHPAD_VERSION
+        );
     }
 
-    // Enqueue on settings page
+    // Enqueue on settings page (kept for backward compatibility, though settings page is removed)
     if ( 'settings_page_dashboard-launchpad' === $hook ) {
         wp_enqueue_style( 'wp-color-picker' );
         wp_enqueue_script(
@@ -209,29 +226,31 @@ function dashboard_launchpad_get_default_buttons() {
     }
 
     // Build buttons array if not cached
+    // Organized in 3 rows: Row 1: Posts/Pages, Row 2: Appearance, Row 3: Admin
     $buttons = array(
+        // Row 1: Content Management (5 columns on desktop, 2 on mobile)
         'posts' => array(
             'label'      => __( 'Posts', 'dashboard-launchpad' ),
             'url'        => 'edit.php',
             'icon'       => 'dashicons-admin-post',
             'capability' => 'edit_posts',
         ),
-        'new_post' => array(
-            'label'      => __( 'Add New Post', 'dashboard-launchpad' ),
-            'url'        => 'post-new.php',
-            'icon'       => 'dashicons-edit',
-            'capability' => 'edit_posts',
+        'categories' => array(
+            'label'      => __( 'Categories', 'dashboard-launchpad' ),
+            'url'        => 'edit-tags.php?taxonomy=category',
+            'icon'       => 'dashicons-category',
+            'capability' => 'manage_categories',
+        ),
+        'tags' => array(
+            'label'      => __( 'Tags', 'dashboard-launchpad' ),
+            'url'        => 'edit-tags.php?taxonomy=post_tag',
+            'icon'       => 'dashicons-tag',
+            'capability' => 'manage_categories',
         ),
         'pages' => array(
             'label'      => __( 'Pages', 'dashboard-launchpad' ),
             'url'        => 'edit.php?post_type=page',
             'icon'       => 'dashicons-admin-page',
-            'capability' => 'edit_pages',
-        ),
-        'new_page' => array(
-            'label'      => __( 'Add New Page', 'dashboard-launchpad' ),
-            'url'        => 'post-new.php?post_type=page',
-            'icon'       => 'dashicons-welcome-add-page',
             'capability' => 'edit_pages',
         ),
         'media' => array(
@@ -240,17 +259,30 @@ function dashboard_launchpad_get_default_buttons() {
             'icon'       => 'dashicons-admin-media',
             'capability' => 'upload_files',
         ),
-        'comments' => array(
-            'label'      => __( 'Comments', 'dashboard-launchpad' ),
-            'url'        => 'edit-comments.php',
-            'icon'       => 'dashicons-admin-comments',
-            'capability' => 'moderate_comments',
-        ),
-        'appearance' => array(
-            'label'      => __( 'Appearance', 'dashboard-launchpad' ),
+        // Row 2: Appearance (5 columns on desktop, 2 on mobile)
+        'themes' => array(
+            'label'      => __( 'Themes', 'dashboard-launchpad' ),
             'url'        => 'themes.php',
             'icon'       => 'dashicons-admin-appearance',
             'capability' => 'switch_themes',
+        ),
+        'widgets' => array(
+            'label'      => __( 'Widgets', 'dashboard-launchpad' ),
+            'url'        => 'widgets.php',
+            'icon'       => 'dashicons-screenoptions',
+            'capability' => 'edit_theme_options',
+        ),
+        'menus' => array(
+            'label'      => __( 'Menus', 'dashboard-launchpad' ),
+            'url'        => 'nav-menus.php',
+            'icon'       => 'dashicons-menu',
+            'capability' => 'edit_theme_options',
+        ),
+        'customizer' => array(
+            'label'      => __( 'Customizer', 'dashboard-launchpad' ),
+            'url'        => 'customize.php',
+            'icon'       => 'dashicons-admin-customizer',
+            'capability' => 'customize',
         ),
         'plugins' => array(
             'label'      => __( 'Plugins', 'dashboard-launchpad' ),
@@ -258,6 +290,7 @@ function dashboard_launchpad_get_default_buttons() {
             'icon'       => 'dashicons-admin-plugins',
             'capability' => 'activate_plugins',
         ),
+        // Row 3: Administration (5 columns on desktop, 2 on mobile)
         'users' => array(
             'label'      => __( 'Users', 'dashboard-launchpad' ),
             'url'        => 'users.php',
@@ -268,6 +301,24 @@ function dashboard_launchpad_get_default_buttons() {
             'label'      => __( 'Settings', 'dashboard-launchpad' ),
             'url'        => 'options-general.php',
             'icon'       => 'dashicons-admin-settings',
+            'capability' => 'manage_options',
+        ),
+        'tools' => array(
+            'label'      => __( 'Tools', 'dashboard-launchpad' ),
+            'url'        => 'tools.php',
+            'icon'       => 'dashicons-admin-tools',
+            'capability' => 'manage_options',
+        ),
+        'updates' => array(
+            'label'      => __( 'Updates', 'dashboard-launchpad' ),
+            'url'        => 'update-core.php',
+            'icon'       => 'dashicons-update',
+            'capability' => 'update_core',
+        ),
+        'site_health' => array(
+            'label'      => __( 'Site Health', 'dashboard-launchpad' ),
+            'url'        => 'site-health.php',
+            'icon'       => 'dashicons-heart',
             'capability' => 'manage_options',
         ),
     );
