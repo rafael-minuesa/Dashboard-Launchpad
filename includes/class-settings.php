@@ -20,7 +20,8 @@ class Dashboard_Launchpad_Settings {
      * @return void
      */
     public static function init() {
-        add_action('admin_menu', array(__CLASS__, 'add_settings_page'));
+        // Settings are now displayed on the launchpad page itself, not as a separate menu item
+        // add_action('admin_menu', array(__CLASS__, 'add_settings_page'));
         add_action('admin_init', array(__CLASS__, 'register_settings'));
     }
     

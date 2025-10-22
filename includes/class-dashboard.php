@@ -122,7 +122,7 @@ class Dashboard_Launchpad_Dashboard {
                 <p class="launchpad-subtitle">
                     <?php _e('Quick access to your most-used admin areas', 'dashboard-launchpad'); ?>
                     &nbsp;•&nbsp;
-                    <a href="<?php echo admin_url('options-general.php?page=dashboard-launchpad'); ?>">
+                    <a href="#launchpad-settings">
                         <?php _e('Configure Buttons', 'dashboard-launchpad'); ?>
                     </a>
                 </p>
@@ -137,7 +137,7 @@ class Dashboard_Launchpad_Dashboard {
                     <p>
                         <?php _e('No buttons configured or available.', 'dashboard-launchpad'); ?>
                         <?php if (current_user_can('manage_options')): ?>
-                            <a href="<?php echo admin_url('options-general.php?page=dashboard-launchpad'); ?>">
+                            <a href="#launchpad-settings">
                                 <?php _e('Configure buttons in Settings', 'dashboard-launchpad'); ?>
                             </a>
                         <?php endif; ?>
@@ -153,6 +153,13 @@ class Dashboard_Launchpad_Dashboard {
                             <span class="button-label"><?php echo esc_html($button['label']); ?></span>
                         </a>
                     <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if (current_user_can('manage_options')): ?>
+                <!-- Settings Section -->
+                <div id="launchpad-settings" class="launchpad-settings-section">
+                    <?php Dashboard_Launchpad_Settings::render_settings_page(); ?>
                 </div>
             <?php endif; ?>
         </div>
@@ -215,6 +222,22 @@ class Dashboard_Launchpad_Dashboard {
      */
     public static function add_custom_styles() {
         $screen = get_current_screen();
+
+        // Add menu icon fix globally in admin
+        ?>
+        <style>
+            /* Fix Launchpad menu icon */
+            #adminmenu #toplevel_page_dashboard-launchpad .wp-menu-image.dashicons-rocket:before {
+                content: '\f158';
+                color: #a7aaad;
+            }
+            #adminmenu #toplevel_page_dashboard-launchpad:hover .wp-menu-image.dashicons-rocket:before,
+            #adminmenu #toplevel_page_dashboard-launchpad.current .wp-menu-image.dashicons-rocket:before {
+                color: #72aee6;
+            }
+        </style>
+        <?php
+
         if (!$screen || $screen->id !== 'toplevel_page_dashboard-launchpad') {
             return;
         }
