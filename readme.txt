@@ -1,18 +1,18 @@
-=== Dashboard Launchpad ===
+=== Simple Launchpad ===
 Contributors: rafaelminuesa
-Tags: dashboard, admin, quick-access, buttons, customization
+Tags: dashboard, admin, quick-access, buttons, customization, launchpad, navigation, productivity
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.2.0
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Transform your WordPress dashboard into a streamlined command center with quick-access buttons to all admin areas.
+Transform your WordPress admin into a streamlined command center with quick-access buttons organized in 3 logical rows.
 
 == Description ==
 
-**Dashboard Launchpad** replaces the default WordPress dashboard with a beautiful, responsive grid of quick-access buttons that take you directly to the admin pages you use most.
+**Simple Launchpad** (formerly Dashboard Launchpad) appears as the first menu item in your WordPress admin, providing instant access to 15 carefully organized buttons across three categories: Content Management, Appearance, and Administration.
 
 Perfect for:
 * **Site administrators** who want faster navigation
@@ -23,7 +23,10 @@ Perfect for:
 = Key Features =
 
 **🎯 Quick Access Buttons**
-* 10 pre-configured buttons for common admin areas (Posts, Pages, Media, Comments, etc.)
+* 15 pre-configured buttons organized in 3 logical rows
+  - **Row 1:** Posts, Categories, Tags, Pages, Media
+  - **Row 2:** Themes, Widgets, Menus, Customizer, Plugins
+  - **Row 3:** Users, Settings, Tools, Updates, Site Health
 * One-click access to any WordPress admin page
 * Visual icons using WordPress Dashicons
 * Fully customizable button order via drag-and-drop
@@ -192,6 +195,26 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 
 == Changelog ==
 
+= 1.4.0 - 2025-10-22 =
+* Added: 9 new buttons (Categories, Tags, Themes, Widgets, Menus, Customizer, Tools, Updates, Site Health)
+* Added: Settings integrated directly into Launchpad page (bottom section)
+* Added: WordPress.org asset directory structure with placeholders
+* Changed: Reorganized buttons into 3 logical rows (Content, Appearance, Administration)
+* Changed: Grid layout now fixed 5 columns (desktop) / 2 columns (mobile)
+* Changed: Increased icon size from 48px to 64px (+33% larger)
+* Changed: Reduced button padding for more efficient space usage
+* Removed: Settings submenu entry (settings now on main page)
+* Removed: 5 buttons (Add New Post, Add New Page, Comments, old Appearance)
+* Fixed: Launchpad menu icon now displays correctly in admin sidebar
+* Fixed: Menu icon properly styled (gray with blue hover)
+* Fixed: Uninstall cleanup now removes custom buttons and cache
+* Fixed: Drag-to-reorder functionality now works properly
+
+= 1.3.0 - 2025-10-22 =
+* Changed: Plugin renamed from "Dashboard Launchpad" to "Simple Launchpad"
+* Improved: Updated branding and documentation
+* Maintained: Backward compatibility (textdomain unchanged)
+
 = 1.2.0 - 2025-10-21 =
 * Added: Comprehensive PHPDoc documentation throughout codebase
 * Added: Developer filter hook `dashboard_launchpad_default_buttons`
@@ -219,6 +242,12 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 
 == Upgrade Notice ==
 
+= 1.4.0 =
+Major UI overhaul! 15 buttons organized in 3 logical rows. Settings integrated into main page. Larger icons, better layout. Recommended update for all users.
+
+= 1.3.0 =
+Plugin renamed to Simple Launchpad. All settings preserved. Update recommended for consistent branding.
+
 = 1.2.0 =
 Major security and code quality improvements. Enhanced developer extensibility with new filter hooks. Recommended update for all users.
 
@@ -226,7 +255,7 @@ Major security and code quality improvements. Enhanced developer extensibility w
 Adds role-based visibility controls and dark mode support. Recommended for multi-user sites.
 
 = 1.0.0 =
-Initial release of Dashboard Launchpad.
+Initial release of Simple Launchpad.
 
 == Credits ==
 
