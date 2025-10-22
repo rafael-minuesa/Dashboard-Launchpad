@@ -1,28 +1,71 @@
 <?php
 /**
- * Plugin Name: Dashboard Launchpad
- * Plugin URI: https://github.com/rafael-minuesa/dashboard-launchpad
+ * Simple Launchpad
+ *
+ * A lightweight dashboard launchpad for quick-access admin shortcuts.
+ * (Formerly "Dashboard Launchpad".)
+ *
+ * Plugin Name: Simple Launchpad
+ * Plugin URI:  https://github.com/rafael-minuesa/dashboard-launchpad
  * Description: Quick-access command center with customizable buttons to all WordPress admin areas. Appears as the first menu item above Dashboard.
- * Version: 1.3.0
- * Author: Rafael Minuesa
- * Author URI: https://prowoos.com
- * License: GPLv2 or later
+ * Version:     1.3.0
+ * Author:      Rafael Minuesa
+ * Author URI:  https://prowoos.com
+ * License:     GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: dashboard-launchpad
  * Domain Path: /languages
+ *
+ * @package SimpleLaunchpad
  */
 
-// If this file is called directly, abort.
-if (!defined('WPINC')) {
-    die;
+ // Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
 }
 
-// Define plugin constants
-define('DASHBOARD_LAUNCHPAD_VERSION', '1.3.0');
-define('DASHBOARD_LAUNCHPAD_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('DASHBOARD_LAUNCHPAD_PLUGIN_URL', plugin_dir_url(__FILE__));
+/**
+ * Plugin Version.
+ *
+ * Note: Keep constant names used by other files for compatibility.
+ */
+if ( ! defined( 'DASHBOARD_LAUNCHPAD_VERSION' ) ) {
+    define( 'DASHBOARD_LAUNCHPAD_VERSION', '1.3.0' );
+}
+if ( ! defined( 'DASHBOARD_LAUNCHPAD_PLUGIN_DIR' ) ) {
+    define( 'DASHBOARD_LAUNCHPAD_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+}
+if ( ! defined( 'DASHBOARD_LAUNCHPAD_PLUGIN_URL' ) ) {
+    define( 'DASHBOARD_LAUNCHPAD_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+}
 
-// Include required files
+/**
+ * Load plugin textdomain for translations.
+ *
+ * We keep the existing textdomain ('dashboard-launchpad') to remain compatible
+ * with existing translation files. If you later rename the textdomain to
+ * 'simple-launchpad', update translation files and all translation calls
+ * across the codebase.
+ *
+ * @since 1.3.0
+ * @return void
+ */
+function dashboard_launchpad_load_textdomain() {
+    load_plugin_textdomain( 'dashboard-launchpad', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+}
+add_action( 'plugins_loaded', 'dashboard_launchpad_load_textdomain' );
+
+/* ---------------------------------------------------------------------------
+ * Includes
+ * --------------------------------------------------------------------------- */
+
+/**
+ * Include required files.
+ *
+ * The includes directory contains core classes for settings, dashboard, and
+ * custom buttons. Keep these require_once lines unchanged unless you rename
+ * included files or classes.
+ */
 require_once DASHBOARD_LAUNCHPAD_PLUGIN_DIR . 'includes/class-settings.php';
 require_once DASHBOARD_LAUNCHPAD_PLUGIN_DIR . 'includes/class-dashboard.php';
 require_once DASHBOARD_LAUNCHPAD_PLUGIN_DIR . 'includes/class-custom-buttons.php';
@@ -41,7 +84,7 @@ function dashboard_launchpad_init() {
     Dashboard_Launchpad_Dashboard::init();
     Dashboard_Launchpad_Custom_Buttons::init();
 }
-add_action('plugins_loaded', 'dashboard_launchpad_init');
+add_action( 'plugins_loaded', 'dashboard_launchpad_init' );
 
 /**
  * Enqueue admin styles and scripts.
@@ -53,9 +96,9 @@ add_action('plugins_loaded', 'dashboard_launchpad_init');
  * @param string $hook The current admin page hook.
  * @return void
  */
-function dashboard_launchpad_enqueue_admin_assets($hook) {
+function dashboard_launchpad_enqueue_admin_assets( $hook ) {
     // Enqueue on Launchpad page
-    if ('toplevel_page_dashboard-launchpad' === $hook) {
+    if ( 'toplevel_page_dashboard-launchpad' === $hook ) {
         wp_enqueue_style(
             'dashboard-launchpad',
             DASHBOARD_LAUNCHPAD_PLUGIN_URL . 'assets/css/dashboard-launchpad.css',
@@ -66,28 +109,32 @@ function dashboard_launchpad_enqueue_admin_assets($hook) {
         wp_enqueue_script(
             'dashboard-launchpad-sortable',
             DASHBOARD_LAUNCHPAD_PLUGIN_URL . 'assets/js/dashboard-launchpad.js',
-            array('jquery', 'jquery-ui-sortable'),
+            array( 'jquery', 'jquery-ui-sortable' ),
             DASHBOARD_LAUNCHPAD_VERSION,
             true
         );
 
-        wp_localize_script('dashboard-launchpad-sortable', 'dashboardLaunchpad', array(
-            'ajaxurl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('dashboard_launchpad_nonce')
-        ));
+        wp_localize_script(
+            'dashboard-launchpad-sortable',
+            'dashboardLaunchpad',
+            array(
+                'ajaxurl' => admin_url( 'admin-ajax.php' ),
+                'nonce'   => wp_create_nonce( 'dashboard_launchpad_nonce' ),
+            )
+        );
     }
-    
+
     // Enqueue on settings page
-    if ('settings_page_dashboard-launchpad' === $hook) {
-        wp_enqueue_style('wp-color-picker');
+    if ( 'settings_page_dashboard-launchpad' === $hook ) {
+        wp_enqueue_style( 'wp-color-picker' );
         wp_enqueue_script(
             'dashboard-launchpad-settings',
             DASHBOARD_LAUNCHPAD_PLUGIN_URL . 'assets/js/settings.js',
-            array('jquery', 'wp-color-picker'),
+            array( 'jquery', 'wp-color-picker' ),
             DASHBOARD_LAUNCHPAD_VERSION,
             true
         );
-        
+
         wp_enqueue_style(
             'dashboard-launchpad-settings',
             DASHBOARD_LAUNCHPAD_PLUGIN_URL . 'assets/css/settings.css',
@@ -96,7 +143,7 @@ function dashboard_launchpad_enqueue_admin_assets($hook) {
         );
     }
 }
-add_action('admin_enqueue_scripts', 'dashboard_launchpad_enqueue_admin_assets');
+add_action( 'admin_enqueue_scripts', 'dashboard_launchpad_enqueue_admin_assets' );
 
 /**
  * Plugin activation hook.
@@ -110,20 +157,20 @@ add_action('admin_enqueue_scripts', 'dashboard_launchpad_enqueue_admin_assets');
 function dashboard_launchpad_activate() {
     // Set default options
     $default_options = array(
-        'enabled_buttons' => array_keys(dashboard_launchpad_get_default_buttons()),
-        'button_order' => array_keys(dashboard_launchpad_get_default_buttons()),
-        'button_color' => '#2271b1',
-        'button_hover_color' => '#135e96',
-        'button_bg_color' => '#ffffff',
+        'enabled_buttons'       => array_keys( dashboard_launchpad_get_default_buttons() ),
+        'button_order'          => array_keys( dashboard_launchpad_get_default_buttons() ),
+        'button_color'          => '#2271b1',
+        'button_hover_color'    => '#135e96',
+        'button_bg_color'       => '#ffffff',
         'button_hover_bg_color' => '#f6f7f7',
-        'role_visibility' => array()
+        'role_visibility'       => array(),
     );
-    
-    if (!get_option('dashboard_launchpad_options')) {
-        add_option('dashboard_launchpad_options', $default_options);
+
+    if ( ! get_option( 'dashboard_launchpad_options' ) ) {
+        add_option( 'dashboard_launchpad_options', $default_options );
     }
 }
-register_activation_hook(__FILE__, 'dashboard_launchpad_activate');
+register_activation_hook( __FILE__, 'dashboard_launchpad_activate' );
 
 /**
  * Plugin deactivation hook.
@@ -137,7 +184,7 @@ register_activation_hook(__FILE__, 'dashboard_launchpad_activate');
 function dashboard_launchpad_deactivate() {
     // Deactivation tasks if needed
 }
-register_deactivation_hook(__FILE__, 'dashboard_launchpad_deactivate');
+register_deactivation_hook( __FILE__, 'dashboard_launchpad_deactivate' );
 
 /**
  * Get default button configuration.
@@ -155,73 +202,73 @@ register_deactivation_hook(__FILE__, 'dashboard_launchpad_deactivate');
 function dashboard_launchpad_get_default_buttons() {
     // Try to get from cache first
     $cache_key = 'dashboard_launchpad_buttons_cache';
-    $buttons = get_transient($cache_key);
+    $buttons   = get_transient( $cache_key );
 
-    if (false !== $buttons) {
+    if ( false !== $buttons ) {
         return $buttons;
     }
 
     // Build buttons array if not cached
     $buttons = array(
         'posts' => array(
-            'label' => __('Posts', 'dashboard-launchpad'),
-            'url' => 'edit.php',
-            'icon' => 'dashicons-admin-post',
-            'capability' => 'edit_posts'
+            'label'      => __( 'Posts', 'dashboard-launchpad' ),
+            'url'        => 'edit.php',
+            'icon'       => 'dashicons-admin-post',
+            'capability' => 'edit_posts',
         ),
         'new_post' => array(
-            'label' => __('Add New Post', 'dashboard-launchpad'),
-            'url' => 'post-new.php',
-            'icon' => 'dashicons-edit',
-            'capability' => 'edit_posts'
+            'label'      => __( 'Add New Post', 'dashboard-launchpad' ),
+            'url'        => 'post-new.php',
+            'icon'       => 'dashicons-edit',
+            'capability' => 'edit_posts',
         ),
         'pages' => array(
-            'label' => __('Pages', 'dashboard-launchpad'),
-            'url' => 'edit.php?post_type=page',
-            'icon' => 'dashicons-admin-page',
-            'capability' => 'edit_pages'
+            'label'      => __( 'Pages', 'dashboard-launchpad' ),
+            'url'        => 'edit.php?post_type=page',
+            'icon'       => 'dashicons-admin-page',
+            'capability' => 'edit_pages',
         ),
         'new_page' => array(
-            'label' => __('Add New Page', 'dashboard-launchpad'),
-            'url' => 'post-new.php?post_type=page',
-            'icon' => 'dashicons-welcome-add-page',
-            'capability' => 'edit_pages'
+            'label'      => __( 'Add New Page', 'dashboard-launchpad' ),
+            'url'        => 'post-new.php?post_type=page',
+            'icon'       => 'dashicons-welcome-add-page',
+            'capability' => 'edit_pages',
         ),
         'media' => array(
-            'label' => __('Media', 'dashboard-launchpad'),
-            'url' => 'upload.php',
-            'icon' => 'dashicons-admin-media',
-            'capability' => 'upload_files'
+            'label'      => __( 'Media', 'dashboard-launchpad' ),
+            'url'        => 'upload.php',
+            'icon'       => 'dashicons-admin-media',
+            'capability' => 'upload_files',
         ),
         'comments' => array(
-            'label' => __('Comments', 'dashboard-launchpad'),
-            'url' => 'edit-comments.php',
-            'icon' => 'dashicons-admin-comments',
-            'capability' => 'moderate_comments'
+            'label'      => __( 'Comments', 'dashboard-launchpad' ),
+            'url'        => 'edit-comments.php',
+            'icon'       => 'dashicons-admin-comments',
+            'capability' => 'moderate_comments',
         ),
         'appearance' => array(
-            'label' => __('Appearance', 'dashboard-launchpad'),
-            'url' => 'themes.php',
-            'icon' => 'dashicons-admin-appearance',
-            'capability' => 'switch_themes'
+            'label'      => __( 'Appearance', 'dashboard-launchpad' ),
+            'url'        => 'themes.php',
+            'icon'       => 'dashicons-admin-appearance',
+            'capability' => 'switch_themes',
         ),
         'plugins' => array(
-            'label' => __('Plugins', 'dashboard-launchpad'),
-            'url' => 'plugins.php',
-            'icon' => 'dashicons-admin-plugins',
-            'capability' => 'activate_plugins'
+            'label'      => __( 'Plugins', 'dashboard-launchpad' ),
+            'url'        => 'plugins.php',
+            'icon'       => 'dashicons-admin-plugins',
+            'capability' => 'activate_plugins',
         ),
         'users' => array(
-            'label' => __('Users', 'dashboard-launchpad'),
-            'url' => 'users.php',
-            'icon' => 'dashicons-admin-users',
-            'capability' => 'list_users'
+            'label'      => __( 'Users', 'dashboard-launchpad' ),
+            'url'        => 'users.php',
+            'icon'       => 'dashicons-admin-users',
+            'capability' => 'list_users',
         ),
         'settings' => array(
-            'label' => __('Settings', 'dashboard-launchpad'),
-            'url' => 'options-general.php',
-            'icon' => 'dashicons-admin-settings',
-            'capability' => 'manage_options'
+            'label'      => __( 'Settings', 'dashboard-launchpad' ),
+            'url'        => 'options-general.php',
+            'icon'       => 'dashicons-admin-settings',
+            'capability' => 'manage_options',
         ),
     );
 
@@ -233,13 +280,13 @@ function dashboard_launchpad_get_default_buttons() {
      * @since 1.2.0
      * @param array $buttons Array of button configurations.
      */
-    $buttons = apply_filters('dashboard_launchpad_default_buttons', $buttons);
+    $buttons = apply_filters( 'dashboard_launchpad_default_buttons', $buttons );
 
     // Merge with custom buttons
-    $buttons = Dashboard_Launchpad_Custom_Buttons::merge_buttons($buttons);
+    $buttons = Dashboard_Launchpad_Custom_Buttons::merge_buttons( $buttons );
 
     // Cache for 1 hour (can be cleared when settings are saved)
-    set_transient($cache_key, $buttons, HOUR_IN_SECONDS);
+    set_transient( $cache_key, $buttons, HOUR_IN_SECONDS );
 
     return $buttons;
 }
@@ -253,5 +300,5 @@ function dashboard_launchpad_get_default_buttons() {
  * @return void
  */
 function dashboard_launchpad_clear_cache() {
-    delete_transient('dashboard_launchpad_buttons_cache');
+    delete_transient( 'dashboard_launchpad_buttons_cache' );
 }
