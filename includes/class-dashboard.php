@@ -116,8 +116,10 @@ class Dashboard_Launchpad_Dashboard {
 
         ?>
         <div class="wrap dashboard-launchpad-page">
+            <a href="#dashboard-launchpad-buttons" class="screen-reader-shortcut"><?php _e('Skip to admin shortcuts', 'dashboard-launchpad'); ?></a>
+
             <h1 class="launchpad-title">
-                <span class="dashicons dashicons-rocket"></span>
+                <span class="dashicons dashicons-rocket" aria-hidden="true"></span>
                 <?php echo esc_html__('Launchpad', 'dashboard-launchpad'); ?>
             </h1>
 
@@ -147,12 +149,13 @@ class Dashboard_Launchpad_Dashboard {
                     </p>
                 </div>
             <?php else: ?>
-                <div class="dashboard-launchpad" id="dashboard-launchpad-buttons">
+                <div class="dashboard-launchpad" id="dashboard-launchpad-buttons" role="navigation" aria-label="<?php esc_attr_e('Admin Quick Links', 'dashboard-launchpad'); ?>">
                     <?php foreach ($buttons_to_display as $button): ?>
                         <a href="<?php echo esc_url(admin_url($button['url'])); ?>"
                            class="launchpad-button"
-                           data-button-id="<?php echo esc_attr($button['id']); ?>">
-                            <span class="dashicons <?php echo esc_attr($button['icon']); ?>"></span>
+                           data-button-id="<?php echo esc_attr($button['id']); ?>"
+                           aria-label="<?php echo esc_attr(sprintf(__('Go to %s', 'dashboard-launchpad'), $button['label'])); ?>">
+                            <span class="dashicons <?php echo esc_attr($button['icon']); ?>" aria-hidden="true"></span>
                             <span class="button-label"><?php echo esc_html($button['label']); ?></span>
                         </a>
                     <?php endforeach; ?>
@@ -229,7 +232,7 @@ class Dashboard_Launchpad_Dashboard {
             /* Ensure Launchpad menu icon displays */
             #adminmenu #toplevel_page_dashboard-launchpad div.wp-menu-image:before {
                 font-family: dashicons !important;
-                content: '\f308' !important;
+                content: '\f158' !important;  /* dashicons-rocket */
             }
         </style>
         <?php

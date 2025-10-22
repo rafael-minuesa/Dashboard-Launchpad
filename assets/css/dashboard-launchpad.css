@@ -1,9 +1,40 @@
 /**
  * Dashboard Launchpad Styles
- * 
+ *
  * @package Dashboard_Launchpad
  * @version 1.0.0
  */
+
+/* Accessibility: Skip link for screen readers and keyboard users */
+.screen-reader-shortcut {
+    position: absolute;
+    top: -1000px;
+    left: -1000px;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.screen-reader-shortcut:focus {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    height: auto;
+    width: auto;
+    clip: auto;
+    clip-path: none;
+    background: #2271b1;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-weight: 600;
+    z-index: 100000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
 
 .dashboard-launchpad {
     display: grid;
