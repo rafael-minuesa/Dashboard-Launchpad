@@ -68,3 +68,7 @@ wp-config.php
 # OS
 .DS_Store
 Thumbs.db
+
+# WordPress.org assets (large image files)
+# Uncomment the line below if you want to ignore these files
+# .wordpress-org/*.png
