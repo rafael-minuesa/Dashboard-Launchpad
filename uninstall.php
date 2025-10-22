@@ -16,6 +16,8 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
 
 // Delete plugin options
 delete_option('dashboard_launchpad_options');
+delete_option('dashboard_launchpad_custom_buttons');
+delete_transient('dashboard_launchpad_buttons_cache');
 
 // For multisite installations, delete options from all sites
 if (is_multisite()) {
@@ -27,9 +29,8 @@ if (is_multisite()) {
     foreach ($blog_ids as $blog_id) {
         switch_to_blog($blog_id);
         delete_option('dashboard_launchpad_options');
+        delete_option('dashboard_launchpad_custom_buttons');
+        delete_transient('dashboard_launchpad_buttons_cache');
         restore_current_blog();
     }
 }
-
-// Note: We're not deleting user meta or transients since this plugin
-// doesn't currently use them, but if it does in the future, add cleanup here
