@@ -1,13 +1,13 @@
-# Dashboard Launchpad 🚀
+# Simple Launchpad 🚀
 
 [![WordPress Plugin Version](https://img.shields.io/badge/WordPress-5.0%2B-blue.svg)](https://wordpress.org/)
 [![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://php.net/)
 [![License](https://img.shields.io/badge/license-GPLv2%2B-green.svg)](LICENSE)
 [![Tested Up To](https://img.shields.io/badge/tested%20up%20to-WP%206.7-brightgreen.svg)](https://wordpress.org/)
 
-> Transform your WordPress dashboard into a streamlined command center with quick-access buttons to all admin areas.
+> Simple streamlined command center with quick-access buttons to all WP admin areas.
 
-![Dashboard Launchpad](https://via.placeholder.com/1200x400/2271b1/ffffff?text=Dashboard+Launchpad)
+![Dashboard Launchpad](https://via.placeholder.com/1200x400/2271b1/ffffff?text=Simple+Launchpad)
 
 ## ✨ Features
 
@@ -34,9 +34,9 @@ Coming soon! Screenshots will show:
 ### Installation
 
 1. Download the latest release
-2. Upload to `/wp-content/plugins/dashboard-launchpad/`
+2. Upload to `/wp-content/plugins/simple-launchpad/`
 3. Activate through the 'Plugins' menu in WordPress
-4. Go to **Settings → Dashboard Launchpad** to configure
+4. Go to **Settings → SImple Launchpad** to configure
 
 ### Basic Usage
 
@@ -44,7 +44,7 @@ Coming soon! Screenshots will show:
 2. Drag to reorder buttons
 3. Customize colors in the Appearance tab
 4. Configure role visibility (optional)
-5. Visit your dashboard to see the launchpad!
+5. Visit your Launchpad!
 
 ## 🎨 Customization
 
@@ -86,7 +86,7 @@ Control which WordPress roles can see each button:
 #### Add Custom Buttons
 
 ```php
-add_filter('dashboard_launchpad_default_buttons', function($buttons) {
+add_filter('simpled_launchpad_default_buttons', function($buttons) {
     $buttons['my_custom'] = array(
         'label' => __('Custom Area', 'my-plugin'),
         'url' => 'admin.php?page=my-custom-page',
@@ -100,7 +100,7 @@ add_filter('dashboard_launchpad_default_buttons', function($buttons) {
 #### Modify Buttons Before Rendering
 
 ```php
-add_filter('dashboard_launchpad_buttons', function($buttons) {
+add_filter('simple_launchpad_buttons', function($buttons) {
     // Modify the buttons array before it's displayed
     return $buttons;
 });
@@ -130,9 +130,9 @@ Use any [WordPress Dashicons](https://developer.wordpress.org/resource/dashicons
 
 ## 📊 Performance
 
-Dashboard Launchpad is optimized for performance:
+Simple Launchpad is optimized for performance:
 
-- ✅ Assets only load on dashboard and settings pages
+- ✅ Assets only load on settings pages
 - ✅ Minimal database queries
 - ✅ No external dependencies
 - ✅ Clean, efficient code
@@ -177,7 +177,7 @@ Contributions are welcome! Please follow these steps:
 
 ```bash
 # Clone the repository
-git clone https://github.com/rafael-minuesa/Dashboard-Launchpad.git
+git clone https://github.com/rafael-minuesa/Simple-Launchpad.git
 
 # Install dependencies
 composer install
@@ -204,7 +204,7 @@ This plugin follows:
 
 ## 📝 License
 
-Dashboard Launchpad is licensed under the [GNU General Public License v2.0 or later](LICENSE).
+Simple Launchpad is licensed under the [GNU General Public License v2.0 or later](LICENSE).
 
 ## 👨‍💻 Author
 
@@ -238,7 +238,7 @@ See [CHANGELOG.md](CHANGELOG.md) for version history and planned features.
 
 If you find this plugin helpful:
 - Give it a ⭐ on GitHub
-- Rate it on [WordPress.org](https://wordpress.org/plugins/dashboard-launchpad/)
+- Rate it on [WordPress.org](https://wordpress.org/plugins/simple-launchpad/)
 - Share it with other WordPress users
 - Contribute code or translations
 
