@@ -222,22 +222,6 @@ class Dashboard_Launchpad_Dashboard {
      */
     public static function add_custom_styles() {
         $screen = get_current_screen();
-
-        // Add menu icon fix globally in admin
-        ?>
-        <style>
-            /* Fix Launchpad menu icon */
-            #adminmenu #toplevel_page_dashboard-launchpad .wp-menu-image.dashicons-rocket:before {
-                content: '\f158';
-                color: #a7aaad;
-            }
-            #adminmenu #toplevel_page_dashboard-launchpad:hover .wp-menu-image.dashicons-rocket:before,
-            #adminmenu #toplevel_page_dashboard-launchpad.current .wp-menu-image.dashicons-rocket:before {
-                color: #72aee6;
-            }
-        </style>
-        <?php
-
         if (!$screen || $screen->id !== 'toplevel_page_dashboard-launchpad') {
             return;
         }
