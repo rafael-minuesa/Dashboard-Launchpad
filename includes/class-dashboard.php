@@ -35,6 +35,9 @@ class Dashboard_Launchpad_Dashboard {
      * @return void
      */
     public static function add_launchpad_menu() {
+        // Ensure dashicons are loaded
+        wp_enqueue_style('dashicons');
+
         add_menu_page(
             __('Launchpad', 'dashboard-launchpad'),           // Page title
             __('Launchpad', 'dashboard-launchpad'),           // Menu title
@@ -221,6 +224,16 @@ class Dashboard_Launchpad_Dashboard {
      * @return void
      */
     public static function add_custom_styles() {
+        ?>
+        <style>
+            /* Ensure Launchpad menu icon displays */
+            #adminmenu #toplevel_page_dashboard-launchpad div.wp-menu-image:before {
+                font-family: dashicons !important;
+                content: '\f308' !important;
+            }
+        </style>
+        <?php
+
         $screen = get_current_screen();
         if (!$screen || $screen->id !== 'toplevel_page_dashboard-launchpad') {
             return;
