@@ -44,7 +44,7 @@ class Dashboard_Launchpad_Dashboard {
             'read',                                            // Capability (all logged-in users)
             'dashboard-launchpad',                             // Menu slug
             array(__CLASS__, 'render_launchpad_page'),         // Callback function
-            'dashicons-rocket',                                // Icon (rocket)
+            'dashicons-grid-view',                             // Icon (grid view)
             1                                                  // Position 1 (before Dashboard at position 2)
         );
     }
@@ -119,7 +119,7 @@ class Dashboard_Launchpad_Dashboard {
             <a href="#dashboard-launchpad-buttons" class="screen-reader-shortcut"><?php _e('Skip to admin shortcuts', 'dashboard-launchpad'); ?></a>
 
             <h1 class="launchpad-title">
-                <span class="dashicons dashicons-rocket" aria-hidden="true"></span>
+                <span class="dashicons dashicons-grid-view" aria-hidden="true"></span>
                 <?php echo esc_html__('Launchpad', 'dashboard-launchpad'); ?>
             </h1>
 
@@ -232,7 +232,7 @@ class Dashboard_Launchpad_Dashboard {
             /* Ensure Launchpad menu icon displays */
             #adminmenu #toplevel_page_dashboard-launchpad div.wp-menu-image:before {
                 font-family: dashicons !important;
-                content: '\f158' !important;  /* dashicons-rocket */
+                content: '\f509' !important;  /* dashicons-grid-view */
             }
         </style>
         <?php
