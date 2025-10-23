@@ -116,7 +116,7 @@ class Dashboard_LaunchPad_Dashboard {
 
 		?>
 		<div class="wrap simple-launchpad-page">
-			<a href="#simple-launchpad-buttons" class="screen-reader-shortcut"><?php _e( 'Skip to admin shortcuts', 'simple-launchpad' ); ?></a>
+			<a href="#simple-launchpad-buttons" class="screen-reader-shortcut"><?php esc_html_e( 'Skip to admin shortcuts', 'simple-launchpad' ); ?></a>
 
 			<h1 class="launchpad-title">
 				<span class="dashicons dashicons-grid-view" aria-hidden="true"></span>
@@ -125,25 +125,25 @@ class Dashboard_LaunchPad_Dashboard {
 
 			<?php if ( current_user_can( 'manage_options' ) ) : ?>
 				<p class="launchpad-subtitle">
-					<?php _e( 'Quick access to your most-used admin areas', 'simple-launchpad' ); ?>
+					<?php esc_html_e( 'Quick access to your most-used admin areas', 'simple-launchpad' ); ?>
 					&nbsp;•&nbsp;
 					<a href="#launchpad-settings">
-						<?php _e( 'Configure Buttons', 'simple-launchpad' ); ?>
+						<?php esc_html_e( 'Configure Buttons', 'simple-launchpad' ); ?>
 					</a>
 				</p>
 			<?php else : ?>
 				<p class="launchpad-subtitle">
-					<?php _e( 'Quick access to your most-used admin areas', 'simple-launchpad' ); ?>
+					<?php esc_html_e( 'Quick access to your most-used admin areas', 'simple-launchpad' ); ?>
 				</p>
 			<?php endif; ?>
 
 			<?php if ( empty( $buttons_to_display ) ) : ?>
 				<div class="notice notice-info">
 					<p>
-						<?php _e( 'No buttons configured or available.', 'simple-launchpad' ); ?>
+						<?php esc_html_e( 'No buttons configured or available.', 'simple-launchpad' ); ?>
 						<?php if ( current_user_can( 'manage_options' ) ) : ?>
 							<a href="#launchpad-settings">
-								<?php _e( 'Configure buttons in Settings', 'simple-launchpad' ); ?>
+								<?php esc_html_e( 'Configure buttons in Settings', 'simple-launchpad' ); ?>
 							</a>
 						<?php endif; ?>
 					</p>
@@ -154,7 +154,15 @@ class Dashboard_LaunchPad_Dashboard {
 						<a href="<?php echo esc_url( admin_url( $button['url'] ) ); ?>"
 						   class="launchpad-button"
 						   data-button-id="<?php echo esc_attr( $button['id'] ); ?>"
-						   aria-label="<?php echo esc_attr( sprintf( __( 'Go to %s', 'simple-launchpad' ), $button['label'] ) ); ?>">
+						   aria-label="<?php
+						   echo esc_attr(
+							   sprintf(
+								   /* translators: %s: Button label (e.g., Posts, Pages, Media) */
+								   __( 'Go to %s', 'simple-launchpad' ),
+								   $button['label']
+							   )
+						   );
+						   ?>">
 							<span class="dashicons <?php echo esc_attr( $button['icon'] ); ?>" aria-hidden="true"></span>
 							<span class="button-label"><?php echo esc_html( $button['label'] ); ?></span>
 						</a>
@@ -193,7 +201,7 @@ class Dashboard_LaunchPad_Dashboard {
 			wp_send_json_error( array( 'message' => __( 'Invalid data format', 'simple-launchpad' ) ) );
 		}
 
-		$order = array_map( 'sanitize_key', $_POST['order'] );
+		$order = array_map( 'sanitize_key', wp_unslash( $_POST['order'] ) );
 
 		// Verify all button IDs are valid
 		$all_buttons = simple_launchpad_get_default_buttons();

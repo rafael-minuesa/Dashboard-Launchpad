@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.2] - 2025-10-23
+
+### Fixed
+- **WordPress.org Coding Standards Compliance:**
+  - Replaced all `_e()` calls with `esc_html_e()` for proper output escaping
+  - Added `wp_unslash()` before sanitizing all `$_POST` variables in AJAX handlers
+  - Added translators comment for `sprintf()` with placeholder in aria-label
+  - Updated "Tested up to" version from 6.7 to 6.8
+  - Reduced plugin tags from 8 to 5 (WordPress.org guideline)
+  - Created `/languages` directory for translation files
+  - Removed forbidden files (`.gitignore`, `phpunit.xml.dist`) from plugin directory
+
+### Security
+- Enhanced input sanitization with proper `wp_unslash()` usage throughout AJAX handlers
+- Improved output escaping compliance across all template files
+
 ## [1.5.1] - 2025-10-23
 
 ### Improved
