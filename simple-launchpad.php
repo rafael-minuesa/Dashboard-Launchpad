@@ -39,15 +39,11 @@ if ( ! defined( 'SIMPLE_LAUNCHPAD_PLUGIN_URL' ) ) {
 }
 
 /**
- * Load plugin textdomain for translations.
+ * Note: Translation loading is handled automatically by WordPress for plugins
+ * hosted on WordPress.org since version 4.6. No need for load_plugin_textdomain().
  *
  * @since 1.3.0
- * @return void
  */
-function simple_launchpad_load_textdomain() {
-	load_plugin_textdomain( 'simple-launchpad', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
-}
-add_action( 'plugins_loaded', 'simple_launchpad_load_textdomain' );
 
 /* ---------------------------------------------------------------------------
  * Includes
