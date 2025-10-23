@@ -4,7 +4,7 @@ Tags: dashboard, admin, quick-access, buttons, customization, launchpad, navigat
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -203,34 +203,23 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 
 == Changelog ==
 
-= 1.0.0 - 2025-10-23 =
+= 1.5.1 - 2025-10-23 =
+* Improved: Updated readme.txt with compelling origin story explaining why this plugin exists
+* Improved: Better description highlighting the frustration of plugins moving menu items around
+* Fixed: Updated all filter hook examples to use new naming (simple_launchpad_*)
+* Fixed: Updated text domain references in documentation
+* Fixed: Corrected support/GitHub URLs to use simple-launchpad slug
 
-**First Public Release to WordPress.org**
+= 1.5.0 - 2025-10-23 =
+* Changed: Complete code refactoring - renamed all identifiers from dashboard-launchpad to simple-launchpad
+* Changed: Class names updated: Dashboard_Launchpad_* → Dashboard_LaunchPad_* (capital P)
+* Changed: Function names: dashboard_launchpad_*() → simple_launchpad_*()
+* Changed: All constants, text domain, CSS classes, menu slugs, options, AJAX actions, and filter hooks renamed
+* Changed: Asset files renamed: dashboard-launchpad.css/js → simple-launchpad.css/js
+* Improved: Simplified codebase by removing unnecessary compatibility code (no existing users)
+* Improved: Cleaner code structure aligned with plugin branding
 
-Stop scrolling through constantly-shifting admin menus! Simple LaunchPad puts all your most-used WordPress admin pages in ONE predictable location at the top of your admin menu.
-
-**Features:**
-* 15 quick-access buttons organized in 3 logical rows (Content, Appearance, Administration)
-* Fully customizable: Enable/disable buttons, drag-and-drop reordering
-* Color customization: Text and background colors for normal and hover states
-* Role-based visibility controls for multi-user sites
-* WCAG 2.1 AA compliant: Full screen reader and keyboard navigation support
-* Responsive design: 5-column grid (desktop), 2-column grid (mobile)
-* Developer-friendly: Filter hooks and well-documented code
-* Translation-ready with proper i18n implementation
-* Clean uninstall: Removes all data including multisite installations
-* Lightweight and fast with transient caching
-* WordPress Coding Standards compliant
-
-**Technical:**
-* Compatible with WordPress 5.0+, tested up to 6.7
-* Requires PHP 7.4 or higher
-* Settings integrated into main LaunchPad page (no separate submenu)
-* Complete security: Nonce verification, capability checks, input sanitization
-
-**OLD VERSION FOR REFERENCE ONLY:**
-
-= 1.4.0 - 2025-10-22 (Development Version) =
+= 1.4.0 - 2025-10-22 =
 * Added: 9 new buttons (Categories, Tags, Themes, Widgets, Menus, Customizer, Tools, Updates, Site Health)
 * Added: Settings integrated directly into LaunchPad page (bottom section)
 * Added: WordPress.org asset directory structure with placeholders
@@ -277,8 +266,14 @@ Stop scrolling through constantly-shifting admin menus! Simple LaunchPad puts al
 
 == Upgrade Notice ==
 
-= 1.0.0 =
-First public release! Stop hunting for menu items that plugins keep moving around. Get all your most-used admin pages in ONE predictable location at the top of your admin menu. Features 15 customizable buttons, WCAG 2.1 AA accessibility compliance, role-based visibility, and more.
+= 1.5.1 =
+Documentation improvements with compelling origin story. Minor fixes to filter hook examples and URLs.
+
+= 1.5.0 =
+Major code refactoring for consistency. All identifiers renamed to simple-launchpad naming scheme. Cleaner codebase.
+
+= 1.4.0 =
+Major UI overhaul! 15 buttons organized in 3 logical rows. Settings integrated into main page. Larger icons, better layout.
 
 == Credits ==
 
