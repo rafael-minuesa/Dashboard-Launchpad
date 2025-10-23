@@ -1,4 +1,4 @@
-# Simple Launchpad 🚀
+# Simple LaunchPad 🚀
 
 [![WordPress Plugin Version](https://img.shields.io/badge/WordPress-5.0%2B-blue.svg)](https://wordpress.org/)
 [![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://php.net/)
