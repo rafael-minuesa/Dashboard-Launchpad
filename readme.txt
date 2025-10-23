@@ -8,11 +8,11 @@ Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Transform your WordPress admin into a streamlined command center with quick-access buttons organized in 3 logical rows.
+Create a section in your WordPress admin with a streamlined command center with quick-access buttons organized in 3 logical rows. Logical is dev-atable, so you're given the option to rearrange things.
 
 == Description ==
 
-**Simple LaunchPad** (formerly Dashboard LaunchPad) appears as the first menu item in your WordPress admin, providing instant access to 15 carefully organized buttons across three categories: Content Management, Appearance, and Administration.
+**Simple LaunchPad** appears as the first menu item in your WordPress admin, providing instant access to 15 carefully organized buttons across three categories: Content Management, Appearance, and Administration.
 
 = Why This Plugin Exists =
 
