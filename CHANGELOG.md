@@ -7,6 +7,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] - 2025-10-23
+
+### Changed
+- **BREAKING: Major Code Refactoring** - Complete identifier rename for consistency
+  - Plugin identifiers renamed from `dashboard-launchpad` to `simple-launchpad`
+  - Class names updated: `Dashboard_Launchpad_*` → `Dashboard_LaunchPad_*` (capital P)
+  - Function names: `dashboard_launchpad_*()` → `simple_launchpad_*()`
+  - Constants: `DASHBOARD_LAUNCHPAD_*` → `SIMPLE_LAUNCHPAD_*`
+  - Text domain: `'dashboard-launchpad'` → `'simple-launchpad'`
+  - CSS classes: `.dashboard-launchpad` → `.simple-launchpad`
+  - Menu slugs/URLs: `dashboard-launchpad` → `simple-launchpad`
+  - Database options: `dashboard_launchpad_*` → `simple_launchpad_*`
+  - AJAX actions: `dashboard_launchpad_*` → `simple_launchpad_*`
+  - Filter hooks: `dashboard_launchpad_*` → `simple_launchpad_*`
+- **Asset files renamed:**
+  - `dashboard-launchpad.css` → `simple-launchpad.css`
+  - `dashboard-launchpad.js` → `simple-launchpad.js`
+- Updated Plugin URI: `simple-launchpad` repository slug
+
+### Added
+- **Automatic data migration** for existing users
+  - Settings automatically migrated from old to new option names
+  - Custom buttons automatically migrated
+  - Migration runs once on plugin update
+  - Old data preserved for safety
+- **Backward compatibility support:**
+  - Old filter hooks still supported (`dashboard_launchpad_*`)
+  - Deprecated filters trigger new equivalents
+  - Smooth transition for developers using plugin hooks
+
+### Fixed
+- Database cleanup now removes both old and new option names on uninstall
+- Improved multisite compatibility with proper data migration
+
 ## [1.4.0] - 2025-10-22
 
 ### Added

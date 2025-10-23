@@ -5,297 +5,302 @@
  * Creates a standalone admin page with quick-access buttons, positioned
  * as the first menu item in the WordPress admin sidebar (above Dashboard).
  *
- * @package Dashboard_Launchpad
+ * @package Simple_LaunchPad
  * @since 1.3.0
  */
 
-class Dashboard_Launchpad_Dashboard {
+class Dashboard_LaunchPad_Dashboard {
 
-    /**
-     * Initialize the LaunchPad page.
-     *
-     * Registers the top-level menu page and AJAX handlers.
-     *
-     * @since 1.0.0
-     * @return void
-     */
-    public static function init() {
-        add_action('admin_menu', array(__CLASS__, 'add_launchpad_menu'), 1);
-        add_action('wp_ajax_dashboard_launchpad_save_order', array(__CLASS__, 'save_button_order'));
-        add_action('admin_head', array(__CLASS__, 'add_custom_styles'));
-    }
+	/**
+	 * Initialize the LaunchPad page.
+	 *
+	 * Registers the top-level menu page and AJAX handlers.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function init() {
+		add_action( 'admin_menu', array( __CLASS__, 'add_launchpad_menu' ), 1 );
+		add_action( 'wp_ajax_simple_launchpad_save_order', array( __CLASS__, 'save_button_order' ) );
+		add_action( 'admin_head', array( __CLASS__, 'add_custom_styles' ) );
+	}
 
-    /**
-     * Add the LaunchPad menu as the first menu item.
-     *
-     * Creates a top-level menu page positioned above Dashboard (position 1).
-     * Uses a rocket icon and includes the menu page rendering callback.
-     *
-     * @since 1.3.0
-     * @return void
-     */
-    public static function add_launchpad_menu() {
-        // Ensure dashicons are loaded
-        wp_enqueue_style('dashicons');
+	/**
+	 * Add the LaunchPad menu as the first menu item.
+	 *
+	 * Creates a top-level menu page positioned above Dashboard (position 1).
+	 * Uses a grid-view icon and includes the menu page rendering callback.
+	 *
+	 * @since 1.3.0
+	 * @return void
+	 */
+	public static function add_launchpad_menu() {
+		// Ensure dashicons are loaded
+		wp_enqueue_style( 'dashicons' );
 
-        add_menu_page(
-            __('LaunchPad', 'dashboard-launchpad'),           // Page title
-            __('LaunchPad', 'dashboard-launchpad'),           // Menu title
-            'read',                                            // Capability (all logged-in users)
-            'dashboard-launchpad',                             // Menu slug
-            array(__CLASS__, 'render_launchpad_page'),         // Callback function
-            'dashicons-grid-view',                             // Icon (grid view)
-            1                                                  // Position 1 (before Dashboard at position 2)
-        );
-    }
+		add_menu_page(
+			__( 'LaunchPad', 'simple-launchpad' ),           // Page title
+			__( 'LaunchPad', 'simple-launchpad' ),           // Menu title
+			'read',                                           // Capability (all logged-in users)
+			'simple-launchpad',                               // Menu slug
+			array( __CLASS__, 'render_launchpad_page' ),      // Callback function
+			'dashicons-grid-view',                            // Icon (grid view)
+			1                                                 // Position 1 (before Dashboard at position 2)
+		);
+	}
 
-    /**
-     * Render the LaunchPad page.
-     *
-     * Displays the full-page button grid, filtering buttons based on user
-     * capabilities, role visibility settings, and enabled status.
-     *
-     * @since 1.0.0
-     * @return void
-     */
-    public static function render_launchpad_page() {
-        $options = get_option('dashboard_launchpad_options');
-        $all_buttons = dashboard_launchpad_get_default_buttons();
-        $enabled_buttons = $options['enabled_buttons'] ?? array_keys($all_buttons);
-        $button_order = $options['button_order'] ?? array_keys($all_buttons);
-        $role_visibility = $options['role_visibility'] ?? array();
+	/**
+	 * Render the LaunchPad page.
+	 *
+	 * Displays the full-page button grid, filtering buttons based on user
+	 * capabilities, role visibility settings, and enabled status.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function render_launchpad_page() {
+		$options         = get_option( 'simple_launchpad_options' );
+		$all_buttons     = simple_launchpad_get_default_buttons();
+		$enabled_buttons = $options['enabled_buttons'] ?? array_keys( $all_buttons );
+		$button_order    = $options['button_order'] ?? array_keys( $all_buttons );
+		$role_visibility = $options['role_visibility'] ?? array();
 
-        $current_user = wp_get_current_user();
-        $user_roles = $current_user->roles;
+		$current_user = wp_get_current_user();
+		$user_roles   = $current_user->roles;
 
-        // Filter and order buttons
-        $buttons_to_display = array();
-        foreach ($button_order as $button_id) {
-            // Check if button is enabled
-            if (!in_array($button_id, $enabled_buttons)) {
-                continue;
-            }
+		// Filter and order buttons
+		$buttons_to_display = array();
+		foreach ( $button_order as $button_id ) {
+			// Check if button is enabled
+			if ( ! in_array( $button_id, $enabled_buttons ) ) {
+				continue;
+			}
 
-            // Check if button exists
-            if (!isset($all_buttons[$button_id])) {
-                continue;
-            }
+			// Check if button exists
+			if ( ! isset( $all_buttons[ $button_id ] ) ) {
+				continue;
+			}
 
-            $button = $all_buttons[$button_id];
+			$button = $all_buttons[ $button_id ];
 
-            // Check capability
-            if (!current_user_can($button['capability'])) {
-                continue;
-            }
+			// Check capability
+			if ( ! current_user_can( $button['capability'] ) ) {
+				continue;
+			}
 
-            // Check role visibility
-            if (!empty($role_visibility[$button_id])) {
-                $allowed_roles = $role_visibility[$button_id];
-                $has_access = false;
-                foreach ($user_roles as $role) {
-                    if (in_array($role, $allowed_roles)) {
-                        $has_access = true;
-                        break;
-                    }
-                }
-                if (!$has_access) {
-                    continue;
-                }
-            }
+			// Check role visibility
+			if ( ! empty( $role_visibility[ $button_id ] ) ) {
+				$allowed_roles = $role_visibility[ $button_id ];
+				$has_access    = false;
+				foreach ( $user_roles as $role ) {
+					if ( in_array( $role, $allowed_roles ) ) {
+						$has_access = true;
+						break;
+					}
+				}
+				if ( ! $has_access ) {
+					continue;
+				}
+			}
 
-            $buttons_to_display[] = array(
-                'id' => $button_id,
-                'label' => $button['label'],
-                'url' => $button['url'],
-                'icon' => $button['icon']
-            );
-        }
+			$buttons_to_display[] = array(
+				'id'    => $button_id,
+				'label' => $button['label'],
+				'url'   => $button['url'],
+				'icon'  => $button['icon'],
+			);
+		}
 
-        // Apply filter for developers
-        $buttons_to_display = apply_filters('dashboard_launchpad_buttons', $buttons_to_display);
+		// Apply filter for developers (new filter)
+		$buttons_to_display = apply_filters( 'simple_launchpad_buttons', $buttons_to_display );
 
-        ?>
-        <div class="wrap dashboard-launchpad-page">
-            <a href="#dashboard-launchpad-buttons" class="screen-reader-shortcut"><?php _e('Skip to admin shortcuts', 'dashboard-launchpad'); ?></a>
+		// Also support old filter for backward compatibility
+		if ( has_filter( 'dashboard_launchpad_buttons' ) ) {
+			$buttons_to_display = apply_filters( 'dashboard_launchpad_buttons', $buttons_to_display );
+		}
 
-            <h1 class="launchpad-title">
-                <span class="dashicons dashicons-grid-view" aria-hidden="true"></span>
-                <?php echo esc_html__('LaunchPad', 'dashboard-launchpad'); ?>
-            </h1>
+		?>
+		<div class="wrap simple-launchpad-page">
+			<a href="#simple-launchpad-buttons" class="screen-reader-shortcut"><?php _e( 'Skip to admin shortcuts', 'simple-launchpad' ); ?></a>
 
-            <?php if (current_user_can('manage_options')): ?>
-                <p class="launchpad-subtitle">
-                    <?php _e('Quick access to your most-used admin areas', 'dashboard-launchpad'); ?>
-                    &nbsp;•&nbsp;
-                    <a href="#launchpad-settings">
-                        <?php _e('Configure Buttons', 'dashboard-launchpad'); ?>
-                    </a>
-                </p>
-            <?php else: ?>
-                <p class="launchpad-subtitle">
-                    <?php _e('Quick access to your most-used admin areas', 'dashboard-launchpad'); ?>
-                </p>
-            <?php endif; ?>
+			<h1 class="launchpad-title">
+				<span class="dashicons dashicons-grid-view" aria-hidden="true"></span>
+				<?php echo esc_html__( 'LaunchPad', 'simple-launchpad' ); ?>
+			</h1>
 
-            <?php if (empty($buttons_to_display)): ?>
-                <div class="notice notice-info">
-                    <p>
-                        <?php _e('No buttons configured or available.', 'dashboard-launchpad'); ?>
-                        <?php if (current_user_can('manage_options')): ?>
-                            <a href="#launchpad-settings">
-                                <?php _e('Configure buttons in Settings', 'dashboard-launchpad'); ?>
-                            </a>
-                        <?php endif; ?>
-                    </p>
-                </div>
-            <?php else: ?>
-                <div class="dashboard-launchpad" id="dashboard-launchpad-buttons" role="navigation" aria-label="<?php esc_attr_e('Admin Quick Links', 'dashboard-launchpad'); ?>">
-                    <?php foreach ($buttons_to_display as $button): ?>
-                        <a href="<?php echo esc_url(admin_url($button['url'])); ?>"
-                           class="launchpad-button"
-                           data-button-id="<?php echo esc_attr($button['id']); ?>"
-                           aria-label="<?php echo esc_attr(sprintf(__('Go to %s', 'dashboard-launchpad'), $button['label'])); ?>">
-                            <span class="dashicons <?php echo esc_attr($button['icon']); ?>" aria-hidden="true"></span>
-                            <span class="button-label"><?php echo esc_html($button['label']); ?></span>
-                        </a>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
+			<?php if ( current_user_can( 'manage_options' ) ) : ?>
+				<p class="launchpad-subtitle">
+					<?php _e( 'Quick access to your most-used admin areas', 'simple-launchpad' ); ?>
+					&nbsp;•&nbsp;
+					<a href="#launchpad-settings">
+						<?php _e( 'Configure Buttons', 'simple-launchpad' ); ?>
+					</a>
+				</p>
+			<?php else : ?>
+				<p class="launchpad-subtitle">
+					<?php _e( 'Quick access to your most-used admin areas', 'simple-launchpad' ); ?>
+				</p>
+			<?php endif; ?>
 
-            <?php if (current_user_can('manage_options')): ?>
-                <!-- Settings Section -->
-                <div id="launchpad-settings" class="launchpad-settings-section">
-                    <?php Dashboard_Launchpad_Settings::render_settings_page(); ?>
-                </div>
-            <?php endif; ?>
-        </div>
-        <?php
-    }
+			<?php if ( empty( $buttons_to_display ) ) : ?>
+				<div class="notice notice-info">
+					<p>
+						<?php _e( 'No buttons configured or available.', 'simple-launchpad' ); ?>
+						<?php if ( current_user_can( 'manage_options' ) ) : ?>
+							<a href="#launchpad-settings">
+								<?php _e( 'Configure buttons in Settings', 'simple-launchpad' ); ?>
+							</a>
+						<?php endif; ?>
+					</p>
+				</div>
+			<?php else : ?>
+				<div class="simple-launchpad" id="simple-launchpad-buttons" role="navigation" aria-label="<?php esc_attr_e( 'Admin Quick Links', 'simple-launchpad' ); ?>">
+					<?php foreach ( $buttons_to_display as $button ) : ?>
+						<a href="<?php echo esc_url( admin_url( $button['url'] ) ); ?>"
+						   class="launchpad-button"
+						   data-button-id="<?php echo esc_attr( $button['id'] ); ?>"
+						   aria-label="<?php echo esc_attr( sprintf( __( 'Go to %s', 'simple-launchpad' ), $button['label'] ) ); ?>">
+							<span class="dashicons <?php echo esc_attr( $button['icon'] ); ?>" aria-hidden="true"></span>
+							<span class="button-label"><?php echo esc_html( $button['label'] ); ?></span>
+						</a>
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
 
-    /**
-     * Save button order via AJAX.
-     *
-     * Handles AJAX requests to save the button order when users drag and drop
-     * buttons. Verifies nonce and user capabilities before saving.
-     *
-     * @since 1.0.0
-     * @return void Sends JSON response and exits.
-     */
-    public static function save_button_order() {
-        check_ajax_referer('dashboard_launchpad_nonce', 'nonce');
+			<?php if ( current_user_can( 'manage_options' ) ) : ?>
+				<!-- Settings Section -->
+				<div id="launchpad-settings" class="launchpad-settings-section">
+					<?php Dashboard_LaunchPad_Settings::render_settings_page(); ?>
+				</div>
+			<?php endif; ?>
+		</div>
+		<?php
+	}
 
-        if (!current_user_can('manage_options')) {
-            wp_send_json_error(array('message' => __('Insufficient permissions', 'dashboard-launchpad')));
-        }
+	/**
+	 * Save button order via AJAX.
+	 *
+	 * Handles AJAX requests to save the button order when users drag and drop
+	 * buttons. Verifies nonce and user capabilities before saving.
+	 *
+	 * @since 1.0.0
+	 * @return void Sends JSON response and exits.
+	 */
+	public static function save_button_order() {
+		check_ajax_referer( 'simple_launchpad_nonce', 'nonce' );
 
-        // Validate input
-        if (!isset($_POST['order']) || !is_array($_POST['order'])) {
-            wp_send_json_error(array('message' => __('Invalid data format', 'dashboard-launchpad')));
-        }
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Insufficient permissions', 'simple-launchpad' ) ) );
+		}
 
-        $order = array_map('sanitize_key', $_POST['order']);
+		// Validate input
+		if ( ! isset( $_POST['order'] ) || ! is_array( $_POST['order'] ) ) {
+			wp_send_json_error( array( 'message' => __( 'Invalid data format', 'simple-launchpad' ) ) );
+		}
 
-        // Verify all button IDs are valid
-        $all_buttons = dashboard_launchpad_get_default_buttons();
-        $valid_order = array();
-        foreach ($order as $button_id) {
-            if (isset($all_buttons[$button_id])) {
-                $valid_order[] = $button_id;
-            }
-        }
+		$order = array_map( 'sanitize_key', $_POST['order'] );
 
-        $options = get_option('dashboard_launchpad_options');
-        if (!is_array($options)) {
-            $options = array();
-        }
-        $options['button_order'] = $valid_order;
-        update_option('dashboard_launchpad_options', $options);
+		// Verify all button IDs are valid
+		$all_buttons = simple_launchpad_get_default_buttons();
+		$valid_order = array();
+		foreach ( $order as $button_id ) {
+			if ( isset( $all_buttons[ $button_id ] ) ) {
+				$valid_order[] = $button_id;
+			}
+		}
 
-        // Clear cache after updating order
-        dashboard_launchpad_clear_cache();
+		$options = get_option( 'simple_launchpad_options' );
+		if ( ! is_array( $options ) ) {
+			$options = array();
+		}
+		$options['button_order'] = $valid_order;
+		update_option( 'simple_launchpad_options', $options );
 
-        wp_send_json_success(array('message' => __('Order saved', 'dashboard-launchpad')));
-    }
+		// Clear cache after updating order
+		simple_launchpad_clear_cache();
 
-    /**
-     * Add custom styles based on user settings.
-     *
-     * Outputs inline CSS in the admin header to apply user-customized colors
-     * to the LaunchPad buttons. Only runs on the LaunchPad page.
-     *
-     * @since 1.0.0
-     * @return void
-     */
-    public static function add_custom_styles() {
-        ?>
-        <style>
-            /* Ensure LaunchPad menu icon displays */
-            #adminmenu #toplevel_page_dashboard-launchpad div.wp-menu-image:before {
-                font-family: dashicons !important;
-                content: '\f509' !important;  /* dashicons-grid-view */
-            }
-        </style>
-        <?php
+		wp_send_json_success( array( 'message' => __( 'Order saved', 'simple-launchpad' ) ) );
+	}
 
-        $screen = get_current_screen();
-        if (!$screen || $screen->id !== 'toplevel_page_dashboard-launchpad') {
-            return;
-        }
+	/**
+	 * Add custom styles based on user settings.
+	 *
+	 * Outputs inline CSS in the admin header to apply user-customized colors
+	 * to the LaunchPad buttons. Only runs on the LaunchPad page.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function add_custom_styles() {
+		?>
+		<style>
+			/* Ensure LaunchPad menu icon displays */
+			#adminmenu #toplevel_page_simple-launchpad div.wp-menu-image:before {
+				font-family: dashicons !important;
+				content: '\f509' !important;  /* dashicons-grid-view */
+			}
+		</style>
+		<?php
 
-        $options = get_option('dashboard_launchpad_options');
-        $button_color = $options['button_color'] ?? '#2271b1';
-        $button_hover_color = $options['button_hover_color'] ?? '#135e96';
-        $button_bg_color = $options['button_bg_color'] ?? '#ffffff';
-        $button_hover_bg_color = $options['button_hover_bg_color'] ?? '#f6f7f7';
+		$screen = get_current_screen();
+		if ( ! $screen || $screen->id !== 'toplevel_page_simple-launchpad' ) {
+			return;
+		}
 
-        ?>
-        <style>
-            /* Page header styling */
-            .dashboard-launchpad-page .launchpad-title {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                font-size: 23px;
-                font-weight: 400;
-                margin: 0;
-                padding: 9px 0 4px;
-                line-height: 1.3;
-            }
+		$options                = get_option( 'simple_launchpad_options' );
+		$button_color           = $options['button_color'] ?? '#2271b1';
+		$button_hover_color     = $options['button_hover_color'] ?? '#135e96';
+		$button_bg_color        = $options['button_bg_color'] ?? '#ffffff';
+		$button_hover_bg_color  = $options['button_hover_bg_color'] ?? '#f6f7f7';
 
-            .dashboard-launchpad-page .launchpad-title .dashicons {
-                font-size: 28px;
-                width: 28px;
-                height: 28px;
-                color: #2271b1;
-            }
+		?>
+		<style>
+			/* Page header styling */
+			.simple-launchpad-page .launchpad-title {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				font-size: 23px;
+				font-weight: 400;
+				margin: 0;
+				padding: 9px 0 4px;
+				line-height: 1.3;
+			}
 
-            .dashboard-launchpad-page .launchpad-subtitle {
-                color: #646970;
-                font-size: 14px;
-                margin: 5px 0 20px;
-            }
+			.simple-launchpad-page .launchpad-title .dashicons {
+				font-size: 28px;
+				width: 28px;
+				height: 28px;
+				color: #2271b1;
+			}
 
-            .dashboard-launchpad-page .launchpad-subtitle a {
-                color: #2271b1;
-                text-decoration: none;
-            }
+			.simple-launchpad-page .launchpad-subtitle {
+				color: #646970;
+				font-size: 14px;
+				margin: 5px 0 20px;
+			}
 
-            .dashboard-launchpad-page .launchpad-subtitle a:hover {
-                color: #135e96;
-            }
+			.simple-launchpad-page .launchpad-subtitle a {
+				color: #2271b1;
+				text-decoration: none;
+			}
 
-            /* Custom button colors */
-            .launchpad-button {
-                color: <?php echo esc_attr($button_color); ?> !important;
-                background-color: <?php echo esc_attr($button_bg_color); ?> !important;
-            }
+			.simple-launchpad-page .launchpad-subtitle a:hover {
+				color: #135e96;
+			}
 
-            .launchpad-button:hover {
-                color: <?php echo esc_attr($button_hover_color); ?> !important;
-                background-color: <?php echo esc_attr($button_hover_bg_color); ?> !important;
-                border-color: <?php echo esc_attr($button_hover_color); ?> !important;
-            }
-        </style>
-        <?php
-    }
+			/* Custom button colors */
+			.launchpad-button {
+				color: <?php echo esc_attr( $button_color ); ?> !important;
+				background-color: <?php echo esc_attr( $button_bg_color ); ?> !important;
+			}
+
+			.launchpad-button:hover {
+				color: <?php echo esc_attr( $button_hover_color ); ?> !important;
+				background-color: <?php echo esc_attr( $button_hover_bg_color ); ?> !important;
+				border-color: <?php echo esc_attr( $button_hover_color ); ?> !important;
+			}
+		</style>
+		<?php
+	}
 }

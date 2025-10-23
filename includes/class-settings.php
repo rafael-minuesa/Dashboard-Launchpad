@@ -5,11 +5,11 @@
  * Manages the plugin settings page, form rendering, input sanitization,
  * and integration with the WordPress Settings API.
  *
- * @package Dashboard_Launchpad
+ * @package Simple_LaunchPad
  * @since 1.0.0
  */
 
-class Dashboard_Launchpad_Settings {
+class Dashboard_LaunchPad_Settings {
 
     /**
      * Initialize the settings.
@@ -24,7 +24,7 @@ class Dashboard_Launchpad_Settings {
         // add_action('admin_menu', array(__CLASS__, 'add_settings_page'));
         add_action('admin_init', array(__CLASS__, 'register_settings'));
     }
-    
+
     /**
      * Add settings page to WordPress admin.
      *
@@ -36,14 +36,14 @@ class Dashboard_Launchpad_Settings {
      */
     public static function add_settings_page() {
         add_options_page(
-            __('Dashboard LaunchPad Settings', 'dashboard-launchpad'),
-            __('Dashboard LaunchPad', 'dashboard-launchpad'),
+            __('Dashboard LaunchPad Settings', 'simple-launchpad'),
+            __('Dashboard LaunchPad', 'simple-launchpad'),
             'manage_options',
-            'dashboard-launchpad',
+            'simple-launchpad',
             array(__CLASS__, 'render_settings_page')
         );
     }
-    
+
     /**
      * Register plugin settings.
      *
@@ -55,12 +55,12 @@ class Dashboard_Launchpad_Settings {
      */
     public static function register_settings() {
         register_setting(
-            'dashboard_launchpad_options',
-            'dashboard_launchpad_options',
+            'simple_launchpad_options',
+            'simple_launchpad_options',
             array(__CLASS__, 'sanitize_options')
         );
     }
-    
+
     /**
      * Sanitize options before saving.
      *
@@ -73,7 +73,7 @@ class Dashboard_Launchpad_Settings {
      */
     public static function sanitize_options($input) {
         $sanitized = array();
-        $all_buttons = dashboard_launchpad_get_default_buttons();
+        $all_buttons = simple_launchpad_get_default_buttons();
 
         // Sanitize enabled buttons - only allow valid button IDs
         if (isset($input['enabled_buttons']) && is_array($input['enabled_buttons'])) {
@@ -84,7 +84,7 @@ class Dashboard_Launchpad_Settings {
         } else {
             $sanitized['enabled_buttons'] = array();
         }
-        
+
         // Sanitize button order (comes as comma-separated string from hidden field)
         // Only allow valid button IDs
         if (isset($input['button_order'])) {
@@ -103,13 +103,13 @@ class Dashboard_Launchpad_Settings {
         } else {
             $sanitized['button_order'] = array();
         }
-        
+
         // Sanitize colors
         $sanitized['button_color'] = sanitize_hex_color($input['button_color'] ?? '#2271b1');
         $sanitized['button_hover_color'] = sanitize_hex_color($input['button_hover_color'] ?? '#135e96');
         $sanitized['button_bg_color'] = sanitize_hex_color($input['button_bg_color'] ?? '#ffffff');
         $sanitized['button_hover_bg_color'] = sanitize_hex_color($input['button_hover_bg_color'] ?? '#f6f7f7');
-        
+
         // Sanitize role visibility - only allow valid button IDs and role names
         if (isset($input['role_visibility']) && is_array($input['role_visibility'])) {
             $sanitized['role_visibility'] = array();
@@ -131,11 +131,11 @@ class Dashboard_Launchpad_Settings {
         }
 
         // Clear button cache when settings are updated
-        dashboard_launchpad_clear_cache();
+        simple_launchpad_clear_cache();
 
         return $sanitized;
     }
-    
+
     /**
      * Render the settings page.
      *
@@ -155,45 +155,45 @@ class Dashboard_Launchpad_Settings {
         // Check if settings were just saved
         if (isset($_GET['settings-updated'])) {
             add_settings_error(
-                'dashboard_launchpad_messages',
-                'dashboard_launchpad_message',
-                __('Settings saved successfully!', 'dashboard-launchpad'),
+                'simple_launchpad_messages',
+                'simple_launchpad_message',
+                __('Settings saved successfully!', 'simple-launchpad'),
                 'updated'
             );
         }
 
         // Show error/update messages
-        settings_errors('dashboard_launchpad_messages');
+        settings_errors('simple_launchpad_messages');
 
-        $options = get_option('dashboard_launchpad_options');
-        $all_buttons = dashboard_launchpad_get_default_buttons();
+        $options = get_option('simple_launchpad_options');
+        $all_buttons = simple_launchpad_get_default_buttons();
         $enabled_buttons = $options['enabled_buttons'] ?? array_keys($all_buttons);
         $button_order = $options['button_order'] ?? array_keys($all_buttons);
         $role_visibility = $options['role_visibility'] ?? array();
-        
+
         // Get WordPress roles
         $roles = wp_roles()->get_names();
-        
+
         ?>
         <div class="wrap">
             <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
 
             <form method="post" action="options.php">
-                <?php settings_fields('dashboard_launchpad_options'); ?>
-                
+                <?php settings_fields('simple_launchpad_options'); ?>
+
                 <h2 class="nav-tab-wrapper">
-                    <a href="#buttons-tab" class="nav-tab nav-tab-active"><?php _e('Buttons', 'dashboard-launchpad'); ?></a>
-                    <a href="#appearance-tab" class="nav-tab"><?php _e('Appearance', 'dashboard-launchpad'); ?></a>
-                    <a href="#roles-tab" class="nav-tab"><?php _e('Role Visibility', 'dashboard-launchpad'); ?></a>
+                    <a href="#buttons-tab" class="nav-tab nav-tab-active"><?php _e('Buttons', 'simple-launchpad'); ?></a>
+                    <a href="#appearance-tab" class="nav-tab"><?php _e('Appearance', 'simple-launchpad'); ?></a>
+                    <a href="#roles-tab" class="nav-tab"><?php _e('Role Visibility', 'simple-launchpad'); ?></a>
                 </h2>
-                
+
                 <!-- Buttons Tab -->
                 <div id="buttons-tab" class="tab-content active">
-                    <h2><?php _e('Enable/Disable & Reorder Buttons', 'dashboard-launchpad'); ?></h2>
-                    <p><?php _e('Check the buttons you want to display and drag to reorder them.', 'dashboard-launchpad'); ?></p>
+                    <h2><?php _e('Enable/Disable & Reorder Buttons', 'simple-launchpad'); ?></h2>
+                    <p><?php _e('Check the buttons you want to display and drag to reorder them.', 'simple-launchpad'); ?></p>
 
-                    <input type="hidden" name="dashboard_launchpad_options[button_order]" id="button_order" value="<?php echo esc_attr(implode(',', $button_order)); ?>">
-                    
+                    <input type="hidden" name="simple_launchpad_options[button_order]" id="button_order" value="<?php echo esc_attr(implode(',', $button_order)); ?>">
+
                     <ul id="sortable-buttons" class="sortable-buttons">
                         <?php
                         // Sort buttons according to saved order
@@ -209,7 +209,7 @@ class Dashboard_Launchpad_Settings {
                                 $ordered_buttons[$button_id] = $button;
                             }
                         }
-                        
+
                         foreach ($ordered_buttons as $button_id => $button):
                             $checked = in_array($button_id, $enabled_buttons) ? 'checked' : '';
                         ?>
@@ -217,7 +217,7 @@ class Dashboard_Launchpad_Settings {
                                 <span class="dashicons dashicons-menu drag-handle"></span>
                                 <label>
                                     <input type="checkbox"
-                                           name="dashboard_launchpad_options[enabled_buttons][]"
+                                           name="simple_launchpad_options[enabled_buttons][]"
                                            value="<?php echo esc_attr($button_id); ?>"
                                            <?php echo $checked; ?>>
                                     <span class="dashicons <?php echo esc_attr($button['icon']); ?>"></span>
@@ -227,19 +227,19 @@ class Dashboard_Launchpad_Settings {
                         <?php endforeach; ?>
                     </ul>
                 </div>
-                
+
                 <!-- Appearance Tab -->
                 <div id="appearance-tab" class="tab-content">
-                    <h2><?php _e('Customize Colors', 'dashboard-launchpad'); ?></h2>
-                    
+                    <h2><?php _e('Customize Colors', 'simple-launchpad'); ?></h2>
+
                     <table class="form-table">
                         <tr>
                             <th scope="row">
-                                <label for="button_color"><?php _e('Button Text Color', 'dashboard-launchpad'); ?></label>
+                                <label for="button_color"><?php _e('Button Text Color', 'simple-launchpad'); ?></label>
                             </th>
                             <td>
                                 <input type="text"
-                                       name="dashboard_launchpad_options[button_color]"
+                                       name="simple_launchpad_options[button_color]"
                                        id="button_color"
                                        value="<?php echo esc_attr($options['button_color'] ?? '#2271b1'); ?>"
                                        class="color-picker">
@@ -247,11 +247,11 @@ class Dashboard_Launchpad_Settings {
                         </tr>
                         <tr>
                             <th scope="row">
-                                <label for="button_hover_color"><?php _e('Button Hover Text Color', 'dashboard-launchpad'); ?></label>
+                                <label for="button_hover_color"><?php _e('Button Hover Text Color', 'simple-launchpad'); ?></label>
                             </th>
                             <td>
                                 <input type="text"
-                                       name="dashboard_launchpad_options[button_hover_color]"
+                                       name="simple_launchpad_options[button_hover_color]"
                                        id="button_hover_color"
                                        value="<?php echo esc_attr($options['button_hover_color'] ?? '#135e96'); ?>"
                                        class="color-picker">
@@ -259,11 +259,11 @@ class Dashboard_Launchpad_Settings {
                         </tr>
                         <tr>
                             <th scope="row">
-                                <label for="button_bg_color"><?php _e('Button Background Color', 'dashboard-launchpad'); ?></label>
+                                <label for="button_bg_color"><?php _e('Button Background Color', 'simple-launchpad'); ?></label>
                             </th>
                             <td>
                                 <input type="text"
-                                       name="dashboard_launchpad_options[button_bg_color]"
+                                       name="simple_launchpad_options[button_bg_color]"
                                        id="button_bg_color"
                                        value="<?php echo esc_attr($options['button_bg_color'] ?? '#ffffff'); ?>"
                                        class="color-picker">
@@ -271,11 +271,11 @@ class Dashboard_Launchpad_Settings {
                         </tr>
                         <tr>
                             <th scope="row">
-                                <label for="button_hover_bg_color"><?php _e('Button Hover Background Color', 'dashboard-launchpad'); ?></label>
+                                <label for="button_hover_bg_color"><?php _e('Button Hover Background Color', 'simple-launchpad'); ?></label>
                             </th>
                             <td>
                                 <input type="text"
-                                       name="dashboard_launchpad_options[button_hover_bg_color]"
+                                       name="simple_launchpad_options[button_hover_bg_color]"
                                        id="button_hover_bg_color"
                                        value="<?php echo esc_attr($options['button_hover_bg_color'] ?? '#f6f7f7'); ?>"
                                        class="color-picker">
@@ -283,12 +283,12 @@ class Dashboard_Launchpad_Settings {
                         </tr>
                     </table>
                 </div>
-                
+
                 <!-- Role Visibility Tab -->
                 <div id="roles-tab" class="tab-content">
-                    <h2><?php _e('Role-Based Button Visibility', 'dashboard-launchpad'); ?></h2>
-                    <p><?php _e('Select which user roles can see each button. Leave empty to show to all roles with the required capability.', 'dashboard-launchpad'); ?></p>
-                    
+                    <h2><?php _e('Role-Based Button Visibility', 'simple-launchpad'); ?></h2>
+                    <p><?php _e('Select which user roles can see each button. Leave empty to show to all roles with the required capability.', 'simple-launchpad'); ?></p>
+
                     <table class="form-table role-visibility-table">
                         <?php foreach ($all_buttons as $button_id => $button): ?>
                             <tr>
@@ -303,7 +303,7 @@ class Dashboard_Launchpad_Settings {
                                         ?>
                                         <label style="display: inline-block; margin-right: 15px;">
                                             <input type="checkbox"
-                                                   name="dashboard_launchpad_options[role_visibility][<?php echo esc_attr($button_id); ?>][]"
+                                                   name="simple_launchpad_options[role_visibility][<?php echo esc_attr($button_id); ?>][]"
                                                    value="<?php echo esc_attr($role_id); ?>"
                                                    <?php echo $checked; ?>>
                                             <?php echo esc_html($role_name); ?>
@@ -316,7 +316,7 @@ class Dashboard_Launchpad_Settings {
                 </div>
 
 
-                <?php submit_button(__('Save Settings', 'dashboard-launchpad')); ?>
+                <?php submit_button(__('Save Settings', 'simple-launchpad')); ?>
             </form>
         </div>
         <?php
