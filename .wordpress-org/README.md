@@ -36,8 +36,3 @@ This directory contains visual assets required for WordPress.org plugin submissi
 - White: `#ffffff`
 - Light Gray: `#f6f7f7`
 
-## Instructions
-
-Replace these placeholder files with actual images following the specifications in `/ASSETS.md`.
-
-For AI image generation prompts, see the main project documentation.
