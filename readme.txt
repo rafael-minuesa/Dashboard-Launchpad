@@ -8,7 +8,7 @@ Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Create a section in your WordPress admin with a streamlined command center with quick-access buttons organized in 3 logical rows. Logical is dev-atable, so you're given the option to rearrange things.
+WCAG 2.1 AA accessible command center with predictable quick-access buttons to all WordPress admin areas—perfect for screen reader users.
 
 == Description ==
 
@@ -27,6 +27,43 @@ Perfect for:
 * **Agencies** managing multiple client sites
 * **Developers** who need quick access to tools
 * **Content teams** focusing on specific admin areas
+* **Users with visual disabilities** who rely on screen readers and predictable navigation
+
+= Accessibility Features =
+
+Simple LaunchPad is fully **WCAG 2.1 AA compliant** and specifically designed to help users with visual disabilities navigate WordPress more efficiently.
+
+**Why This Matters for Accessibility:**
+
+When you manage multiple WordPress sites with different plugins, the admin menu becomes unpredictable. One site has "Posts" at position 3, another at position 7. Plugin developers arbitrarily inject their menu items anywhere, constantly shifting core WordPress items up and down. For sighted users, this is frustrating. **For screen reader users, this is a nightmare.**
+
+Every time a screen reader user logs into a different site, they must:
+- Navigate through the entire menu structure to find familiar items
+- Re-learn where "Posts", "Pages", "Plugins", and "Settings" are located
+- Tab through dozens of unfamiliar plugin menu items just to reach core WordPress functions
+
+**Simple LaunchPad solves this by providing ONE predictable location** at the top of the admin menu where all essential WordPress areas are always accessible.
+
+**Accessibility Compliance Features:**
+
+✓ **Keyboard Navigation:** Full keyboard support with visible focus states
+✓ **Screen Reader Support:** Proper ARIA labels and semantic HTML structure
+✓ **Skip Links:** "Skip to admin shortcuts" link for faster navigation
+✓ **Descriptive Labels:** Each button includes clear, descriptive aria-labels (e.g., "Go to Posts", "Go to Settings")
+✓ **Icon Accessibility:** All icons are properly marked as decorative (`aria-hidden="true"`)
+✓ **Semantic HTML:** Proper use of navigation landmarks and heading structure
+✓ **Large Click Targets:** 64px icons with generous padding meet WCAG touch target guidelines
+✓ **Focus Management:** Clear visual focus indicators with high contrast
+✓ **Consistent Location:** Always appears as the first menu item for predictable navigation
+
+**Real-World Impact:**
+
+Instead of tabbing through 20+ menu items that change position on every site, screen reader users can:
+1. Log in to WordPress
+2. Tab once to "LaunchPad" (always first in the menu)
+3. Access any of 15 core WordPress areas with predictable, consistent labels
+
+This reduces cognitive load, speeds up navigation, and makes WordPress administration accessible to everyone—not just sighted users who can visually scan the menu.
 
 = Key Features =
 
@@ -60,6 +97,15 @@ Perfect for:
 * No jQuery dependencies (except admin)
 * Optimized for WordPress standards
 
+**♿ Accessibility**
+* WCAG 2.1 AA compliant
+* Full keyboard navigation support
+* Screen reader optimized with proper ARIA labels
+* Skip links for faster navigation
+* Large click targets (64px icons)
+* Consistent, predictable menu position
+* Reduces cognitive load for users with disabilities
+
 **🔧 Developer Friendly**
 * Extensible with WordPress filters and hooks
 * Well-documented code with PHPDoc comments
@@ -80,6 +126,9 @@ Configure different button layouts for different client sites or user roles.
 
 **For Developers:**
 Extend the plugin with custom buttons using the provided filter hooks.
+
+**For Users with Visual Disabilities:**
+Access all core WordPress admin areas from one predictable location with full screen reader support. No more hunting through constantly changing menu structures.
 
 = Developer Hooks =
 
@@ -147,6 +196,17 @@ All settings are stored locally in your WordPress database.
 7. Visit your WordPress Dashboard to see the new launchpad!
 
 == Frequently Asked Questions ==
+
+= Is this plugin accessible to users with disabilities? =
+
+Yes! Simple LaunchPad is fully WCAG 2.1 AA compliant with:
+* Full keyboard navigation support
+* Proper ARIA labels for screen readers
+* Skip links for faster navigation
+* Large click targets (64px icons)
+* Consistent menu position for predictable navigation
+
+The plugin specifically helps screen reader users by providing ONE predictable location for all essential WordPress admin areas, eliminating the need to navigate through constantly changing menu structures across different sites.
 
 = Does this plugin work with the latest WordPress version? =
 
