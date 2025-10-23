@@ -1,10 +1,10 @@
 === Simple LaunchPad ===
 Contributors: rafaelminuesa
-Tags: dashboard, admin, quick-access, buttons, customization, launchpad, navigation, productivity
+Tags: dashboard, admin, quick-access, buttons, customization
 Requires at least: 5.0
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -203,6 +203,16 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 
 == Changelog ==
 
+= 1.5.2 - 2025-10-23 =
+* Fixed: Replaced all _e() calls with esc_html_e() for proper output escaping
+* Fixed: Added wp_unslash() before sanitizing all $_POST variables in AJAX handlers
+* Fixed: Added translators comment for sprintf() with placeholder
+* Fixed: Updated "Tested up to" version from 6.7 to 6.8
+* Fixed: Reduced plugin tags from 8 to 5 (WordPress.org requirement)
+* Fixed: Created /languages directory for translations
+* Fixed: Removed forbidden files (.gitignore, phpunit.xml.dist) from plugin directory
+* Improved: Enhanced WordPress.org coding standards compliance
+
 = 1.5.1 - 2025-10-23 =
 * Improved: Updated readme.txt with compelling origin story explaining why this plugin exists
 * Improved: Better description highlighting the frustration of plugins moving menu items around
@@ -265,6 +275,9 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 * Capability-based security
 
 == Upgrade Notice ==
+
+= 1.5.2 =
+WordPress.org compliance fixes: improved output escaping, input sanitization, and coding standards compliance. Ready for plugin directory submission.
 
 = 1.5.1 =
 Documentation improvements with compelling origin story. Minor fixes to filter hook examples and URLs.

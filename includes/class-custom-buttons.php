@@ -81,11 +81,11 @@ class Dashboard_LaunchPad_Custom_Buttons {
             wp_send_json_error(array('message' => __('Missing required fields', 'simple-launchpad')));
         }
 
-        $button_id = sanitize_key($_POST['button_id']);
-        $label = sanitize_text_field($_POST['label']);
-        $url = sanitize_text_field($_POST['url']);
-        $icon = sanitize_text_field($_POST['icon'] ?? 'dashicons-admin-generic');
-        $capability = sanitize_text_field($_POST['capability'] ?? 'read');
+        $button_id = sanitize_key(wp_unslash($_POST['button_id']));
+        $label = sanitize_text_field(wp_unslash($_POST['label']));
+        $url = sanitize_text_field(wp_unslash($_POST['url']));
+        $icon = sanitize_text_field(wp_unslash($_POST['icon'] ?? 'dashicons-admin-generic'));
+        $capability = sanitize_text_field(wp_unslash($_POST['capability'] ?? 'read'));
 
         // Check if button ID already exists (in defaults or customs)
         $all_default_buttons = simple_launchpad_get_default_buttons();
@@ -148,7 +148,7 @@ class Dashboard_LaunchPad_Custom_Buttons {
             wp_send_json_error(array('message' => __('Button ID required', 'simple-launchpad')));
         }
 
-        $button_id = sanitize_key($_POST['button_id']);
+        $button_id = sanitize_key(wp_unslash($_POST['button_id']));
         $custom_buttons = self::get_custom_buttons();
 
         if (!isset($custom_buttons[$button_id])) {
@@ -157,16 +157,16 @@ class Dashboard_LaunchPad_Custom_Buttons {
 
         // Update fields if provided
         if (!empty($_POST['label'])) {
-            $custom_buttons[$button_id]['label'] = sanitize_text_field($_POST['label']);
+            $custom_buttons[$button_id]['label'] = sanitize_text_field(wp_unslash($_POST['label']));
         }
         if (!empty($_POST['url'])) {
-            $custom_buttons[$button_id]['url'] = sanitize_text_field($_POST['url']);
+            $custom_buttons[$button_id]['url'] = sanitize_text_field(wp_unslash($_POST['url']));
         }
         if (!empty($_POST['icon'])) {
-            $custom_buttons[$button_id]['icon'] = sanitize_text_field($_POST['icon']);
+            $custom_buttons[$button_id]['icon'] = sanitize_text_field(wp_unslash($_POST['icon']));
         }
         if (!empty($_POST['capability'])) {
-            $custom_buttons[$button_id]['capability'] = sanitize_text_field($_POST['capability']);
+            $custom_buttons[$button_id]['capability'] = sanitize_text_field(wp_unslash($_POST['capability']));
         }
 
         update_option('simple_launchpad_custom_buttons', $custom_buttons);
@@ -200,7 +200,7 @@ class Dashboard_LaunchPad_Custom_Buttons {
             wp_send_json_error(array('message' => __('Button ID required', 'simple-launchpad')));
         }
 
-        $button_id = sanitize_key($_POST['button_id']);
+        $button_id = sanitize_key(wp_unslash($_POST['button_id']));
         $custom_buttons = self::get_custom_buttons();
 
         if (!isset($custom_buttons[$button_id])) {

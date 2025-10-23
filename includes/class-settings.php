@@ -182,15 +182,15 @@ class Dashboard_LaunchPad_Settings {
                 <?php settings_fields('simple_launchpad_options'); ?>
 
                 <h2 class="nav-tab-wrapper">
-                    <a href="#buttons-tab" class="nav-tab nav-tab-active"><?php _e('Buttons', 'simple-launchpad'); ?></a>
-                    <a href="#appearance-tab" class="nav-tab"><?php _e('Appearance', 'simple-launchpad'); ?></a>
-                    <a href="#roles-tab" class="nav-tab"><?php _e('Role Visibility', 'simple-launchpad'); ?></a>
+                    <a href="#buttons-tab" class="nav-tab nav-tab-active"><?php esc_html_e('Buttons', 'simple-launchpad'); ?></a>
+                    <a href="#appearance-tab" class="nav-tab"><?php esc_html_e('Appearance', 'simple-launchpad'); ?></a>
+                    <a href="#roles-tab" class="nav-tab"><?php esc_html_e('Role Visibility', 'simple-launchpad'); ?></a>
                 </h2>
 
                 <!-- Buttons Tab -->
                 <div id="buttons-tab" class="tab-content active">
-                    <h2><?php _e('Enable/Disable & Reorder Buttons', 'simple-launchpad'); ?></h2>
-                    <p><?php _e('Check the buttons you want to display and drag to reorder them.', 'simple-launchpad'); ?></p>
+                    <h2><?php esc_html_e('Enable/Disable & Reorder Buttons', 'simple-launchpad'); ?></h2>
+                    <p><?php esc_html_e('Check the buttons you want to display and drag to reorder them.', 'simple-launchpad'); ?></p>
 
                     <input type="hidden" name="simple_launchpad_options[button_order]" id="button_order" value="<?php echo esc_attr(implode(',', $button_order)); ?>">
 
@@ -230,12 +230,12 @@ class Dashboard_LaunchPad_Settings {
 
                 <!-- Appearance Tab -->
                 <div id="appearance-tab" class="tab-content">
-                    <h2><?php _e('Customize Colors', 'simple-launchpad'); ?></h2>
+                    <h2><?php esc_html_e('Customize Colors', 'simple-launchpad'); ?></h2>
 
                     <table class="form-table">
                         <tr>
                             <th scope="row">
-                                <label for="button_color"><?php _e('Button Text Color', 'simple-launchpad'); ?></label>
+                                <label for="button_color"><?php esc_html_e('Button Text Color', 'simple-launchpad'); ?></label>
                             </th>
                             <td>
                                 <input type="text"
@@ -247,7 +247,7 @@ class Dashboard_LaunchPad_Settings {
                         </tr>
                         <tr>
                             <th scope="row">
-                                <label for="button_hover_color"><?php _e('Button Hover Text Color', 'simple-launchpad'); ?></label>
+                                <label for="button_hover_color"><?php esc_html_e('Button Hover Text Color', 'simple-launchpad'); ?></label>
                             </th>
                             <td>
                                 <input type="text"
@@ -259,7 +259,7 @@ class Dashboard_LaunchPad_Settings {
                         </tr>
                         <tr>
                             <th scope="row">
-                                <label for="button_bg_color"><?php _e('Button Background Color', 'simple-launchpad'); ?></label>
+                                <label for="button_bg_color"><?php esc_html_e('Button Background Color', 'simple-launchpad'); ?></label>
                             </th>
                             <td>
                                 <input type="text"
@@ -271,7 +271,7 @@ class Dashboard_LaunchPad_Settings {
                         </tr>
                         <tr>
                             <th scope="row">
-                                <label for="button_hover_bg_color"><?php _e('Button Hover Background Color', 'simple-launchpad'); ?></label>
+                                <label for="button_hover_bg_color"><?php esc_html_e('Button Hover Background Color', 'simple-launchpad'); ?></label>
                             </th>
                             <td>
                                 <input type="text"
@@ -286,8 +286,8 @@ class Dashboard_LaunchPad_Settings {
 
                 <!-- Role Visibility Tab -->
                 <div id="roles-tab" class="tab-content">
-                    <h2><?php _e('Role-Based Button Visibility', 'simple-launchpad'); ?></h2>
-                    <p><?php _e('Select which user roles can see each button. Leave empty to show to all roles with the required capability.', 'simple-launchpad'); ?></p>
+                    <h2><?php esc_html_e('Role-Based Button Visibility', 'simple-launchpad'); ?></h2>
+                    <p><?php esc_html_e('Select which user roles can see each button. Leave empty to show to all roles with the required capability.', 'simple-launchpad'); ?></p>
 
                     <table class="form-table role-visibility-table">
                         <?php foreach ($all_buttons as $button_id => $button): ?>
