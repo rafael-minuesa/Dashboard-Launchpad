@@ -6,7 +6,7 @@
  *
  * Plugin Name: Simple LaunchPad
  * Plugin URI:  https://github.com/rafael-minuesa/simple-launchpad
- * Description: Quick-access command center with customizable buttons to all WordPress admin areas. Appears as the first menu item above Dashboard.
+ * Description: Quick-access command center with customizable buttons to all WordPress admin areas. Fully WCAG 2.1 AA accessible with screen reader support. Appears as the first menu item above Dashboard.
  * Version:     1.5.2
  * Author:      Rafael Minuesa
  * Author URI:  https://prowoos.com
