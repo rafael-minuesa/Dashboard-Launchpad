@@ -20,6 +20,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Tools - WordPress tools and utilities
   - Updates - Plugin, theme, and core updates
   - Site Health - WordPress site health checker
+- **Accessibility Improvements (WCAG 2.1 AA Compliant):**
+  - Added ARIA labels to all buttons for screen readers
+  - Added navigation landmark with descriptive label
+  - Added skip link for keyboard users ("Skip to admin shortcuts")
+  - Added aria-hidden to decorative icons
+  - Screen reader support for JAWS, NVDA, VoiceOver
+  - Full keyboard navigation support
 - WordPress.org submission preparation:
   - Complete `.wordpress-org/` directory structure
   - Asset placeholder files with detailed specifications
@@ -32,6 +39,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Menu icon CSS fix for proper display
 
 ### Changed
+- **Main plugin file renamed:** `dashboard-launchpad.php` → `simple-launchpad.php`
+  - Aligns with "Simple Launchpad" branding
+  - Cleaner, more professional naming
+  - No user impact (pre-release rename)
+- **Menu icon changed:** Rocket → Grid View (dashicons-grid-view, f509)
+  - Better represents the plugin's grid layout
+  - More intuitive for users
 - **Major Button Reorganization:**
   - Organized into 3 logical rows (Content, Appearance, Administration)
   - Desktop: Fixed 5-column grid (previously auto-fill)

@@ -121,7 +121,7 @@ Infrastructure:   200+ lines
 - `phpunit.xml.dist` - Test configuration
 
 ### Modified
-- `dashboard-launchpad.php` - v1.3.0, caching, custom buttons
+- `simple-launchpad.php` - v1.3.0, caching, custom buttons (renamed from dashboard-launchpad.php)
 - `includes/class-dashboard.php` - Cache clearing
 - `includes/class-settings.php` - Cache clearing, enhanced validation
 - `.gitignore` - Development tools
@@ -244,7 +244,7 @@ Seamless upgrade from v1.2.0:
 
 ### Thorough Review (15 minutes)
 1. Read `includes/class-custom-buttons.php`
-2. Check caching implementation in `dashboard-launchpad.php`
+2. Check caching implementation in `simple-launchpad.php`
 3. Review security improvements in all files
 4. Test plugin activation/deactivation
 
