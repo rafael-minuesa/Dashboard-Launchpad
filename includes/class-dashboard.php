@@ -111,13 +111,8 @@ class Dashboard_LaunchPad_Dashboard {
 			);
 		}
 
-		// Apply filter for developers (new filter)
+		// Apply filter for developers
 		$buttons_to_display = apply_filters( 'simple_launchpad_buttons', $buttons_to_display );
-
-		// Also support old filter for backward compatibility
-		if ( has_filter( 'dashboard_launchpad_buttons' ) ) {
-			$buttons_to_display = apply_filters( 'dashboard_launchpad_buttons', $buttons_to_display );
-		}
 
 		?>
 		<div class="wrap simple-launchpad-page">

@@ -51,46 +51,6 @@ function simple_launchpad_load_textdomain() {
 add_action( 'plugins_loaded', 'simple_launchpad_load_textdomain' );
 
 /* ---------------------------------------------------------------------------
- * Migration from old identifiers
- * --------------------------------------------------------------------------- */
-
-/**
- * Migrate old plugin data to new identifiers.
- *
- * Runs once to migrate settings from dashboard_launchpad_* to simple_launchpad_*.
- * Ensures existing users don't lose their customizations.
- *
- * @since 1.5.0
- * @return void
- */
-function simple_launchpad_migrate_data() {
-	// Check if migration has already run
-	if ( get_option( 'simple_launchpad_migration_complete' ) ) {
-		return;
-	}
-
-	// Migrate main options
-	$old_options = get_option( 'dashboard_launchpad_options' );
-	if ( $old_options && ! get_option( 'simple_launchpad_options' ) ) {
-		add_option( 'simple_launchpad_options', $old_options );
-		// Keep old option for one version for safety
-	}
-
-	// Migrate custom buttons
-	$old_custom_buttons = get_option( 'dashboard_launchpad_custom_buttons' );
-	if ( $old_custom_buttons && ! get_option( 'simple_launchpad_custom_buttons' ) ) {
-		add_option( 'simple_launchpad_custom_buttons', $old_custom_buttons );
-	}
-
-	// Migrate transient cache (just delete old one, will regenerate)
-	delete_transient( 'dashboard_launchpad_buttons_cache' );
-
-	// Mark migration as complete
-	add_option( 'simple_launchpad_migration_complete', true );
-}
-add_action( 'plugins_loaded', 'simple_launchpad_migrate_data', 5 );
-
-/* ---------------------------------------------------------------------------
  * Includes
  * --------------------------------------------------------------------------- */
 
@@ -369,11 +329,6 @@ function simple_launchpad_get_default_buttons() {
 	 */
 	$buttons = apply_filters( 'simple_launchpad_default_buttons', $buttons );
 
-	// Also check for deprecated filter for backward compatibility
-	if ( has_filter( 'dashboard_launchpad_default_buttons' ) ) {
-		$buttons = apply_filters( 'dashboard_launchpad_default_buttons', $buttons );
-	}
-
 	// Merge with custom buttons
 	$buttons = Dashboard_LaunchPad_Custom_Buttons::merge_buttons( $buttons );
 
@@ -393,5 +348,4 @@ function simple_launchpad_get_default_buttons() {
  */
 function simple_launchpad_clear_cache() {
 	delete_transient( 'simple_launchpad_buttons_cache' );
-	delete_transient( 'dashboard_launchpad_buttons_cache' ); // Also delete old cache
 }
