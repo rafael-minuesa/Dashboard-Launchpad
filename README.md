@@ -1,13 +1,6 @@
 # Simple LaunchPad 🚀
 
-[![WordPress Plugin Version](https://img.shields.io/badge/WordPress-5.0%2B-blue.svg)](https://wordpress.org/)
-[![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://php.net/)
-[![License](https://img.shields.io/badge/license-GPLv2%2B-green.svg)](LICENSE)
-[![Tested Up To](https://img.shields.io/badge/tested%20up%20to-WP%206.7-brightgreen.svg)](https://wordpress.org/)
-
 > Simple streamlined command center with quick-access buttons to all WP admin areas.
-
-![Dashboard Launchpad](https://via.placeholder.com/1200x400/2271b1/ffffff?text=Simple+Launchpad)
 
 ## ✨ Features
 
@@ -214,21 +207,15 @@ Simple Launchpad is licensed under the [GNU General Public License v2.0 or later
 
 ## 📞 Support
 
-- **Issues:** [GitHub Issues](https://github.com/rafael-minuesa/Dashboard-Launchpad/issues)
-- **WordPress Support:** [WordPress.org Forum](https://wordpress.org/support/plugin/dashboard-launchpad/)
-- **Documentation:** [Wiki](https://github.com/rafael-minuesa/Dashboard-Launchpad/wiki)
+- **Issues:** [GitHub Issues](https://github.com/rafael-minuesa/Simple-Launchpad/issues)
+- **WordPress Support:** [WordPress.org Forum](https://wordpress.org/support/plugin/simple-launchpad/)
+- **Documentation:** [Wiki](https://github.com/rafael-minuesa/Simple-Launchpad/wiki)
 
 ## 🗺️ Roadmap
 
 See [CHANGELOG.md](CHANGELOG.md) for version history and planned features.
 
-### Coming Soon (v1.3.0)
-- Custom button management UI
-- Dashicons picker
-- Import/export settings
-- Button presets
-
-### Future Plans (v1.4.0+)
+### Future Plans (v2.0+)
 - Button analytics
 - Quick actions
 - Button grouping
@@ -244,4 +231,4 @@ If you find this plugin helpful:
 
 ---
 
-**Made with ❤️ for the WordPress community**
+**Made with ❤️ for the WordPress Community**
