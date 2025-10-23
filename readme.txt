@@ -4,7 +4,7 @@ Tags: dashboard, admin, quick-access, buttons, customization, launchpad, navigat
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.4.0
+Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -203,6 +203,22 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 
 == Changelog ==
 
+= 1.5.1 - 2025-10-23 =
+* Improved: Updated readme.txt with compelling origin story explaining why this plugin exists
+* Improved: Better description highlighting the frustration of plugins moving menu items around
+* Fixed: Updated all filter hook examples to use new naming (simple_launchpad_*)
+* Fixed: Updated text domain references in documentation
+* Fixed: Corrected support/GitHub URLs to use simple-launchpad slug
+
+= 1.5.0 - 2025-10-23 =
+* Changed: Complete code refactoring - renamed all identifiers from dashboard-launchpad to simple-launchpad
+* Changed: Class names updated: Dashboard_Launchpad_* → Dashboard_LaunchPad_* (capital P)
+* Changed: Function names: dashboard_launchpad_*() → simple_launchpad_*()
+* Changed: All constants, text domain, CSS classes, menu slugs, options, AJAX actions, and filter hooks renamed
+* Changed: Asset files renamed: dashboard-launchpad.css/js → simple-launchpad.css/js
+* Improved: Simplified codebase by removing unnecessary compatibility code (no existing users)
+* Improved: Cleaner code structure aligned with plugin branding
+
 = 1.4.0 - 2025-10-22 =
 * Added: 9 new buttons (Categories, Tags, Themes, Widgets, Menus, Customizer, Tools, Updates, Site Health)
 * Added: Settings integrated directly into LaunchPad page (bottom section)
@@ -250,20 +266,14 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 
 == Upgrade Notice ==
 
+= 1.5.1 =
+Documentation improvements with compelling origin story. Minor fixes to filter hook examples and URLs.
+
+= 1.5.0 =
+Major code refactoring for consistency. All identifiers renamed to simple-launchpad naming scheme. Cleaner codebase.
+
 = 1.4.0 =
-Major UI overhaul! 15 buttons organized in 3 logical rows. Settings integrated into main page. Larger icons, better layout. Recommended update for all users.
-
-= 1.3.0 =
-Plugin renamed to Simple LaunchPad. All settings preserved. Update recommended for consistent branding.
-
-= 1.2.0 =
-Major security and code quality improvements. Enhanced developer extensibility with new filter hooks. Recommended update for all users.
-
-= 1.1.0 =
-Adds role-based visibility controls and dark mode support. Recommended for multi-user sites.
-
-= 1.0.0 =
-Initial release of Simple LaunchPad.
+Major UI overhaul! 15 buttons organized in 3 logical rows. Settings integrated into main page. Larger icons, better layout.
 
 == Credits ==
 
@@ -272,11 +282,11 @@ Developed by [Rafael Minuesa](https://prowoos.com)
 == Support ==
 
 For support, feature requests, or bug reports, please visit:
-* [Plugin Support Forum](https://wordpress.org/support/plugin/dashboard-launchpad/)
-* [GitHub Repository](https://github.com/rafael-minuesa/dashboard-launchpad)
+* [Plugin Support Forum](https://wordpress.org/support/plugin/simple-launchpad/)
+* [GitHub Repository](https://github.com/rafael-minuesa/simple-launchpad)
 
 == Donations ==
 
 If you find this plugin helpful, please consider:
-* [Leaving a 5-star review](https://wordpress.org/support/plugin/dashboard-launchpad/reviews/)
-* [Contributing on GitHub](https://github.com/rafael-minuesa/dashboard-launchpad)
+* [Leaving a 5-star review](https://wordpress.org/support/plugin/simple-launchpad/reviews/)
+* [Contributing on GitHub](https://github.com/rafael-minuesa/simple-launchpad)

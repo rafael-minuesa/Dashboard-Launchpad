@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.1] - 2025-10-23
+
+### Improved
+- **readme.txt:** Added compelling "Why This Plugin Exists" section
+  - Personal story about managing multiple WordPress installations
+  - Explains frustration with plugins arbitrarily moving menu items
+  - Positions plugin as community contribution vs just complaining
+  - More relatable and engaging for WordPress.org users
+- Documentation clarity and user engagement
+
+### Fixed
+- Updated all filter hook examples: `dashboard_launchpad_*` → `simple_launchpad_*`
+- Updated text domain references in Translations section
+- Corrected support/GitHub URLs to use `simple-launchpad` slug
+- Fixed WordPress.org plugin directory URLs
+
 ## [1.5.0] - 2025-10-23
 
 ### Changed
@@ -57,6 +73,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Settings integration directly into LaunchPad page
 - Anchor link navigation to settings section
 - Menu icon CSS fix for proper display
+- Settings link on plugins page
 
 ### Changed
 - **Main plugin file renamed:** `dashboard-launchpad.php` → `simple-launchpad.php`
@@ -79,6 +96,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Settings moved from separate submenu to bottom of LaunchPad page
 - "Configure Buttons" now uses anchor link instead of page navigation
 - Settings submenu entry removed from WordPress admin
+- User-facing text: "Launchpad" → "LaunchPad" (capital P)
 
 ### Removed
 - **5 Buttons Removed:**
@@ -100,12 +118,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Uninstall process now completely removes all plugin data
 - Multisite cleanup improved and verified
 - Transient cache properly cleared on uninstall
-
-### Developer
-- Added comments documenting button organization in code
-- Settings can still be accessed programmatically
-- Backward compatibility maintained for settings hooks
-- Filter hooks unchanged
 
 ## [1.3.0] - 2025-10-22
 
@@ -179,103 +191,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Button text color (hover state)
   - Button background color (normal state)
   - Button background color (hover state)
-- WordPress Color Picker integration
-- Tabbed settings interface (Buttons, Appearance, Role Visibility)
-- Capability-based security (users only see buttons they have permission to access)
-- Translation-ready with `dashboard-launchpad` text domain
-- Clean, semantic CSS with WordPress admin styling
-- AJAX functionality for button order saving
-- Responsive grid layout
-- Dashboard widget removal (removes default WP widgets)
-- Proper WordPress plugin structure with class-based organization
+- Tabbed settings interface with three sections:
+  - Buttons: Enable/disable and reorder
+  - Appearance: Color customization with WordPress Color Picker
+  - (Future) Advanced settings placeholder
+- Capability-based security (respects WordPress user permissions)
+- Responsive grid layout that adapts to mobile devices
+- WordPress Coding Standards compliant code
+- Translation-ready with proper i18n implementation
 
-### Security
-- Nonce verification on all forms and AJAX requests
-- Capability checks using `current_user_can()`
-- Input sanitization using WordPress core functions
-- Output escaping using `esc_attr()`, `esc_html()`, `esc_url()`
-
-### Developer Features
-- Object-oriented architecture with static methods
-- Proper WordPress hooks integration
-- Filter hooks for customization
-- Clean, commented code
-- Follows WordPress Coding Standards
-- Modular file structure
+### Technical
+- Clean, object-oriented architecture with separate classes
+- Transient caching for improved performance
+- AJAX-based button reordering (live save)
+- WordPress Settings API integration
+- Proper sanitization and validation throughout
+- Nonce verification for security
 
 ---
-
-## Version History Summary
-
-- **v1.4.0** - Major UI overhaul, 15 buttons in 3 rows, settings integration, WordPress.org prep
-- **v1.3.0** - Renamed to Simple LaunchPad, branding updates
-- **v1.2.0** - Security & code quality improvements, developer extensibility
-- **v1.1.0** - Role visibility, dark mode, responsive enhancements
-- **v1.0.0** - Initial release with core features
-
----
-
-## Upgrade Notes
-
-### From 1.3.0 to 1.4.0
-- **Button Changes:** Default buttons changed from 10 to 15
-  - 9 new buttons added (Categories, Tags, Themes, Widgets, Menus, Customizer, Tools, Updates, Site Health)
-  - 5 buttons removed (Add New Post, Add New Page, Comments, old Appearance button)
-- **Settings Location:** Settings page removed from WordPress admin menu
-  - Settings now appear at bottom of LaunchPad page
-  - All functionality preserved, just different location
-- **Layout Changes:** Grid changed from auto-fill to fixed 5 columns (desktop) / 2 columns (mobile)
-- **No Data Loss:** All your existing enabled buttons and customizations are preserved
-- **User Impact:** Existing users will see new buttons automatically added to their layout
-- **Tip:** Visit LaunchPad page and scroll down to configure your new buttons
-
-### From 1.2.0 to 1.3.0
-- Plugin renamed from "Dashboard LaunchPad" to "Simple LaunchPad"
-- No breaking changes
-- All settings and data preserved
-
-### From 1.1.0 to 1.2.0
-- No breaking changes
-- Settings are preserved during upgrade
-- New developer filter hooks available
-- Uninstall process now properly cleans up database
-
-### From 1.0.0 to 1.1.0
-- No breaking changes
-- New role visibility settings default to showing all buttons to all roles
-- Dark mode activates automatically based on user OS preference
-
----
-
-## Future Roadmap
-
-### Planned for 1.5.0
-- [ ] Custom button management UI (add your own buttons via interface)
-- [ ] Dashicons picker for custom buttons
-- [ ] Import/export settings
-- [ ] Button presets for common use cases
-- [ ] WordPress.org submission
-
-### Planned for 1.6.0
-- [ ] Button analytics (track most-used buttons)
-- [ ] Quick action support (perform actions from button hover)
-- [ ] Search/filter buttons
-- [ ] Button categories/grouping in settings
-
-### Under Consideration
-- [ ] Multi-dashboard support (different layouts per user)
-- [ ] Button shortcuts/keyboard navigation
-- [ ] Integration with popular plugins (WooCommerce, etc.)
-- [ ] Widget support (embed launchpad in other areas)
-
----
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
 
-Dashboard LaunchPad is licensed under the [GPLv2 or later](LICENSE).
+Simple LaunchPad is licensed under the [GPLv2 or later](LICENSE).
+
+## Support & Contributions
+
+- **GitHub:** https://github.com/rafael-minuesa/simple-launchpad
+- **WordPress.org:** https://wordpress.org/plugins/simple-launchpad/
+- **Author:** Rafael Minuesa (https://prowoos.com)
+
+If you find this plugin helpful, please consider:
+- ⭐ Leaving a 5-star review on WordPress.org
+- 🐛 Reporting bugs or requesting features on GitHub
+- 🌍 Contributing translations
+- 💬 Sharing with others who manage multiple WordPress sites
