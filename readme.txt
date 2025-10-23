@@ -1,4 +1,4 @@
-=== Simple Launchpad ===
+=== Simple LaunchPad ===
 Contributors: rafaelminuesa
 Tags: dashboard, admin, quick-access, buttons, customization, launchpad, navigation, productivity
 Requires at least: 5.0
@@ -12,7 +12,7 @@ Transform your WordPress admin into a streamlined command center with quick-acce
 
 == Description ==
 
-**Simple Launchpad** (formerly Dashboard Launchpad) appears as the first menu item in your WordPress admin, providing instant access to 15 carefully organized buttons across three categories: Content Management, Appearance, and Administration.
+**Simple LaunchPad** (formerly Dashboard LaunchPad) appears as the first menu item in your WordPress admin, providing instant access to 15 carefully organized buttons across three categories: Content Management, Appearance, and Administration.
 
 Perfect for:
 * **Site administrators** who want faster navigation
@@ -96,14 +96,14 @@ add_filter('dashboard_launchpad_default_buttons', function($buttons) {
 
 = Translations =
 
-Dashboard Launchpad is translation-ready! Help translate it into your language:
+Dashboard LaunchPad is translation-ready! Help translate it into your language:
 * Text Domain: dashboard-launchpad
 * All strings wrapped with proper i18n functions
 * POT file included for translators
 
 = Privacy =
 
-Dashboard Launchpad does not:
+Dashboard LaunchPad does not:
 * Collect any user data
 * Use cookies
 * Connect to external services
@@ -117,7 +117,7 @@ All settings are stored locally in your WordPress database.
 
 1. Log in to your WordPress admin panel
 2. Navigate to Plugins → Add New
-3. Search for "Dashboard Launchpad"
+3. Search for "Dashboard LaunchPad"
 4. Click "Install Now" and then "Activate"
 
 = Manual Installation =
@@ -130,7 +130,7 @@ All settings are stored locally in your WordPress database.
 
 = Configuration =
 
-1. After activation, go to **Settings → Dashboard Launchpad**
+1. After activation, go to **Settings → Dashboard LaunchPad**
 2. Choose which buttons to enable/disable
 3. Drag and drop to reorder buttons
 4. Customize colors in the Appearance tab
@@ -142,7 +142,7 @@ All settings are stored locally in your WordPress database.
 
 = Does this plugin work with the latest WordPress version? =
 
-Yes! Dashboard Launchpad is tested with the latest WordPress version and follows WordPress coding standards.
+Yes! Dashboard LaunchPad is tested with the latest WordPress version and follows WordPress coding standards.
 
 = Can I add my own custom buttons? =
 
@@ -150,11 +150,11 @@ Yes! Use the `dashboard_launchpad_default_buttons` filter hook to add custom but
 
 = Can I change the button order? =
 
-Absolutely! Go to Settings → Dashboard Launchpad → Buttons tab, then drag and drop buttons to reorder them.
+Absolutely! Go to Settings → Dashboard LaunchPad → Buttons tab, then drag and drop buttons to reorder them.
 
 = Does it work with mobile devices? =
 
-Yes! Dashboard Launchpad is fully responsive and works beautifully on tablets and mobile phones.
+Yes! Dashboard LaunchPad is fully responsive and works beautifully on tablets and mobile phones.
 
 = Can I control which users see which buttons? =
 
@@ -162,7 +162,7 @@ Yes! Use the Role Visibility tab to configure which WordPress roles can see each
 
 = Will this conflict with other plugins? =
 
-Dashboard Launchpad is designed to be compatible with other plugins. It uses WordPress best practices and only modifies the dashboard area. If you experience any conflicts, please report them in the support forum.
+Dashboard LaunchPad is designed to be compatible with other plugins. It uses WordPress best practices and only modifies the dashboard area. If you experience any conflicts, please report them in the support forum.
 
 = Does it remove all default dashboard widgets? =
 
@@ -178,7 +178,7 @@ Yes! All text is wrapped with WordPress i18n functions and ready for translation
 
 = Does it work with multisite? =
 
-Yes! Dashboard Launchpad works on both single-site and multisite WordPress installations.
+Yes! Dashboard LaunchPad works on both single-site and multisite WordPress installations.
 
 = How do I uninstall the plugin? =
 
@@ -197,7 +197,7 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 
 = 1.4.0 - 2025-10-22 =
 * Added: 9 new buttons (Categories, Tags, Themes, Widgets, Menus, Customizer, Tools, Updates, Site Health)
-* Added: Settings integrated directly into Launchpad page (bottom section)
+* Added: Settings integrated directly into LaunchPad page (bottom section)
 * Added: WordPress.org asset directory structure with placeholders
 * Changed: Reorganized buttons into 3 logical rows (Content, Appearance, Administration)
 * Changed: Grid layout now fixed 5 columns (desktop) / 2 columns (mobile)
@@ -205,13 +205,13 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 * Changed: Reduced button padding for more efficient space usage
 * Removed: Settings submenu entry (settings now on main page)
 * Removed: 5 buttons (Add New Post, Add New Page, Comments, old Appearance)
-* Fixed: Launchpad menu icon now displays correctly in admin sidebar
+* Fixed: LaunchPad menu icon now displays correctly in admin sidebar
 * Fixed: Menu icon properly styled (gray with blue hover)
 * Fixed: Uninstall cleanup now removes custom buttons and cache
 * Fixed: Drag-to-reorder functionality now works properly
 
 = 1.3.0 - 2025-10-22 =
-* Changed: Plugin renamed from "Dashboard Launchpad" to "Simple Launchpad"
+* Changed: Plugin renamed from "Dashboard LaunchPad" to "Simple LaunchPad"
 * Improved: Updated branding and documentation
 * Maintained: Backward compatibility (textdomain unchanged)
 
@@ -246,7 +246,7 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 Major UI overhaul! 15 buttons organized in 3 logical rows. Settings integrated into main page. Larger icons, better layout. Recommended update for all users.
 
 = 1.3.0 =
-Plugin renamed to Simple Launchpad. All settings preserved. Update recommended for consistent branding.
+Plugin renamed to Simple LaunchPad. All settings preserved. Update recommended for consistent branding.
 
 = 1.2.0 =
 Major security and code quality improvements. Enhanced developer extensibility with new filter hooks. Recommended update for all users.
@@ -255,7 +255,7 @@ Major security and code quality improvements. Enhanced developer extensibility w
 Adds role-based visibility controls and dark mode support. Recommended for multi-user sites.
 
 = 1.0.0 =
-Initial release of Simple Launchpad.
+Initial release of Simple LaunchPad.
 
 == Credits ==
 

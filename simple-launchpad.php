@@ -1,11 +1,11 @@
 <?php
 /**
- * Simple Launchpad
+ * Simple LaunchPad
  *
- * A lightweight dashboard launchpad for quick-access admin shortcuts.
- * (Formerly "Dashboard Launchpad".)
+ * A lightweight dashboard LaunchPad for quick-access admin shortcuts.
+ * (Formerly "Dashboard LaunchPad".)
  *
- * Plugin Name: Simple Launchpad
+ * Plugin Name: Simple LaunchPad
  * Plugin URI:  https://github.com/rafael-minuesa/dashboard-launchpad
  * Description: Quick-access command center with customizable buttons to all WordPress admin areas. Appears as the first menu item above Dashboard.
  * Version:     1.4.0
@@ -90,7 +90,7 @@ add_action( 'plugins_loaded', 'dashboard_launchpad_init' );
  * Add Settings link to plugin action links on plugins page.
  *
  * Adds a "Settings" link under the plugin name on the plugins list page
- * that directs users to the Launchpad page where settings are integrated.
+ * that directs users to the LaunchPad page where settings are integrated.
  *
  * @since 1.4.0
  * @param array $links Existing plugin action links.

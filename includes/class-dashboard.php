@@ -1,6 +1,6 @@
 <?php
 /**
- * Launchpad Page functionality
+ * LaunchPad Page functionality
  *
  * Creates a standalone admin page with quick-access buttons, positioned
  * as the first menu item in the WordPress admin sidebar (above Dashboard).
@@ -12,7 +12,7 @@
 class Dashboard_Launchpad_Dashboard {
 
     /**
-     * Initialize the launchpad page.
+     * Initialize the LaunchPad page.
      *
      * Registers the top-level menu page and AJAX handlers.
      *
@@ -26,7 +26,7 @@ class Dashboard_Launchpad_Dashboard {
     }
 
     /**
-     * Add the Launchpad menu as the first menu item.
+     * Add the LaunchPad menu as the first menu item.
      *
      * Creates a top-level menu page positioned above Dashboard (position 1).
      * Uses a rocket icon and includes the menu page rendering callback.
@@ -39,8 +39,8 @@ class Dashboard_Launchpad_Dashboard {
         wp_enqueue_style('dashicons');
 
         add_menu_page(
-            __('Launchpad', 'dashboard-launchpad'),           // Page title
-            __('Launchpad', 'dashboard-launchpad'),           // Menu title
+            __('LaunchPad', 'dashboard-launchpad'),           // Page title
+            __('LaunchPad', 'dashboard-launchpad'),           // Menu title
             'read',                                            // Capability (all logged-in users)
             'dashboard-launchpad',                             // Menu slug
             array(__CLASS__, 'render_launchpad_page'),         // Callback function
@@ -50,7 +50,7 @@ class Dashboard_Launchpad_Dashboard {
     }
 
     /**
-     * Render the Launchpad page.
+     * Render the LaunchPad page.
      *
      * Displays the full-page button grid, filtering buttons based on user
      * capabilities, role visibility settings, and enabled status.
@@ -120,7 +120,7 @@ class Dashboard_Launchpad_Dashboard {
 
             <h1 class="launchpad-title">
                 <span class="dashicons dashicons-grid-view" aria-hidden="true"></span>
-                <?php echo esc_html__('Launchpad', 'dashboard-launchpad'); ?>
+                <?php echo esc_html__('LaunchPad', 'dashboard-launchpad'); ?>
             </h1>
 
             <?php if (current_user_can('manage_options')): ?>
@@ -221,7 +221,7 @@ class Dashboard_Launchpad_Dashboard {
      * Add custom styles based on user settings.
      *
      * Outputs inline CSS in the admin header to apply user-customized colors
-     * to the launchpad buttons. Only runs on the launchpad page.
+     * to the LaunchPad buttons. Only runs on the LaunchPad page.
      *
      * @since 1.0.0
      * @return void
@@ -229,7 +229,7 @@ class Dashboard_Launchpad_Dashboard {
     public static function add_custom_styles() {
         ?>
         <style>
-            /* Ensure Launchpad menu icon displays */
+            /* Ensure LaunchPad menu icon displays */
             #adminmenu #toplevel_page_dashboard-launchpad div.wp-menu-image:before {
                 font-family: dashicons !important;
                 content: '\f509' !important;  /* dashicons-grid-view */

@@ -20,7 +20,7 @@ class Dashboard_Launchpad_Settings {
      * @return void
      */
     public static function init() {
-        // Settings are now displayed on the launchpad page itself, not as a separate menu item
+        // Settings are now displayed on the LaunchPad page itself, not as a separate menu item
         // add_action('admin_menu', array(__CLASS__, 'add_settings_page'));
         add_action('admin_init', array(__CLASS__, 'register_settings'));
     }
@@ -28,7 +28,7 @@ class Dashboard_Launchpad_Settings {
     /**
      * Add settings page to WordPress admin.
      *
-     * Creates a settings page under Settings > Dashboard Launchpad.
+     * Creates a settings page under Settings > Dashboard LaunchPad.
      * Requires 'manage_options' capability.
      *
      * @since 1.0.0
@@ -36,8 +36,8 @@ class Dashboard_Launchpad_Settings {
      */
     public static function add_settings_page() {
         add_options_page(
-            __('Dashboard Launchpad Settings', 'dashboard-launchpad'),
-            __('Dashboard Launchpad', 'dashboard-launchpad'),
+            __('Dashboard LaunchPad Settings', 'dashboard-launchpad'),
+            __('Dashboard LaunchPad', 'dashboard-launchpad'),
             'manage_options',
             'dashboard-launchpad',
             array(__CLASS__, 'render_settings_page')
