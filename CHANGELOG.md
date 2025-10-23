@@ -1,11 +1,31 @@
 # Changelog
 
-All notable changes to Simple Launchpad will be documented in this file.
+All notable changes to Simple LaunchPad will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.5.0] - 2025-10-23
+
+### Changed
+- **Major Code Refactoring** - Complete identifier rename for consistency
+  - Plugin identifiers renamed from `dashboard-launchpad` to `simple-launchpad`
+  - Class names updated: `Dashboard_Launchpad_*` → `Dashboard_LaunchPad_*` (capital P)
+  - Function names: `dashboard_launchpad_*()` → `simple_launchpad_*()`
+  - Constants: `DASHBOARD_LAUNCHPAD_*` → `SIMPLE_LAUNCHPAD_*`
+  - Text domain: `'dashboard-launchpad'` → `'simple-launchpad'`
+  - CSS classes: `.dashboard-launchpad` → `.simple-launchpad`
+  - Menu slugs/URLs: `dashboard-launchpad` → `simple-launchpad`
+  - Database options: `dashboard_launchpad_*` → `simple_launchpad_*`
+  - AJAX actions: `dashboard_launchpad_*` → `simple_launchpad_*`
+  - Filter hooks: `dashboard_launchpad_*` → `simple_launchpad_*`
+- **Asset files renamed:**
+  - `dashboard-launchpad.css` → `simple-launchpad.css`
+  - `dashboard-launchpad.js` → `simple-launchpad.js`
+- Updated Plugin URI: `simple-launchpad` repository slug
+- Simplified codebase by removing unnecessary compatibility code
 
 ## [1.4.0] - 2025-10-22
 
@@ -34,13 +54,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Banner placeholders (772x250, 1544x500)
   - Icon placeholders (128x128, 256x256)
   - Screenshot placeholders (1-6)
-- Settings integration directly into Launchpad page
+- Settings integration directly into LaunchPad page
 - Anchor link navigation to settings section
 - Menu icon CSS fix for proper display
 
 ### Changed
 - **Main plugin file renamed:** `dashboard-launchpad.php` → `simple-launchpad.php`
-  - Aligns with "Simple Launchpad" branding
+  - Aligns with "Simple LaunchPad" branding
   - Cleaner, more professional naming
   - No user impact (pre-release rename)
 - **Menu icon changed:** Rocket → Grid View (dashicons-grid-view, f509)
@@ -56,7 +76,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Reduced button padding from 25px/15px to 15px/10px
   - Improved visual hierarchy and button grouping
   - Cleaner, more efficient use of screen space
-- Settings moved from separate submenu to bottom of Launchpad page
+- Settings moved from separate submenu to bottom of LaunchPad page
 - "Configure Buttons" now uses anchor link instead of page navigation
 - Settings submenu entry removed from WordPress admin
 
@@ -69,12 +89,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Redundant quick-add buttons in favor of main section access
 
 ### Fixed
-- Launchpad menu icon now displays correctly in WordPress admin sidebar
+- LaunchPad menu icon now displays correctly in WordPress admin sidebar
 - Menu icon properly styled (gray default, blue on hover/active)
 - Uninstall cleanup now removes custom buttons option
 - Uninstall cleanup now removes transient cache
 - Drag-to-reorder functionality now works in settings
-- Settings CSS/JS now loads on Launchpad page
+- Settings CSS/JS now loads on LaunchPad page
 
 ### Security
 - Uninstall process now completely removes all plugin data
@@ -90,7 +110,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.3.0] - 2025-10-22
 
 ### Changed
-- Plugin renamed from "Dashboard Launchpad" to "Simple Launchpad"
+- Plugin renamed from "Dashboard LaunchPad" to "Simple LaunchPad"
 - Updated all branding and documentation
 - Maintained backward compatibility (textdomain unchanged)
 
@@ -150,7 +170,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2025-01-01
 
 ### Added
-- Initial release of Dashboard Launchpad
+- Initial release of Dashboard LaunchPad
 - 10 pre-configured admin buttons (Posts, Pages, Media, Comments, Appearance, Plugins, Users, Settings, etc.)
 - Drag-and-drop button reordering via jQuery UI Sortable
 - Enable/disable individual buttons through settings
@@ -188,7 +208,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version History Summary
 
 - **v1.4.0** - Major UI overhaul, 15 buttons in 3 rows, settings integration, WordPress.org prep
-- **v1.3.0** - Renamed to Simple Launchpad, branding updates
+- **v1.3.0** - Renamed to Simple LaunchPad, branding updates
 - **v1.2.0** - Security & code quality improvements, developer extensibility
 - **v1.1.0** - Role visibility, dark mode, responsive enhancements
 - **v1.0.0** - Initial release with core features
@@ -202,15 +222,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - 9 new buttons added (Categories, Tags, Themes, Widgets, Menus, Customizer, Tools, Updates, Site Health)
   - 5 buttons removed (Add New Post, Add New Page, Comments, old Appearance button)
 - **Settings Location:** Settings page removed from WordPress admin menu
-  - Settings now appear at bottom of Launchpad page
+  - Settings now appear at bottom of LaunchPad page
   - All functionality preserved, just different location
 - **Layout Changes:** Grid changed from auto-fill to fixed 5 columns (desktop) / 2 columns (mobile)
 - **No Data Loss:** All your existing enabled buttons and customizations are preserved
 - **User Impact:** Existing users will see new buttons automatically added to their layout
-- **Tip:** Visit Launchpad page and scroll down to configure your new buttons
+- **Tip:** Visit LaunchPad page and scroll down to configure your new buttons
 
 ### From 1.2.0 to 1.3.0
-- Plugin renamed from "Dashboard Launchpad" to "Simple Launchpad"
+- Plugin renamed from "Dashboard LaunchPad" to "Simple LaunchPad"
 - No breaking changes
 - All settings and data preserved
 
@@ -258,4 +278,4 @@ For major changes, please open an issue first to discuss what you would like to 
 
 ## License
 
-Dashboard Launchpad is licensed under the [GPLv2 or later](LICENSE).
+Dashboard LaunchPad is licensed under the [GPLv2 or later](LICENSE).

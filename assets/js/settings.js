@@ -1,5 +1,5 @@
 /**
- * Dashboard Launchpad - Settings Page JavaScript
+ * Simple LaunchPad - Settings Page JavaScript
  */
 
 jQuery(document).ready(function($) {

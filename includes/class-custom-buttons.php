@@ -6,11 +6,11 @@
  * Custom buttons are stored separately from default buttons and can be created,
  * edited, and deleted through the settings interface.
  *
- * @package Dashboard_Launchpad
+ * @package Simple_LaunchPad
  * @since 1.3.0
  */
 
-class Dashboard_Launchpad_Custom_Buttons {
+class Dashboard_LaunchPad_Custom_Buttons {
 
     /**
      * Initialize custom button management.
@@ -21,9 +21,9 @@ class Dashboard_Launchpad_Custom_Buttons {
      * @return void
      */
     public static function init() {
-        add_action('wp_ajax_dashboard_launchpad_add_custom_button', array(__CLASS__, 'add_custom_button'));
-        add_action('wp_ajax_dashboard_launchpad_update_custom_button', array(__CLASS__, 'update_custom_button'));
-        add_action('wp_ajax_dashboard_launchpad_delete_custom_button', array(__CLASS__, 'delete_custom_button'));
+        add_action('wp_ajax_simple_launchpad_add_custom_button', array(__CLASS__, 'add_custom_button'));
+        add_action('wp_ajax_simple_launchpad_update_custom_button', array(__CLASS__, 'update_custom_button'));
+        add_action('wp_ajax_simple_launchpad_delete_custom_button', array(__CLASS__, 'delete_custom_button'));
     }
 
     /**
@@ -36,7 +36,7 @@ class Dashboard_Launchpad_Custom_Buttons {
      * @return array Array of custom button configurations keyed by button ID.
      */
     public static function get_custom_buttons() {
-        $custom_buttons = get_option('dashboard_launchpad_custom_buttons', array());
+        $custom_buttons = get_option('simple_launchpad_custom_buttons', array());
 
         if (!is_array($custom_buttons)) {
             return array();
@@ -70,15 +70,15 @@ class Dashboard_Launchpad_Custom_Buttons {
      * @return void Sends JSON response and exits.
      */
     public static function add_custom_button() {
-        check_ajax_referer('dashboard_launchpad_custom_button_nonce', 'nonce');
+        check_ajax_referer('simple_launchpad_custom_button_nonce', 'nonce');
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error(array('message' => __('Insufficient permissions', 'dashboard-launchpad')));
+            wp_send_json_error(array('message' => __('Insufficient permissions', 'simple-launchpad')));
         }
 
         // Validate required fields
         if (empty($_POST['button_id']) || empty($_POST['label']) || empty($_POST['url'])) {
-            wp_send_json_error(array('message' => __('Missing required fields', 'dashboard-launchpad')));
+            wp_send_json_error(array('message' => __('Missing required fields', 'simple-launchpad')));
         }
 
         $button_id = sanitize_key($_POST['button_id']);
@@ -88,16 +88,16 @@ class Dashboard_Launchpad_Custom_Buttons {
         $capability = sanitize_text_field($_POST['capability'] ?? 'read');
 
         // Check if button ID already exists (in defaults or customs)
-        $all_default_buttons = dashboard_launchpad_get_default_buttons();
+        $all_default_buttons = simple_launchpad_get_default_buttons();
         $custom_buttons = self::get_custom_buttons();
 
         if (isset($all_default_buttons[$button_id]) || isset($custom_buttons[$button_id])) {
-            wp_send_json_error(array('message' => __('Button ID already exists', 'dashboard-launchpad')));
+            wp_send_json_error(array('message' => __('Button ID already exists', 'simple-launchpad')));
         }
 
         // Validate button ID format (alphanumeric, underscores, hyphens only)
         if (!preg_match('/^[a-z0-9_-]+$/', $button_id)) {
-            wp_send_json_error(array('message' => __('Button ID can only contain lowercase letters, numbers, underscores, and hyphens', 'dashboard-launchpad')));
+            wp_send_json_error(array('message' => __('Button ID can only contain lowercase letters, numbers, underscores, and hyphens', 'simple-launchpad')));
         }
 
         // Validate capability exists
@@ -117,13 +117,13 @@ class Dashboard_Launchpad_Custom_Buttons {
             'custom' => true  // Mark as custom for identification
         );
 
-        update_option('dashboard_launchpad_custom_buttons', $custom_buttons);
+        update_option('simple_launchpad_custom_buttons', $custom_buttons);
 
         // Clear cache
-        dashboard_launchpad_clear_cache();
+        simple_launchpad_clear_cache();
 
         wp_send_json_success(array(
-            'message' => __('Custom button added successfully', 'dashboard-launchpad'),
+            'message' => __('Custom button added successfully', 'simple-launchpad'),
             'button' => $custom_buttons[$button_id]
         ));
     }
@@ -138,21 +138,21 @@ class Dashboard_Launchpad_Custom_Buttons {
      * @return void Sends JSON response and exits.
      */
     public static function update_custom_button() {
-        check_ajax_referer('dashboard_launchpad_custom_button_nonce', 'nonce');
+        check_ajax_referer('simple_launchpad_custom_button_nonce', 'nonce');
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error(array('message' => __('Insufficient permissions', 'dashboard-launchpad')));
+            wp_send_json_error(array('message' => __('Insufficient permissions', 'simple-launchpad')));
         }
 
         if (empty($_POST['button_id'])) {
-            wp_send_json_error(array('message' => __('Button ID required', 'dashboard-launchpad')));
+            wp_send_json_error(array('message' => __('Button ID required', 'simple-launchpad')));
         }
 
         $button_id = sanitize_key($_POST['button_id']);
         $custom_buttons = self::get_custom_buttons();
 
         if (!isset($custom_buttons[$button_id])) {
-            wp_send_json_error(array('message' => __('Custom button not found', 'dashboard-launchpad')));
+            wp_send_json_error(array('message' => __('Custom button not found', 'simple-launchpad')));
         }
 
         // Update fields if provided
@@ -169,13 +169,13 @@ class Dashboard_Launchpad_Custom_Buttons {
             $custom_buttons[$button_id]['capability'] = sanitize_text_field($_POST['capability']);
         }
 
-        update_option('dashboard_launchpad_custom_buttons', $custom_buttons);
+        update_option('simple_launchpad_custom_buttons', $custom_buttons);
 
         // Clear cache
-        dashboard_launchpad_clear_cache();
+        simple_launchpad_clear_cache();
 
         wp_send_json_success(array(
-            'message' => __('Custom button updated successfully', 'dashboard-launchpad'),
+            'message' => __('Custom button updated successfully', 'simple-launchpad'),
             'button' => $custom_buttons[$button_id]
         ));
     }
@@ -190,40 +190,40 @@ class Dashboard_Launchpad_Custom_Buttons {
      * @return void Sends JSON response and exits.
      */
     public static function delete_custom_button() {
-        check_ajax_referer('dashboard_launchpad_custom_button_nonce', 'nonce');
+        check_ajax_referer('simple_launchpad_custom_button_nonce', 'nonce');
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error(array('message' => __('Insufficient permissions', 'dashboard-launchpad')));
+            wp_send_json_error(array('message' => __('Insufficient permissions', 'simple-launchpad')));
         }
 
         if (empty($_POST['button_id'])) {
-            wp_send_json_error(array('message' => __('Button ID required', 'dashboard-launchpad')));
+            wp_send_json_error(array('message' => __('Button ID required', 'simple-launchpad')));
         }
 
         $button_id = sanitize_key($_POST['button_id']);
         $custom_buttons = self::get_custom_buttons();
 
         if (!isset($custom_buttons[$button_id])) {
-            wp_send_json_error(array('message' => __('Custom button not found', 'dashboard-launchpad')));
+            wp_send_json_error(array('message' => __('Custom button not found', 'simple-launchpad')));
         }
 
         unset($custom_buttons[$button_id]);
-        update_option('dashboard_launchpad_custom_buttons', $custom_buttons);
+        update_option('simple_launchpad_custom_buttons', $custom_buttons);
 
         // Also remove from enabled buttons and button order
-        $options = get_option('dashboard_launchpad_options', array());
+        $options = get_option('simple_launchpad_options', array());
         if (isset($options['enabled_buttons']) && is_array($options['enabled_buttons'])) {
             $options['enabled_buttons'] = array_diff($options['enabled_buttons'], array($button_id));
         }
         if (isset($options['button_order']) && is_array($options['button_order'])) {
             $options['button_order'] = array_diff($options['button_order'], array($button_id));
         }
-        update_option('dashboard_launchpad_options', $options);
+        update_option('simple_launchpad_options', $options);
 
         // Clear cache
-        dashboard_launchpad_clear_cache();
+        simple_launchpad_clear_cache();
 
-        wp_send_json_success(array('message' => __('Custom button deleted successfully', 'dashboard-launchpad')));
+        wp_send_json_success(array('message' => __('Custom button deleted successfully', 'simple-launchpad')));
     }
 
     /**
@@ -237,19 +237,19 @@ class Dashboard_Launchpad_Custom_Buttons {
      */
     public static function get_available_capabilities() {
         return array(
-            'read' => __('Read (All Users)', 'dashboard-launchpad'),
-            'edit_posts' => __('Edit Posts', 'dashboard-launchpad'),
-            'edit_pages' => __('Edit Pages', 'dashboard-launchpad'),
-            'edit_others_posts' => __('Edit Others Posts', 'dashboard-launchpad'),
-            'publish_posts' => __('Publish Posts', 'dashboard-launchpad'),
-            'manage_categories' => __('Manage Categories', 'dashboard-launchpad'),
-            'moderate_comments' => __('Moderate Comments', 'dashboard-launchpad'),
-            'upload_files' => __('Upload Files', 'dashboard-launchpad'),
-            'activate_plugins' => __('Activate Plugins', 'dashboard-launchpad'),
-            'edit_theme_options' => __('Edit Theme Options', 'dashboard-launchpad'),
-            'list_users' => __('List Users', 'dashboard-launchpad'),
-            'manage_options' => __('Manage Options (Administrator)', 'dashboard-launchpad'),
-            'switch_themes' => __('Switch Themes', 'dashboard-launchpad'),
+            'read' => __('Read (All Users)', 'simple-launchpad'),
+            'edit_posts' => __('Edit Posts', 'simple-launchpad'),
+            'edit_pages' => __('Edit Pages', 'simple-launchpad'),
+            'edit_others_posts' => __('Edit Others Posts', 'simple-launchpad'),
+            'publish_posts' => __('Publish Posts', 'simple-launchpad'),
+            'manage_categories' => __('Manage Categories', 'simple-launchpad'),
+            'moderate_comments' => __('Moderate Comments', 'simple-launchpad'),
+            'upload_files' => __('Upload Files', 'simple-launchpad'),
+            'activate_plugins' => __('Activate Plugins', 'simple-launchpad'),
+            'edit_theme_options' => __('Edit Theme Options', 'simple-launchpad'),
+            'list_users' => __('List Users', 'simple-launchpad'),
+            'manage_options' => __('Manage Options (Administrator)', 'simple-launchpad'),
+            'switch_themes' => __('Switch Themes', 'simple-launchpad'),
         );
     }
 }
