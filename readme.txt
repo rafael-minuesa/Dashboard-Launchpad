@@ -8,7 +8,7 @@ Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-WCAG 2.1 AA accessible command center with predictable quick-access buttons to all WordPress admin areas—perfect for screen reader users.
+WCAG 2.1 AA accessible admin dashboard with quick-access buttons to all WordPress areas—perfect for screen reader users.
 
 == Description ==
 

@@ -211,7 +211,6 @@ class Dashboard_LaunchPad_Settings {
                         }
 
                         foreach ($ordered_buttons as $button_id => $button):
-                            $checked = in_array($button_id, $enabled_buttons) ? 'checked' : '';
                         ?>
                             <li class="button-item" data-button-id="<?php echo esc_attr($button_id); ?>">
                                 <span class="dashicons dashicons-menu drag-handle"></span>
@@ -219,7 +218,7 @@ class Dashboard_LaunchPad_Settings {
                                     <input type="checkbox"
                                            name="simple_launchpad_options[enabled_buttons][]"
                                            value="<?php echo esc_attr($button_id); ?>"
-                                           <?php echo $checked; ?>>
+                                           <?php checked(in_array($button_id, $enabled_buttons)); ?>>
                                     <span class="dashicons <?php echo esc_attr($button['icon']); ?>"></span>
                                     <?php echo esc_html($button['label']); ?>
                                 </label>
@@ -298,14 +297,11 @@ class Dashboard_LaunchPad_Settings {
                                 </th>
                                 <td>
                                     <?php foreach ($roles as $role_id => $role_name): ?>
-                                        <?php
-                                        $checked = isset($role_visibility[$button_id]) && in_array($role_id, $role_visibility[$button_id]) ? 'checked' : '';
-                                        ?>
                                         <label style="display: inline-block; margin-right: 15px;">
                                             <input type="checkbox"
                                                    name="simple_launchpad_options[role_visibility][<?php echo esc_attr($button_id); ?>][]"
                                                    value="<?php echo esc_attr($role_id); ?>"
-                                                   <?php echo $checked; ?>>
+                                                   <?php checked(isset($role_visibility[$button_id]) && in_array($role_id, $role_visibility[$button_id])); ?>>
                                             <?php echo esc_html($role_name); ?>
                                         </label>
                                     <?php endforeach; ?>
