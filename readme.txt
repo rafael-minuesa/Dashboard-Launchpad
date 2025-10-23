@@ -14,6 +14,14 @@ Transform your WordPress admin into a streamlined command center with quick-acce
 
 **Simple LaunchPad** (formerly Dashboard LaunchPad) appears as the first menu item in your WordPress admin, providing instant access to 15 carefully organized buttons across three categories: Content Management, Appearance, and Administration.
 
+= Why This Plugin Exists =
+
+If you manage multiple WordPress installations with different plugins (like I do), you know the frustration: plugin developers arbitrarily decide where their menu entries appear, constantly pushing core WordPress menu items like Themes, Plugins, and Settings up and down the sidebar. One site has "Plugins" at position 5, another at position 12, and yet another at position 8. You're forced to scroll endlessly, hunting for the same common entries you use every day.
+
+**I got tired of complaining about it, so I did something about it.**
+
+Simple LaunchPad puts all your most-used admin pages in ONE predictable location at the top of your admin menu. No more scrolling. No more hunting. Just click and go. This is my contribution to the WordPress community—a solution to a problem we've all experienced but rarely talk about.
+
 Perfect for:
 * **Site administrators** who want faster navigation
 * **Agencies** managing multiple client sites
@@ -77,13 +85,13 @@ Extend the plugin with custom buttons using the provided filter hooks.
 
 **Filters:**
 
-`dashboard_launchpad_default_buttons` - Modify or add default buttons
-`dashboard_launchpad_buttons` - Modify buttons before rendering
+`simple_launchpad_default_buttons` - Modify or add default buttons
+`simple_launchpad_buttons` - Modify buttons before rendering
 
 **Example - Add Custom Button:**
 
 `
-add_filter('dashboard_launchpad_default_buttons', function($buttons) {
+add_filter('simple_launchpad_default_buttons', function($buttons) {
     $buttons['my_custom'] = array(
         'label' => 'Custom Area',
         'url' => 'admin.php?page=my-custom-page',
@@ -96,8 +104,8 @@ add_filter('dashboard_launchpad_default_buttons', function($buttons) {
 
 = Translations =
 
-Dashboard LaunchPad is translation-ready! Help translate it into your language:
-* Text Domain: dashboard-launchpad
+Simple LaunchPad is translation-ready! Help translate it into your language:
+* Text Domain: simple-launchpad
 * All strings wrapped with proper i18n functions
 * POT file included for translators
 
