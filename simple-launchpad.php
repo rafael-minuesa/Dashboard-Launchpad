@@ -2,8 +2,7 @@
 /**
  * Simple LaunchPad
  *
- * A lightweight dashboard LaunchPad for quick-access admin shortcuts.
- * (Formerly "Dashboard LaunchPad".)
+ * A lightweight dashboard launchpad for quick-access admin shortcuts.
  *
  * Plugin Name: Simple LaunchPad
  * Plugin URI:  https://github.com/rafael-minuesa/simple-launchpad
