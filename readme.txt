@@ -4,7 +4,7 @@ Tags: dashboard, admin, quick-access, buttons, customization
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.5.2
+Stable tag: 1.5.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,7 @@ Every time a screen reader user logs into a different site, they must:
 **Accessibility Compliance Features:**
 
 ✓ **Keyboard Navigation:** Full keyboard support with visible focus states
+✓ **Global Keyboard Shortcut:** Press Alt+Shift+L (Windows/Linux) or Control+Option+L (Mac) to instantly open LaunchPad from anywhere in WordPress admin
 ✓ **Screen Reader Support:** Proper ARIA labels and semantic HTML structure
 ✓ **Skip Links:** "Skip to admin shortcuts" link for faster navigation
 ✓ **Descriptive Labels:** Each button includes clear, descriptive aria-labels (e.g., "Go to Posts", "Go to Settings")
@@ -100,6 +101,7 @@ This reduces cognitive load, speeds up navigation, and makes WordPress administr
 **♿ Accessibility**
 * WCAG 2.1 AA compliant
 * Full keyboard navigation support
+* Global keyboard shortcut: Alt+Shift+L to open LaunchPad from anywhere
 * Screen reader optimized with proper ARIA labels
 * Skip links for faster navigation
 * Large click targets (64px icons)
@@ -197,10 +199,15 @@ All settings are stored locally in your WordPress database.
 
 == Frequently Asked Questions ==
 
+= Is there a keyboard shortcut to open LaunchPad? =
+
+Yes! Press **Alt+Shift+L** (Windows/Linux) or **Control+Option+L** (Mac) from anywhere in the WordPress admin to instantly jump to the LaunchPad page. This follows WordPress's standard keyboard shortcut conventions and works globally across all admin pages.
+
 = Is this plugin accessible to users with disabilities? =
 
 Yes! Simple LaunchPad is fully WCAG 2.1 AA compliant with:
 * Full keyboard navigation support
+* Global keyboard shortcut (Alt+Shift+L) for instant access
 * Proper ARIA labels for screen readers
 * Skip links for faster navigation
 * Large click targets (64px icons)
@@ -262,6 +269,11 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 6. Dark mode support
 
 == Changelog ==
+
+= 1.5.3 - 2025-10-23 =
+* Added: Global keyboard shortcut Alt+Shift+L (Windows/Linux) or Control+Option+L (Mac) to open LaunchPad from anywhere in WordPress admin
+* Improved: Enhanced accessibility with instant keyboard access to LaunchPad page
+* Improved: JavaScript now loads globally to support keyboard shortcut functionality
 
 = 1.5.2 - 2025-10-23 =
 * Fixed: Replaced all _e() calls with esc_html_e() for proper output escaping
@@ -335,6 +347,9 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 * Capability-based security
 
 == Upgrade Notice ==
+
+= 1.5.3 =
+Added global keyboard shortcut! Press Alt+Shift+L to instantly open LaunchPad from anywhere in WordPress admin. Enhanced accessibility feature.
 
 = 1.5.2 =
 WordPress.org compliance fixes: improved output escaping, input sanitization, and coding standards compliance. Ready for plugin directory submission.

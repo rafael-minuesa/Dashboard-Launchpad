@@ -7,7 +7,7 @@
  * Plugin Name: Simple LaunchPad
  * Plugin URI:  https://github.com/rafael-minuesa/simple-launchpad
  * Description: Quick-access command center with customizable buttons to all WordPress admin areas. Fully WCAG 2.1 AA accessible with screen reader support. Appears as the first menu item above Dashboard.
- * Version:     1.5.2
+ * Version:     1.5.3
  * Author:      Rafael Minuesa
  * Author URI:  https://prowoos.com
  * License:     GPLv2 or later
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.0.0
  */
 if ( ! defined( 'SIMPLE_LAUNCHPAD_VERSION' ) ) {
-	define( 'SIMPLE_LAUNCHPAD_VERSION', '1.5.2' );
+	define( 'SIMPLE_LAUNCHPAD_VERSION', '1.5.3' );
 }
 if ( ! defined( 'SIMPLE_LAUNCHPAD_PLUGIN_DIR' ) ) {
 	define( 'SIMPLE_LAUNCHPAD_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
@@ -107,7 +107,25 @@ add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'simple_launch
  * @return void
  */
 function simple_launchpad_enqueue_admin_assets( $hook ) {
-	// Enqueue on LaunchPad page
+	// Enqueue keyboard shortcut script globally on all admin pages
+	wp_enqueue_script(
+		'simple-launchpad-global',
+		SIMPLE_LAUNCHPAD_PLUGIN_URL . 'assets/js/simple-launchpad.js',
+		array( 'jquery' ),
+		SIMPLE_LAUNCHPAD_VERSION,
+		true
+	);
+
+	// Pass the LaunchPad URL to JavaScript for keyboard shortcut
+	wp_localize_script(
+		'simple-launchpad-global',
+		'simpleLaunchpadData',
+		array(
+			'launchpadUrl' => admin_url( 'admin.php?page=simple-launchpad' ),
+		)
+	);
+
+	// Enqueue page-specific assets on LaunchPad page
 	if ( 'toplevel_page_simple-launchpad' === $hook ) {
 		wp_enqueue_style(
 			'simple-launchpad',
@@ -116,16 +134,8 @@ function simple_launchpad_enqueue_admin_assets( $hook ) {
 			SIMPLE_LAUNCHPAD_VERSION
 		);
 
-		wp_enqueue_script(
-			'simple-launchpad-sortable',
-			SIMPLE_LAUNCHPAD_PLUGIN_URL . 'assets/js/simple-launchpad.js',
-			array( 'jquery', 'jquery-ui-sortable' ),
-			SIMPLE_LAUNCHPAD_VERSION,
-			true
-		);
-
 		wp_localize_script(
-			'simple-launchpad-sortable',
+			'simple-launchpad-global',
 			'simpleLaunchpad',
 			array(
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
