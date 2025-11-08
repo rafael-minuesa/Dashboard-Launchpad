@@ -254,7 +254,7 @@ class Dashboard_LaunchPad_Dashboard {
 		';
 
 		// Enqueue a minimal admin style to attach inline CSS to
-		wp_register_style( 'simple-launchpad-admin', false );
+		wp_register_style( 'simple-launchpad-admin', false, array(), SIMPLE_LAUNCHPAD_VERSION );
 		wp_enqueue_style( 'simple-launchpad-admin' );
 		wp_add_inline_style( 'simple-launchpad-admin', $menu_icon_css );
 

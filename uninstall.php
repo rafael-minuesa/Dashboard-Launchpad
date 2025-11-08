@@ -24,9 +24,10 @@ if ( is_multisite() ) {
 	global $wpdb;
 
 	// Get all blog IDs
-	$blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Required for multisite uninstall, no caching needed
+	$simple_launchpad_blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
 
-	foreach ( $blog_ids as $blog_id ) {
+	foreach ( $simple_launchpad_blog_ids as $blog_id ) {
 		switch_to_blog( $blog_id );
 
 		delete_option( 'simple_launchpad_options' );

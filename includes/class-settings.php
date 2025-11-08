@@ -157,7 +157,8 @@ class Dashboard_LaunchPad_Settings {
         }
 
         // Check if settings were just saved
-        if (isset($_GET['settings-updated'])) {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- WordPress sets this parameter after settings save
+        if (isset($_GET['settings-updated']) && $_GET['settings-updated']) {
             add_settings_error(
                 'simple_launchpad_messages',
                 'simple_launchpad_message',
@@ -243,7 +244,7 @@ class Dashboard_LaunchPad_Settings {
                                            name="simple_launchpad_options[enabled_buttons][]"
                                            value="<?php echo esc_attr($button_id); ?>"
                                            <?php checked(in_array($button_id, $enabled_buttons)); ?>
-                                           <?php echo $disabled_attr; ?>>
+                                           <?php echo esc_attr($disabled_attr); ?>>
                                     <span class="dashicons <?php echo esc_attr($button['icon']); ?>"></span>
                                     <?php echo esc_html($button['label']); ?>
                                     <?php if ($is_wc_button && !$is_woocommerce_active): ?>

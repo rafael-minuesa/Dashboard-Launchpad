@@ -4,7 +4,7 @@ Tags: dashboard, admin, quick-access, buttons, customization
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.1.0
+Stable tag: 3.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -271,6 +271,17 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 6. Dark mode support
 
 == Changelog ==
+
+= 3.1.2 - 2025-11-08 =
+* Fixed: Added phpcs ignore comments for WordPress.org compliance
+* Fixed: Escaped output for disabled attribute in settings
+* Fixed: Added version parameter to wp_register_style() for proper cache busting
+* Fixed: Prefixed global variable in uninstall.php ($simple_launchpad_blog_ids)
+* Fixed: Created /languages directory for translation files
+* Improved: WordPress.org Plugin Check compliance - all critical errors resolved
+
+= 3.1.1 - 2025-11-08 =
+* Fixed: Version bump for minor updates
 
 = 3.1.0 - 2025-11-08 =
 * Added: Dark Mode toggle setting in Appearance tab
