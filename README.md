@@ -1,7 +1,7 @@
 # Simple LaunchPad 🚀
 
 ![WordPress Plugin](https://img.shields.io/badge/WordPress-Plugin-blue.svg)
-![Version](https://img.shields.io/badge/version-3.1.0-green.svg)
+![Version](https://img.shields.io/badge/version-3.1.1-green.svg)
 ![License](https://img.shields.io/badge/license-GPL--2.0%2B-blue.svg)
 ![WCAG](https://img.shields.io/badge/WCAG-2.1%20AA-success.svg)
 ![PHP](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)
