@@ -7,7 +7,7 @@
  * Plugin Name: Simple LaunchPad
  * Plugin URI:  https://github.com/rafael-minuesa/simple-launchpad
  * Description: Quick-access command center with customizable buttons to all WordPress admin areas. Fully WCAG 2.1 AA accessible with screen reader support. Appears as the first menu item above Dashboard.
- * Version:     3.0.1
+ * Version:     3.0.2
  * Author:      Rafael Minuesa
  * Author URI:  https://prowoos.com
  * License:     GPLv2 or later
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.0.0
  */
 if ( ! defined( 'SIMPLE_LAUNCHPAD_VERSION' ) ) {
-	define( 'SIMPLE_LAUNCHPAD_VERSION', '3.0.1' );
+	define( 'SIMPLE_LAUNCHPAD_VERSION', '3.0.2' );
 }
 if ( ! defined( 'SIMPLE_LAUNCHPAD_PLUGIN_DIR' ) ) {
 	define( 'SIMPLE_LAUNCHPAD_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
@@ -179,7 +179,7 @@ function simple_launchpad_activate() {
 	$all_button_ids = array_keys( $all_buttons );
 
 	// Exclude WooCommerce buttons from default enabled buttons
-	$woocommerce_buttons = array( 'woocommerce', 'wc_settings', 'wc_orders', 'wc_products' );
+	$woocommerce_buttons = array( 'woocommerce', 'wc_settings', 'wc_orders', 'wc_products', 'wc_product_categories' );
 	$default_enabled = array_diff( $all_button_ids, $woocommerce_buttons );
 
 	// Set default options
@@ -331,7 +331,7 @@ function simple_launchpad_get_default_buttons() {
 			'icon'       => 'dashicons-heart',
 			'capability' => 'manage_options',
 		),
-		// Row 4: WooCommerce (4 columns, only shown if WooCommerce is active)
+		// Row 4: WooCommerce (5 columns, only shown if WooCommerce is active)
 		'woocommerce' => array(
 			'label'      => __( 'WooCommerce', 'simple-launchpad' ),
 			'url'        => 'admin.php?page=wc-admin',
@@ -355,6 +355,12 @@ function simple_launchpad_get_default_buttons() {
 			'url'        => 'edit.php?post_type=product',
 			'icon'       => 'dashicons-products',
 			'capability' => 'edit_products',
+		),
+		'wc_product_categories' => array(
+			'label'      => __( 'Product Categories', 'simple-launchpad' ),
+			'url'        => 'edit-tags.php?taxonomy=product_cat&post_type=product',
+			'icon'       => 'dashicons-category',
+			'capability' => 'manage_product_terms',
 		),
 	);
 

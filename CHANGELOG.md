@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.2] - 2025-11-08
+
+### Added
+- **Product Categories Button:**
+  - Added 5th button to WooCommerce row: Product Categories
+  - Completes Row 4 with 5 buttons (matching other rows)
+  - Direct link to WooCommerce product categories taxonomy
+  - Uses `dashicons-category` icon
+  - Requires `manage_product_terms` capability
+  - Disabled by default (like other WooCommerce buttons)
+
+### Changed
+- Total available buttons increased from 19 to 20
+- WooCommerce row now has 5 buttons (was 4)
+- Row 4 comment updated: "5 columns" (was "4 columns")
+
+### Technical
+- New button ID: `wc_product_categories`
+- URL: `edit-tags.php?taxonomy=product_cat&post_type=product`
+- Added to WooCommerce buttons exclusion list in activation hook
+- Added to WooCommerce buttons detection in settings page
+
 ## [3.0.1] - 2025-11-08
 
 ### Changed

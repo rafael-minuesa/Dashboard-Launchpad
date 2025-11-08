@@ -4,7 +4,7 @@ Tags: dashboard, admin, quick-access, buttons, customization
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.0.1
+Stable tag: 3.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ WCAG 2.1 AA accessible admin dashboard with quick-access buttons to all WordPres
 
 == Description ==
 
-**Simple LaunchPad** appears as the first menu item in your WordPress admin, providing instant access to 19 carefully organized buttons across four categories: Content Management, Appearance, Administration, and WooCommerce.
+**Simple LaunchPad** appears as the first menu item in your WordPress admin, providing instant access to 20 carefully organized buttons across four categories: Content Management, Appearance, Administration, and WooCommerce.
 
 = Why This Plugin Exists =
 
@@ -69,11 +69,11 @@ This reduces cognitive load, speeds up navigation, and makes WordPress administr
 = Key Features =
 
 **🎯 Quick Access Buttons**
-* 19 pre-configured buttons organized in 4 logical rows
+* 20 pre-configured buttons organized in 4 logical rows (5 buttons each)
   - **Row 1:** Posts, Categories, Tags, Pages, Media
   - **Row 2:** Themes, Widgets, Menus, Customizer, Plugins
   - **Row 3:** Users, Settings, Tools, Updates, Site Health
-  - **Row 4:** WooCommerce, WC Settings, Orders, Products (when WooCommerce is active)
+  - **Row 4:** WooCommerce, WC Settings, Orders, Products, Product Categories (when WooCommerce is active)
 * One-click access to any WordPress admin page
 * Visual icons using WordPress Dashicons
 * Fully customizable button order via drag-and-drop
@@ -272,6 +272,13 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 
 == Changelog ==
 
+= 3.0.2 - 2025-11-08 =
+* Added: Product Categories button - 5th button in WooCommerce row
+* Added: Direct access to WooCommerce product categories taxonomy
+* Improved: Row 4 now complete with 5 buttons (matching other rows)
+* Changed: Total available buttons increased from 19 to 20
+* Note: Product Categories button disabled by default like other WooCommerce buttons
+
 = 3.0.1 - 2025-11-08 =
 * Changed: WooCommerce buttons are now disabled by default - users must enable them manually in Settings
 * Added: Visual detection when WooCommerce is not installed - buttons appear greyed out in settings
@@ -383,6 +390,9 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 * Capability-based security
 
 == Upgrade Notice ==
+
+= 3.0.2 =
+Added Product Categories button to WooCommerce row! Now all rows have 5 buttons each. Total of 20 buttons available.
 
 = 3.0.1 =
 Improved UX! WooCommerce buttons now disabled by default and appear greyed out when WooCommerce is not installed. Better visual feedback and first-time user experience.

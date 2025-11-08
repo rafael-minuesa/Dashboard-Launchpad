@@ -224,7 +224,7 @@ class Dashboard_LaunchPad_Settings {
                         }
 
                         // Define WooCommerce buttons
-                        $woocommerce_buttons = array('woocommerce', 'wc_settings', 'wc_orders', 'wc_products');
+                        $woocommerce_buttons = array('woocommerce', 'wc_settings', 'wc_orders', 'wc_products', 'wc_product_categories');
 
                         foreach ($ordered_buttons as $button_id => $button):
                             // Check if this is a WooCommerce button
