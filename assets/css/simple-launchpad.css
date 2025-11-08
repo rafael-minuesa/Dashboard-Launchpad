@@ -117,15 +117,41 @@
 
 /* Dark mode support (WordPress 5.7+) */
 @media (prefers-color-scheme: dark) {
-    .launchpad-button {
+    .simple-launchpad:not(.force-light) .launchpad-button {
         background: #1d2327;
         border-color: #3c434a;
         color: #f0f0f1;
     }
-    
-    .launchpad-button:hover {
+
+    .simple-launchpad:not(.force-light) .launchpad-button:hover {
         background: #2c3338;
         border-color: #72aee6;
         color: #72aee6;
     }
+}
+
+/* Force dark mode override */
+.simple-launchpad.force-dark .launchpad-button {
+    background: #1d2327;
+    border-color: #3c434a;
+    color: #f0f0f1;
+}
+
+.simple-launchpad.force-dark .launchpad-button:hover {
+    background: #2c3338;
+    border-color: #72aee6;
+    color: #72aee6;
+}
+
+/* Force light mode override */
+.simple-launchpad.force-light .launchpad-button {
+    background: #fff;
+    border-color: #dcdcde;
+    color: #2c3338;
+}
+
+.simple-launchpad.force-light .launchpad-button:hover {
+    background: #f6f7f7;
+    border-color: #2271b1;
+    color: #2271b1;
 }

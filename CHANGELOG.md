@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.0] - 2025-11-08
+
+### Added
+- **Dark Mode Toggle Setting:**
+  - New "Dark Mode" setting in Appearance tab
+  - Three options: Light Mode (default), Dark Mode, Auto (Follow System Preference)
+  - Allows users to manually enable dark mode or follow system settings
+  - Light mode is the default - users opt-in to dark mode
+
+### Changed
+- **Enhanced Dark Mode Control:**
+  - Dark mode now requires explicit user choice
+  - Added `.force-light` and `.force-dark` CSS classes
+  - Auto mode available for users who prefer system preference
+  - Improved CSS specificity for dark mode styles
+
+### Technical
+- New option: `dark_mode` (values: 'light', 'dark', 'auto')
+- Default value: 'light' (opt-in dark mode)
+- Added sanitization for dark mode setting (whitelist validation)
+- Dashboard rendering applies dark mode class based on user preference
+- CSS media query updated to respect manual overrides
+
 ## [3.0.2] - 2025-11-08
 
 ### Added

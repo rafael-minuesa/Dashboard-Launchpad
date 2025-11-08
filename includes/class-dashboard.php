@@ -64,6 +64,7 @@ class Dashboard_LaunchPad_Dashboard {
 		$enabled_buttons = $options['enabled_buttons'] ?? array_keys( $all_buttons );
 		$button_order    = $options['button_order'] ?? array_keys( $all_buttons );
 		$role_visibility = $options['role_visibility'] ?? array();
+		$dark_mode       = $options['dark_mode'] ?? 'light';
 
 		$current_user = wp_get_current_user();
 		$user_roles   = $current_user->roles;
@@ -149,7 +150,15 @@ class Dashboard_LaunchPad_Dashboard {
 					</p>
 				</div>
 			<?php else : ?>
-				<div class="simple-launchpad" id="simple-launchpad-buttons" role="navigation" aria-label="<?php esc_attr_e( 'Admin Quick Links', 'simple-launchpad' ); ?>">
+				<?php
+				$dark_mode_class = '';
+				if ( 'light' === $dark_mode ) {
+					$dark_mode_class = ' force-light';
+				} elseif ( 'dark' === $dark_mode ) {
+					$dark_mode_class = ' force-dark';
+				}
+				?>
+				<div class="simple-launchpad<?php echo esc_attr( $dark_mode_class ); ?>" id="simple-launchpad-buttons" role="navigation" aria-label="<?php esc_attr_e( 'Admin Quick Links', 'simple-launchpad' ); ?>">
 					<?php foreach ( $buttons_to_display as $button ) : ?>
 						<a href="<?php echo esc_url( admin_url( $button['url'] ) ); ?>"
 						   class="launchpad-button"

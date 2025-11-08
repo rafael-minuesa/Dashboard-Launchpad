@@ -4,7 +4,7 @@ Tags: dashboard, admin, quick-access, buttons, customization
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.0.2
+Stable tag: 3.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -272,6 +272,15 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 
 == Changelog ==
 
+= 3.1.0 - 2025-11-08 =
+* Added: Dark Mode toggle setting in Appearance tab
+* Added: Three display options - Light Mode (default), Dark Mode, Auto (Follow System Preference)
+* Changed: Light mode is now the default - users must opt-in to dark mode
+* Changed: Dark mode no longer automatically follows system preference unless "Auto" is selected
+* Improved: Manual override of dark mode with .force-light and .force-dark CSS classes
+* Improved: Better control over button appearance regardless of system settings
+* Note: Existing users will default to Light Mode - visit Settings → Appearance to enable Dark Mode
+
 = 3.0.2 - 2025-11-08 =
 * Added: Product Categories button - 5th button in WooCommerce row
 * Added: Direct access to WooCommerce product categories taxonomy
@@ -390,6 +399,9 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 * Capability-based security
 
 == Upgrade Notice ==
+
+= 3.1.0 =
+New Dark Mode toggle! Choose Light Mode, Dark Mode, or Auto in Settings → Appearance. Light mode is default - opt-in to dark mode for a sleek nighttime experience.
 
 = 3.0.2 =
 Added Product Categories button to WooCommerce row! Now all rows have 5 buttons each. Total of 20 buttons available.

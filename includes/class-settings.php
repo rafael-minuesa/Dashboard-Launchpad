@@ -110,6 +110,10 @@ class Dashboard_LaunchPad_Settings {
         $sanitized['button_bg_color'] = sanitize_hex_color($input['button_bg_color'] ?? '#ffffff');
         $sanitized['button_hover_bg_color'] = sanitize_hex_color($input['button_hover_bg_color'] ?? '#f6f7f7');
 
+        // Sanitize dark mode setting - only allow 'auto', 'light', or 'dark'
+        $dark_mode = $input['dark_mode'] ?? 'light';
+        $sanitized['dark_mode'] = in_array($dark_mode, array('auto', 'light', 'dark'), true) ? $dark_mode : 'light';
+
         // Sanitize role visibility - only allow valid button IDs and role names
         if (isset($input['role_visibility']) && is_array($input['role_visibility'])) {
             $sanitized['role_visibility'] = array();
@@ -302,6 +306,27 @@ class Dashboard_LaunchPad_Settings {
                                        id="button_hover_bg_color"
                                        value="<?php echo esc_attr($options['button_hover_bg_color'] ?? '#f6f7f7'); ?>"
                                        class="color-picker">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label for="dark_mode"><?php esc_html_e('Dark Mode', 'simple-launchpad'); ?></label>
+                            </th>
+                            <td>
+                                <select name="simple_launchpad_options[dark_mode]" id="dark_mode">
+                                    <option value="light" <?php selected($options['dark_mode'] ?? 'light', 'light'); ?>>
+                                        <?php esc_html_e('Light Mode', 'simple-launchpad'); ?>
+                                    </option>
+                                    <option value="dark" <?php selected($options['dark_mode'] ?? 'light', 'dark'); ?>>
+                                        <?php esc_html_e('Dark Mode', 'simple-launchpad'); ?>
+                                    </option>
+                                    <option value="auto" <?php selected($options['dark_mode'] ?? 'light', 'auto'); ?>>
+                                        <?php esc_html_e('Auto (Follow System Preference)', 'simple-launchpad'); ?>
+                                    </option>
+                                </select>
+                                <p class="description">
+                                    <?php esc_html_e('Choose whether buttons should use light mode, dark mode, or automatically follow your system preference.', 'simple-launchpad'); ?>
+                                </p>
                             </td>
                         </tr>
                     </table>
