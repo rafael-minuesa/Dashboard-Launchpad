@@ -9,7 +9,7 @@
  * @since 1.3.0
  */
 
-class Dashboard_LaunchPad_Dashboard {
+class Simple_LaunchPad_Dashboard {
 
 	/**
 	 * Initialize the LaunchPad page.
@@ -182,7 +182,7 @@ class Dashboard_LaunchPad_Dashboard {
 			<?php if ( current_user_can( 'manage_options' ) ) : ?>
 				<!-- Settings Section -->
 				<div id="launchpad-settings" class="launchpad-settings-section">
-					<?php Dashboard_LaunchPad_Settings::render_settings_page(); ?>
+					<?php Simple_LaunchPad_Settings::render_settings_page(); ?>
 				</div>
 			<?php endif; ?>
 		</div>

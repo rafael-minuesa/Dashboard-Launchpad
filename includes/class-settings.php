@@ -9,7 +9,7 @@
  * @since 1.0.0
  */
 
-class Dashboard_LaunchPad_Settings {
+class Simple_LaunchPad_Settings {
 
     /**
      * Initialize the settings.

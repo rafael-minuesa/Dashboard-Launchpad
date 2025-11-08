@@ -4,7 +4,7 @@ Tags: dashboard, admin, quick-access, buttons, customization
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.1.3
+Stable tag: 3.1.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -271,6 +271,13 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 6. Dark mode support
 
 == Changelog ==
+
+= 3.1.4 - 2025-11-08 =
+* Fixed: Renamed all classes from Dashboard_LaunchPad_* to Simple_LaunchPad_* for proper plugin prefix
+* Fixed: WordPress.org requirement - all global classes must use plugin prefix
+* Changed: Dashboard_LaunchPad_Settings → Simple_LaunchPad_Settings
+* Changed: Dashboard_LaunchPad_Dashboard → Simple_LaunchPad_Dashboard
+* Changed: Dashboard_LaunchPad_Custom_Buttons → Simple_LaunchPad_Custom_Buttons
 
 = 3.1.3 - 2025-11-08 =
 * Fixed: Replaced .gitkeep with index.php in languages directory (hidden files not permitted)

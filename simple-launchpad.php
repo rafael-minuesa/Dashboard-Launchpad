@@ -7,7 +7,7 @@
  * Plugin Name: Simple LaunchPad
  * Plugin URI:  https://github.com/rafael-minuesa/simple-launchpad
  * Description: Quick-access command center with customizable buttons to all WordPress admin areas. Fully WCAG 2.1 AA accessible with screen reader support. Appears as the first menu item above Dashboard.
- * Version:     3.1.3
+ * Version:     3.1.4
  * Author:      Rafael Minuesa
  * Author URI:  https://prowoos.com
  * License:     GPLv2 or later
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.0.0
  */
 if ( ! defined( 'SIMPLE_LAUNCHPAD_VERSION' ) ) {
-	define( 'SIMPLE_LAUNCHPAD_VERSION', '3.1.3' );
+	define( 'SIMPLE_LAUNCHPAD_VERSION', '3.1.4' );
 }
 if ( ! defined( 'SIMPLE_LAUNCHPAD_PLUGIN_DIR' ) ) {
 	define( 'SIMPLE_LAUNCHPAD_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
@@ -69,9 +69,9 @@ require_once SIMPLE_LAUNCHPAD_PLUGIN_DIR . 'includes/class-custom-buttons.php';
  * @return void
  */
 function simple_launchpad_init() {
-	Dashboard_LaunchPad_Settings::init();
-	Dashboard_LaunchPad_Dashboard::init();
-	Dashboard_LaunchPad_Custom_Buttons::init();
+	Simple_LaunchPad_Settings::init();
+	Simple_LaunchPad_Dashboard::init();
+	Simple_LaunchPad_Custom_Buttons::init();
 }
 add_action( 'plugins_loaded', 'simple_launchpad_init' );
 
@@ -376,7 +376,7 @@ function simple_launchpad_get_default_buttons() {
 	$buttons = apply_filters( 'simple_launchpad_default_buttons', $buttons );
 
 	// Merge with custom buttons
-	$buttons = Dashboard_LaunchPad_Custom_Buttons::merge_buttons( $buttons );
+	$buttons = Simple_LaunchPad_Custom_Buttons::merge_buttons( $buttons );
 
 	// Cache for 1 hour (can be cleared when settings are saved)
 	set_transient( $cache_key, $buttons, HOUR_IN_SECONDS );

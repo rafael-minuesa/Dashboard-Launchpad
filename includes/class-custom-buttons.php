@@ -10,7 +10,7 @@
  * @since 1.3.0
  */
 
-class Dashboard_LaunchPad_Custom_Buttons {
+class Simple_LaunchPad_Custom_Buttons {
 
     /**
      * Initialize custom button management.
