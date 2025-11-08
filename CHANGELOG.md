@@ -7,7 +7,90 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.5.3] - 2025-10-23
+## [3.0.1] - 2025-11-08
+
+### Changed
+- **WooCommerce Buttons Disabled by Default:**
+  - WooCommerce buttons (WooCommerce, WC Settings, Orders, Products) are now disabled by default
+  - Users must manually enable them in Settings → Buttons tab
+  - Improves first-time user experience for non-WooCommerce sites
+
+### Added
+- **Visual WooCommerce Detection:**
+  - WooCommerce buttons appear greyed out in settings when WooCommerce is not installed
+  - Clear visual indicator showing "(Requires WooCommerce)" badge on disabled buttons
+  - Informational notice in settings explaining WooCommerce button availability
+  - Disabled state prevents enabling buttons when WooCommerce is not active
+
+### Improved
+- **Settings Page UX:**
+  - Better visual feedback for plugin dependencies
+  - Greyed-out styling with reduced opacity (50%) for unavailable buttons
+  - Checkbox disabled state prevents accidental enabling
+  - Dark mode support for disabled button states
+
+### Technical
+- Updated activation hook to exclude WooCommerce buttons from default enabled array
+- Added `class_exists('WooCommerce')` detection in settings rendering
+- New CSS classes: `.woocommerce-disabled`, `.woocommerce-required-badge`
+- Proper cursor states (`not-allowed`) for disabled buttons
+
+## [3.0.0] - 2025-11-08
+
+### Added
+- **WooCommerce Integration (Major Feature Release):**
+  - 4 new WooCommerce buttons in dedicated Row 4:
+    - **WooCommerce** - Quick access to WooCommerce dashboard
+    - **WC Settings** - Direct link to WooCommerce settings
+    - **Orders** - Manage WooCommerce orders (supports HPOS)
+    - **Products** - Manage WooCommerce products
+  - Buttons automatically appear when WooCommerce is installed and active
+  - Proper capability checks (`manage_woocommerce`, `edit_shop_orders`, `edit_products`)
+  - High-Performance Order Storage (HPOS) compatible
+  - Uses appropriate Dashicons for each WooCommerce section
+
+### Changed
+- Button organization now spans 4 rows instead of 3 (when WooCommerce is active)
+- Total available buttons increased from 15 to 19
+- Updated button layout documentation to reflect new WooCommerce row
+
+### Technical
+- New button IDs: `woocommerce`, `wc_settings`, `wc_orders`, `wc_products`
+- WooCommerce buttons respect WordPress capability system
+- No changes required for non-WooCommerce sites (buttons hidden if no capability)
+
+## [2.0.1] - 2025-11-07
+
+### Fixed
+- **WordPress.org Submission Compliance (Major Release):**
+  - Converted all inline `<style>` tags to use `wp_add_inline_style()` for proper CSS enqueuing
+  - Fixed inconsistent product naming in documentation (Dashboard LaunchPad → Simple LaunchPad)
+  - Corrected filter hook examples in readme.txt (`dashboard_launchpad_*` → `simple_launchpad_*`)
+  - Fixed typos in README.md (`simpled_launchpad` → `simple_launchpad`)
+  - All CSS now properly enqueued following WordPress best practices
+  - Addressed all WordPress.org plugin review feedback
+
+### Improved
+- **Code Quality & Standards:**
+  - Menu icon CSS now uses `wp_add_inline_style()` attached to `simple-launchpad-admin` handle
+  - Dynamic button color CSS now uses `wp_add_inline_style()` attached to `simple-launchpad` handle
+  - Eliminated direct `<style>` tag output in favor of WordPress enqueue system
+  - Better separation of concerns between static and dynamic styles
+  - Full compliance with WordPress Plugin Repository guidelines
+
+### Documentation
+- Verified all naming uses consistent `simple_launchpad_` prefix (16 characters)
+- Confirmed all functions, constants, options, and hooks are properly prefixed
+- Updated all user-facing documentation for consistency
+- Installation instructions now reference correct plugin name throughout
+- All filter hook examples corrected across all documentation
+
+### Breaking Changes
+- **None** - This is a backwards-compatible release despite the major version bump
+- All existing settings and configurations will continue to work
+- No database migrations required
+
+## [1.5.3] - 2025-10-25
 
 ### Added
 - **Global Keyboard Shortcut:** Press Alt+Shift+L (Windows/Linux) or Control+Option+L (Mac) to instantly open LaunchPad from anywhere in WordPress admin
@@ -33,7 +116,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhanced input sanitization with proper `wp_unslash()` usage throughout AJAX handlers
 - Improved output escaping compliance across all template files
 
-## [1.5.1] - 2025-10-23
+## [1.5.1] - 2025-10-20
 
 ### Improved
 - **readme.txt:** Added compelling "Why This Plugin Exists" section
@@ -49,7 +132,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Corrected support/GitHub URLs to use `simple-launchpad` slug
 - Fixed WordPress.org plugin directory URLs
 
-## [1.5.0] - 2025-10-23
+## [1.5.0] - 2025-10-19
 
 ### Changed
 - **Major Code Refactoring** - Complete identifier rename for consistency
@@ -69,7 +152,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated Plugin URI: `simple-launchpad` repository slug
 - Simplified codebase by removing unnecessary compatibility code
 
-## [1.4.0] - 2025-10-22
+## [1.4.0] - 2025-10-17
 
 ### Added
 - **9 New Default Buttons:**
@@ -145,7 +228,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Multisite cleanup improved and verified
 - Transient cache properly cleared on uninstall
 
-## [1.3.0] - 2025-10-22
+## [1.3.0] - 2025-10-16
 
 ### Changed
 - Plugin renamed from "Dashboard LaunchPad" to "Simple LaunchPad"
@@ -156,7 +239,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Various PHPDoc improvements
 - Code quality enhancements
 
-## [1.2.0] - 2025-10-21
+## [1.2.0] - 2025-10-16
 
 ### Added
 - Comprehensive PHPDoc documentation throughout the entire codebase

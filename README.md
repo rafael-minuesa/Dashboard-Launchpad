@@ -29,7 +29,7 @@ Coming soon! Screenshots will show:
 1. Download the latest release
 2. Upload to `/wp-content/plugins/simple-launchpad/`
 3. Activate through the 'Plugins' menu in WordPress
-4. Go to **Settings → SImple Launchpad** to configure
+4. Go to **Settings → Simple LaunchPad** to configure
 
 ### Basic Usage
 
@@ -79,7 +79,7 @@ Control which WordPress roles can see each button:
 #### Add Custom Buttons
 
 ```php
-add_filter('simpled_launchpad_default_buttons', function($buttons) {
+add_filter('simple_launchpad_default_buttons', function($buttons) {
     $buttons['my_custom'] = array(
         'label' => __('Custom Area', 'my-plugin'),
         'url' => 'admin.php?page=my-custom-page',

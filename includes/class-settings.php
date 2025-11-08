@@ -192,6 +192,19 @@ class Dashboard_LaunchPad_Settings {
                     <h2><?php esc_html_e('Enable/Disable & Reorder Buttons', 'simple-launchpad'); ?></h2>
                     <p><?php esc_html_e('Check the buttons you want to display and drag to reorder them.', 'simple-launchpad'); ?></p>
 
+                    <?php
+                    // Check if WooCommerce is active
+                    $is_woocommerce_active = class_exists('WooCommerce');
+                    if (!$is_woocommerce_active):
+                    ?>
+                        <div class="notice notice-info inline">
+                            <p>
+                                <strong><?php esc_html_e('WooCommerce Not Detected:', 'simple-launchpad'); ?></strong>
+                                <?php esc_html_e('WooCommerce buttons are available but will appear greyed out below. Install and activate WooCommerce to enable these buttons.', 'simple-launchpad'); ?>
+                            </p>
+                        </div>
+                    <?php endif; ?>
+
                     <input type="hidden" name="simple_launchpad_options[button_order]" id="button_order" value="<?php echo esc_attr(implode(',', $button_order)); ?>">
 
                     <ul id="sortable-buttons" class="sortable-buttons">
@@ -210,17 +223,28 @@ class Dashboard_LaunchPad_Settings {
                             }
                         }
 
+                        // Define WooCommerce buttons
+                        $woocommerce_buttons = array('woocommerce', 'wc_settings', 'wc_orders', 'wc_products');
+
                         foreach ($ordered_buttons as $button_id => $button):
+                            // Check if this is a WooCommerce button
+                            $is_wc_button = in_array($button_id, $woocommerce_buttons);
+                            $disabled_class = ($is_wc_button && !$is_woocommerce_active) ? 'woocommerce-disabled' : '';
+                            $disabled_attr = ($is_wc_button && !$is_woocommerce_active) ? 'disabled' : '';
                         ?>
-                            <li class="button-item" data-button-id="<?php echo esc_attr($button_id); ?>">
+                            <li class="button-item <?php echo esc_attr($disabled_class); ?>" data-button-id="<?php echo esc_attr($button_id); ?>">
                                 <span class="dashicons dashicons-menu drag-handle"></span>
                                 <label>
                                     <input type="checkbox"
                                            name="simple_launchpad_options[enabled_buttons][]"
                                            value="<?php echo esc_attr($button_id); ?>"
-                                           <?php checked(in_array($button_id, $enabled_buttons)); ?>>
+                                           <?php checked(in_array($button_id, $enabled_buttons)); ?>
+                                           <?php echo $disabled_attr; ?>>
                                     <span class="dashicons <?php echo esc_attr($button['icon']); ?>"></span>
                                     <?php echo esc_html($button['label']); ?>
+                                    <?php if ($is_wc_button && !$is_woocommerce_active): ?>
+                                        <span class="woocommerce-required-badge"><?php esc_html_e('(Requires WooCommerce)', 'simple-launchpad'); ?></span>
+                                    <?php endif; ?>
                                 </label>
                             </li>
                         <?php endforeach; ?>

@@ -7,7 +7,7 @@
  * Plugin Name: Simple LaunchPad
  * Plugin URI:  https://github.com/rafael-minuesa/simple-launchpad
  * Description: Quick-access command center with customizable buttons to all WordPress admin areas. Fully WCAG 2.1 AA accessible with screen reader support. Appears as the first menu item above Dashboard.
- * Version:     1.5.3
+ * Version:     3.0.1
  * Author:      Rafael Minuesa
  * Author URI:  https://prowoos.com
  * License:     GPLv2 or later
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.0.0
  */
 if ( ! defined( 'SIMPLE_LAUNCHPAD_VERSION' ) ) {
-	define( 'SIMPLE_LAUNCHPAD_VERSION', '1.5.3' );
+	define( 'SIMPLE_LAUNCHPAD_VERSION', '3.0.1' );
 }
 if ( ! defined( 'SIMPLE_LAUNCHPAD_PLUGIN_DIR' ) ) {
 	define( 'SIMPLE_LAUNCHPAD_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
@@ -168,15 +168,24 @@ add_action( 'admin_enqueue_scripts', 'simple_launchpad_enqueue_admin_assets' );
  *
  * Sets up default plugin options when the plugin is first activated.
  * Only creates options if they don't already exist to preserve user settings.
+ * WooCommerce buttons are disabled by default - users must enable them manually.
  *
  * @since 1.0.0
  * @return void
  */
 function simple_launchpad_activate() {
+	// Get all buttons
+	$all_buttons = simple_launchpad_get_default_buttons();
+	$all_button_ids = array_keys( $all_buttons );
+
+	// Exclude WooCommerce buttons from default enabled buttons
+	$woocommerce_buttons = array( 'woocommerce', 'wc_settings', 'wc_orders', 'wc_products' );
+	$default_enabled = array_diff( $all_button_ids, $woocommerce_buttons );
+
 	// Set default options
 	$default_options = array(
-		'enabled_buttons'       => array_keys( simple_launchpad_get_default_buttons() ),
-		'button_order'          => array_keys( simple_launchpad_get_default_buttons() ),
+		'enabled_buttons'       => array_values( $default_enabled ),
+		'button_order'          => $all_button_ids,
 		'button_color'          => '#2271b1',
 		'button_hover_color'    => '#135e96',
 		'button_bg_color'       => '#ffffff',
@@ -227,7 +236,7 @@ function simple_launchpad_get_default_buttons() {
 	}
 
 	// Build buttons array if not cached
-	// Organized in 3 rows: Row 1: Posts/Pages, Row 2: Appearance, Row 3: Admin
+	// Organized in 4 rows: Row 1: Posts/Pages, Row 2: Appearance, Row 3: Admin, Row 4: WooCommerce
 	$buttons = array(
 		// Row 1: Content Management (5 columns on desktop, 2 on mobile)
 		'posts' => array(
@@ -321,6 +330,31 @@ function simple_launchpad_get_default_buttons() {
 			'url'        => 'site-health.php',
 			'icon'       => 'dashicons-heart',
 			'capability' => 'manage_options',
+		),
+		// Row 4: WooCommerce (4 columns, only shown if WooCommerce is active)
+		'woocommerce' => array(
+			'label'      => __( 'WooCommerce', 'simple-launchpad' ),
+			'url'        => 'admin.php?page=wc-admin',
+			'icon'       => 'dashicons-cart',
+			'capability' => 'manage_woocommerce',
+		),
+		'wc_settings' => array(
+			'label'      => __( 'WC Settings', 'simple-launchpad' ),
+			'url'        => 'admin.php?page=wc-settings',
+			'icon'       => 'dashicons-admin-generic',
+			'capability' => 'manage_woocommerce',
+		),
+		'wc_orders' => array(
+			'label'      => __( 'Orders', 'simple-launchpad' ),
+			'url'        => 'admin.php?page=wc-orders',
+			'icon'       => 'dashicons-clipboard',
+			'capability' => 'edit_shop_orders',
+		),
+		'wc_products' => array(
+			'label'      => __( 'Products', 'simple-launchpad' ),
+			'url'        => 'edit.php?post_type=product',
+			'icon'       => 'dashicons-products',
+			'capability' => 'edit_products',
 		),
 	);
 

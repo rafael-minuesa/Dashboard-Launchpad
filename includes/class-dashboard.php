@@ -228,22 +228,26 @@ class Dashboard_LaunchPad_Dashboard {
 	/**
 	 * Add custom styles based on user settings.
 	 *
-	 * Outputs inline CSS in the admin header to apply user-customized colors
+	 * Adds inline CSS using wp_add_inline_style() to apply user-customized colors
 	 * to the LaunchPad buttons. Only runs on the LaunchPad page.
 	 *
 	 * @since 1.0.0
 	 * @return void
 	 */
 	public static function add_custom_styles() {
-		?>
-		<style>
+		// Add global menu icon styling
+		$menu_icon_css = '
 			/* Ensure LaunchPad menu icon displays */
 			#adminmenu #toplevel_page_simple-launchpad div.wp-menu-image:before {
 				font-family: dashicons !important;
-				content: '\f509' !important;  /* dashicons-grid-view */
+				content: "\f509" !important;  /* dashicons-grid-view */
 			}
-		</style>
-		<?php
+		';
+
+		// Enqueue a minimal admin style to attach inline CSS to
+		wp_register_style( 'simple-launchpad-admin', false );
+		wp_enqueue_style( 'simple-launchpad-admin' );
+		wp_add_inline_style( 'simple-launchpad-admin', $menu_icon_css );
 
 		$screen = get_current_screen();
 		if ( ! $screen || $screen->id !== 'toplevel_page_simple-launchpad' ) {
@@ -256,8 +260,8 @@ class Dashboard_LaunchPad_Dashboard {
 		$button_bg_color        = $options['button_bg_color'] ?? '#ffffff';
 		$button_hover_bg_color  = $options['button_hover_bg_color'] ?? '#f6f7f7';
 
-		?>
-		<style>
+		// Build custom CSS for LaunchPad page
+		$custom_css = '
 			/* Page header styling */
 			.simple-launchpad-page .launchpad-title {
 				display: flex;
@@ -294,16 +298,18 @@ class Dashboard_LaunchPad_Dashboard {
 
 			/* Custom button colors */
 			.launchpad-button {
-				color: <?php echo esc_attr( $button_color ); ?> !important;
-				background-color: <?php echo esc_attr( $button_bg_color ); ?> !important;
+				color: ' . esc_attr( $button_color ) . ' !important;
+				background-color: ' . esc_attr( $button_bg_color ) . ' !important;
 			}
 
 			.launchpad-button:hover {
-				color: <?php echo esc_attr( $button_hover_color ); ?> !important;
-				background-color: <?php echo esc_attr( $button_hover_bg_color ); ?> !important;
-				border-color: <?php echo esc_attr( $button_hover_color ); ?> !important;
+				color: ' . esc_attr( $button_hover_color ) . ' !important;
+				background-color: ' . esc_attr( $button_hover_bg_color ) . ' !important;
+				border-color: ' . esc_attr( $button_hover_color ) . ' !important;
 			}
-		</style>
-		<?php
+		';
+
+		// Add inline styles to the already-enqueued simple-launchpad CSS
+		wp_add_inline_style( 'simple-launchpad', $custom_css );
 	}
 }

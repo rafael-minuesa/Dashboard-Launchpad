@@ -4,7 +4,7 @@ Tags: dashboard, admin, quick-access, buttons, customization
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.5.3
+Stable tag: 3.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ WCAG 2.1 AA accessible admin dashboard with quick-access buttons to all WordPres
 
 == Description ==
 
-**Simple LaunchPad** appears as the first menu item in your WordPress admin, providing instant access to 15 carefully organized buttons across three categories: Content Management, Appearance, and Administration.
+**Simple LaunchPad** appears as the first menu item in your WordPress admin, providing instant access to 19 carefully organized buttons across four categories: Content Management, Appearance, Administration, and WooCommerce.
 
 = Why This Plugin Exists =
 
@@ -69,13 +69,15 @@ This reduces cognitive load, speeds up navigation, and makes WordPress administr
 = Key Features =
 
 **🎯 Quick Access Buttons**
-* 15 pre-configured buttons organized in 3 logical rows
+* 19 pre-configured buttons organized in 4 logical rows
   - **Row 1:** Posts, Categories, Tags, Pages, Media
   - **Row 2:** Themes, Widgets, Menus, Customizer, Plugins
   - **Row 3:** Users, Settings, Tools, Updates, Site Health
+  - **Row 4:** WooCommerce, WC Settings, Orders, Products (when WooCommerce is active)
 * One-click access to any WordPress admin page
 * Visual icons using WordPress Dashicons
 * Fully customizable button order via drag-and-drop
+* WooCommerce integration with HPOS support
 
 **🎨 Full Customization**
 * Enable/disable individual buttons
@@ -162,7 +164,7 @@ Simple LaunchPad is translation-ready! Help translate it into your language:
 
 = Privacy =
 
-Dashboard LaunchPad does not:
+Simple LaunchPad does not:
 * Collect any user data
 * Use cookies
 * Connect to external services
@@ -176,7 +178,7 @@ All settings are stored locally in your WordPress database.
 
 1. Log in to your WordPress admin panel
 2. Navigate to Plugins → Add New
-3. Search for "Dashboard LaunchPad"
+3. Search for "Simple LaunchPad"
 4. Click "Install Now" and then "Activate"
 
 = Manual Installation =
@@ -189,7 +191,7 @@ All settings are stored locally in your WordPress database.
 
 = Configuration =
 
-1. After activation, go to **Settings → Dashboard LaunchPad**
+1. After activation, go to **Settings → Simple LaunchPad**
 2. Choose which buttons to enable/disable
 3. Drag and drop to reorder buttons
 4. Customize colors in the Appearance tab
@@ -217,19 +219,19 @@ The plugin specifically helps screen reader users by providing ONE predictable l
 
 = Does this plugin work with the latest WordPress version? =
 
-Yes! Dashboard LaunchPad is tested with the latest WordPress version and follows WordPress coding standards.
+Yes! Simple LaunchPad is tested with the latest WordPress version and follows WordPress coding standards.
 
 = Can I add my own custom buttons? =
 
-Yes! Use the `dashboard_launchpad_default_buttons` filter hook to add custom buttons. See the "Developer Hooks" section in the description for examples.
+Yes! Use the `simple_launchpad_default_buttons` filter hook to add custom buttons. See the "Developer Hooks" section in the description for examples.
 
 = Can I change the button order? =
 
-Absolutely! Go to Settings → Dashboard LaunchPad → Buttons tab, then drag and drop buttons to reorder them.
+Absolutely! Go to Settings → Simple LaunchPad → Buttons tab, then drag and drop buttons to reorder them.
 
 = Does it work with mobile devices? =
 
-Yes! Dashboard LaunchPad is fully responsive and works beautifully on tablets and mobile phones.
+Yes! Simple LaunchPad is fully responsive and works beautifully on tablets and mobile phones.
 
 = Can I control which users see which buttons? =
 
@@ -237,7 +239,7 @@ Yes! Use the Role Visibility tab to configure which WordPress roles can see each
 
 = Will this conflict with other plugins? =
 
-Dashboard LaunchPad is designed to be compatible with other plugins. It uses WordPress best practices and only modifies the dashboard area. If you experience any conflicts, please report them in the support forum.
+Simple LaunchPad is designed to be compatible with other plugins. It uses WordPress best practices and only modifies the dashboard area. If you experience any conflicts, please report them in the support forum.
 
 = Does it remove all default dashboard widgets? =
 
@@ -253,7 +255,7 @@ Yes! All text is wrapped with WordPress i18n functions and ready for translation
 
 = Does it work with multisite? =
 
-Yes! Dashboard LaunchPad works on both single-site and multisite WordPress installations.
+Yes! Simple LaunchPad works on both single-site and multisite WordPress installations.
 
 = How do I uninstall the plugin? =
 
@@ -269,6 +271,40 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 6. Dark mode support
 
 == Changelog ==
+
+= 3.0.1 - 2025-11-08 =
+* Changed: WooCommerce buttons are now disabled by default - users must enable them manually in Settings
+* Added: Visual detection when WooCommerce is not installed - buttons appear greyed out in settings
+* Added: "(Requires WooCommerce)" badge on WooCommerce buttons when plugin is not active
+* Added: Informational notice in settings explaining WooCommerce button availability
+* Improved: Better UX with greyed-out styling (50% opacity) for unavailable buttons
+* Improved: Disabled checkbox state prevents enabling when WooCommerce is not installed
+* Improved: Dark mode support for disabled button states
+* Fixed: First-time user experience improved for non-WooCommerce sites
+
+= 3.0.0 - 2025-11-08 =
+* Added: WooCommerce integration with 4 new buttons in dedicated Row 4
+* Added: WooCommerce button - Quick access to WooCommerce dashboard
+* Added: WC Settings button - Direct link to WooCommerce settings
+* Added: Orders button - Manage WooCommerce orders (HPOS compatible)
+* Added: Products button - Manage WooCommerce products
+* Improved: Total available buttons increased from 15 to 19
+* Improved: Button organization now spans 4 rows (when WooCommerce is active)
+* Improved: Proper capability checks for all WooCommerce features
+* Note: WooCommerce buttons only appear when WooCommerce is installed and active
+
+= 2.0.1 - 2025-11-08 =
+* Fixed: Converted all inline `<style>` tags to use `wp_add_inline_style()` for proper WordPress standards compliance
+* Fixed: Inconsistent product naming in documentation (Dashboard LaunchPad → Simple LaunchPad throughout all docs)
+* Fixed: Corrected filter hook examples in readme (`dashboard_launchpad_*` → `simple_launchpad_*`)
+* Fixed: Typos in README.md (`simpled_launchpad` → `simple_launchpad`)
+* Improved: Menu icon CSS now properly enqueued via `wp_add_inline_style()` attached to `simple-launchpad-admin` handle
+* Improved: Dynamic button color CSS now uses `wp_add_inline_style()` attached to `simple-launchpad` handle
+* Improved: Eliminated direct `<style>` tag output in favor of WordPress enqueue system
+* Improved: Full compliance with WordPress.org Plugin Repository guidelines
+* Documentation: Verified all naming uses consistent `simple_launchpad_` prefix (16 characters)
+* Documentation: Confirmed all functions, constants, options, and hooks are properly prefixed
+* Note: This is a backwards-compatible release - all existing settings will continue to work
 
 = 1.5.3 - 2025-10-23 =
 * Added: Global keyboard shortcut Alt+Shift+L (Windows/Linux) or Control+Option+L (Mac) to open LaunchPad from anywhere in WordPress admin
@@ -347,6 +383,15 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 * Capability-based security
 
 == Upgrade Notice ==
+
+= 3.0.1 =
+Improved UX! WooCommerce buttons now disabled by default and appear greyed out when WooCommerce is not installed. Better visual feedback and first-time user experience.
+
+= 3.0.0 =
+WooCommerce integration! 4 new buttons for WooCommerce, WC Settings, Orders, and Products. Automatically detected when WooCommerce is active. Total of 19 buttons available.
+
+= 2.0.1 =
+Major WordPress.org compliance update! Converted all inline styles to wp_add_inline_style(), fixed documentation inconsistencies. Fully backwards-compatible - your settings are safe.
 
 = 1.5.3 =
 Added global keyboard shortcut! Press Alt+Shift+L to instantly open LaunchPad from anywhere in WordPress admin. Enhanced accessibility feature.
