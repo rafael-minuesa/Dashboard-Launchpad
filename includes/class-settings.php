@@ -158,7 +158,7 @@ class Dashboard_LaunchPad_Settings {
 
         // Check if settings were just saved
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- WordPress sets this parameter after settings save
-        if (isset($_GET['settings-updated']) && $_GET['settings-updated']) {
+        if (isset($_GET['settings-updated']) && sanitize_text_field(wp_unslash($_GET['settings-updated']))) {
             add_settings_error(
                 'simple_launchpad_messages',
                 'simple_launchpad_message',

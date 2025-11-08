@@ -4,7 +4,7 @@ Tags: dashboard, admin, quick-access, buttons, customization
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.1.2
+Stable tag: 3.1.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -271,6 +271,11 @@ Simply deactivate and delete the plugin through the WordPress admin. All setting
 6. Dark mode support
 
 == Changelog ==
+
+= 3.1.3 - 2025-11-08 =
+* Fixed: Replaced .gitkeep with index.php in languages directory (hidden files not permitted)
+* Fixed: Added proper sanitization to $_GET['settings-updated'] parameter
+* Note: Text domain 'simple-launchpad' is correct - Plugin Check warnings about 'Simple-Launchpad-main' are due to local folder naming
 
 = 3.1.2 - 2025-11-08 =
 * Fixed: Added phpcs ignore comments for WordPress.org compliance
