@@ -310,7 +310,7 @@ class Dashboard_LaunchPad_Settings {
                         </tr>
                         <tr>
                             <th scope="row">
-                                <label for="dark_mode"><?php esc_html_e('Dark Mode', 'simple-launchpad'); ?></label>
+                                <label for="dark_mode"><?php esc_html_e('Choose Mode', 'simple-launchpad'); ?></label>
                             </th>
                             <td>
                                 <select name="simple_launchpad_options[dark_mode]" id="dark_mode">

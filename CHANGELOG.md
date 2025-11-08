@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.1] - 2025-11-08
+
+### Added
+- **Dark Mode Toggle Setting:**
+  - "Change Mode" label
+
+### Changed
+- **Corrected Dark Mode Label:**
+  - Corrected "Dark Mode" label setting in Appearance tab to "Change Mode"
+
+### Technical
+
 ## [3.1.0] - 2025-11-08
 
 ### Added
