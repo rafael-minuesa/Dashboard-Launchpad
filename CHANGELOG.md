@@ -348,7 +348,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2025-01-01
 
 ### Added
-- Initial release of Dashboard LaunchPad
+- Initial release of Dashboard LaunchPad (now Simple LaunchPad)
 - 10 pre-configured admin buttons (Posts, Pages, Media, Comments, Appearance, Plugins, Users, Settings, etc.)
 - Drag-and-drop button reordering via jQuery UI Sortable
 - Enable/disable individual buttons through settings

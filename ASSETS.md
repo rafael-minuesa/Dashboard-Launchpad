@@ -1,4 +1,4 @@
-# Dashboard Launchpad - Assets Guide
+# Simple Launchpad - Assets Guide
 
 This document outlines the visual assets required for WordPress.org submission and general plugin branding.
 
@@ -14,7 +14,7 @@ This document outlines the visual assets required for WordPress.org submission a
 
 **Design Guidelines:**
 - Use the plugin's brand colors (WordPress blue #2271b1 recommended)
-- Include plugin name "Dashboard Launchpad"
+- Include plugin name "Simple Launchpad"
 - Show key features visually (button grid, customization)
 - Keep text readable even at small sizes
 - Avoid too much detail
@@ -44,7 +44,7 @@ This document outlines the visual assets required for WordPress.org submission a
 **Icon Concept Ideas:**
 - 🚀 Rocket ship (launchpad concept)
 - ⚡ Lightning bolt (speed/quick access)
-- 📊 Dashboard/grid pattern
+- 📊 Grid pattern
 - 🎯 Target (precision)
 
 ---
@@ -54,7 +54,7 @@ This document outlines the visual assets required for WordPress.org submission a
 **Location:** `.wordpress-org/` directory (not included in plugin zip)
 
 **Naming Convention:**
-- `screenshot-1.png` - Dashboard view with buttons
+- `screenshot-1.png` - Panel view with buttons
 - `screenshot-2.png` - Settings page: Buttons tab
 - `screenshot-3.png` - Settings page: Appearance tab
 - `screenshot-4.png` - Settings page: Role Visibility tab
@@ -85,7 +85,7 @@ This document outlines the visual assets required for WordPress.org submission a
 ## Directory Structure
 
 ```
-Dashboard-Launchpad/
+Simple-Launchpad/
 ├── .wordpress-org/          ← Assets for WordPress.org (not in plugin zip)
 │   ├── banner-772x250.png
 │   ├── banner-1544x500.png
@@ -111,7 +111,7 @@ Dashboard-Launchpad/
 
 1. Create new file: 1544 x 500 px
 2. Add background gradient (use WordPress blue #2271b1)
-3. Add plugin name "Dashboard Launchpad" with clear typography
+3. Add plugin name "Simple Launchpad" with clear typography
 4. Add mockup of button grid interface
 5. Export as PNG at 100% (1544x500) and 50% (772x250)
 
@@ -119,14 +119,14 @@ Dashboard-Launchpad/
 
 1. Create custom size: 1544 x 500 px
 2. Search for "WordPress plugin banner" templates
-3. Customize with Dashboard Launchpad branding
+3. Customize with Simple Launchpad branding
 4. Download as PNG
 
 ### Option 3: Using Photoshop
 
 1. New document: 1544 x 500 px, 72 DPI
 2. Add background layer with gradient
-3. Add text layer: "Dashboard Launchpad"
+3. Add text layer: "Simple Launchpad"
 4. Add visual elements (mockup screenshots, icons)
 5. Save for Web: PNG-24
 6. Resize to 772 x 250 px for standard version

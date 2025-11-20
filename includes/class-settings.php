@@ -28,7 +28,7 @@ class Simple_LaunchPad_Settings {
     /**
      * Add settings page to WordPress admin.
      *
-     * Creates a settings page under Settings > Dashboard LaunchPad.
+     * Creates a settings page under Settings > Simple LaunchPad.
      * Requires 'manage_options' capability.
      *
      * @since 1.0.0
@@ -36,8 +36,8 @@ class Simple_LaunchPad_Settings {
      */
     public static function add_settings_page() {
         add_options_page(
-            __('Dashboard LaunchPad Settings', 'simple-launchpad'),
-            __('Dashboard LaunchPad', 'simple-launchpad'),
+            __('Simple LaunchPad Settings', 'simple-launchpad'),
+            __('Simple LaunchPad', 'simple-launchpad'),
             'manage_options',
             'simple-launchpad',
             array(__CLASS__, 'render_settings_page')
